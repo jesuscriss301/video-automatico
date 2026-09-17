@@ -47,10 +47,18 @@ class TTSEngineError(RuntimeError):
 
 
 def _wav_duration_seconds(path: Path) -> float:
-    with wave.open(str(path), "rb") as wf:
-        frames = wf.getnframes()
-        rate = wf.getframerate()
-        return frames / float(rate)
+    # Usamos ffprobe en vez del módulo `wave` de Python porque `wave` solo
+    # entiende WAV en PCM entero (formato 1) — un WAV en float32 (formato 3,
+    # lo que escribe torchaudio.save por defecto, como hace ChatterboxBackend)
+    # lo revienta con "unknown format: 3". ffprobe lee cualquier variante.
+    cmd = [
+        "ffprobe", "-v", "error", "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1", str(path),
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0 or not result.stdout.strip():
+        raise TTSEngineError(f"No se pudo leer la duración de {path}: {result.stderr}")
+    return float(result.stdout.strip())
 
 
 class EspeakBackend:
@@ -238,7 +246,12 @@ class ChatterboxBackend:
             cfg_weight=self.cfg_weight,
             temperature=self.temperature,
         )
-        torchaudio.save(str(out_path), wav, self._model.sr)
+        # encoding/bits_per_sample explícitos: por defecto torchaudio.save
+        # escribe float32 (formato WAV 3), que ffmpeg lee sin problema pero
+        # es el doble de pesado y menos compatible en general que el PCM de
+        # 16 bits (formato 1) que usan Piper y espeak en el resto del
+        # pipeline — lo dejamos igual para todos los backends.
+        torchaudio.save(str(out_path), wav, self._model.sr, encoding="PCM_S", bits_per_sample=16)
         return SynthesizedAudio(path=out_path, duration_seconds=_wav_duration_seconds(out_path))
 
 
