@@ -92,6 +92,55 @@ uvicorn api.main:app --reload --port 8000
 
 y mandar un POST a `/generate` con el guion en el body.
 
+## Cambiar o "crear" voces
+
+Hay tres formas de tener una voz distinta, de más simple a más elaborada:
+
+**1) Descargar otro modelo de voz de Piper (la forma real de tener otra voz).**
+Cada modelo `.onnx` es un hablante entrenado por separado — no son variaciones
+del mismo, son personas distintas. Para español hay varias: `es_ES-davefx-medium`
+(la que trae por defecto este proyecto), `es_ES-sharvard-medium`, `es_ES-mls_10246-low`,
+`es_MX-ald-medium`, entre otras (la lista completa está en
+[rhasspy/piper/voices.json](https://github.com/rhasspy/piper)). Se descargan igual
+que la primera:
+
+```bash
+python -m piper.download_voices es_ES-sharvard-medium --download-dir assets/voices
+python scripts/run_pipeline.py examples/sample_script.json outputs/video.mp4 --voice es_ES-sharvard-medium
+```
+
+**2) Tocar los parámetros de síntesis (varía cómo suena el MISMO modelo, no lo cambia por otro).**
+Piper expone estas perillas por cada síntesis:
+
+| Parámetro | Qué hace | Rango típico |
+|---|---|---|
+| `--length-scale` | velocidad: menor = más rápido, mayor = más lento | 0.8 - 1.3 |
+| `--noise-scale` | expresividad: más alto = menos plano/monótono | 0.5 - 1.0 |
+| `--noise-w-scale` | variación de ritmo entre sílabas: más alto = menos robótico | 0.5 - 1.0 |
+| `--speaker-id` | cambia de hablante, **solo si** el modelo es multi-hablante | depende del modelo |
+
+Ejemplo, una narración más lenta y expresiva:
+
+```bash
+python scripts/run_pipeline.py examples/sample_script.json outputs/video.mp4 \
+  --voice es_ES-davefx-medium --length-scale 1.15 --noise-scale 0.85 --noise-w-scale 0.85
+```
+
+Estos valores también se pueden dejar fijos por defecto en `config/settings.py`
+(`piper_length_scale`, `piper_noise_scale`, `piper_noise_w_scale`, `piper_speaker_id`)
+para no tener que pasarlos cada vez.
+
+Con el backend `espeak` (el de respaldo/pruebas) las perillas equivalentes son
+`--espeak-pitch` (0-99, tono) y la velocidad ya existente por config.
+
+**3) Clonar o inventar una voz de verdad (más trabajo, no incluido todavía en este
+proyecto).** Ni el punto 1 ni el 2 crean una voz que no exista — para eso hace
+falta un modelo de *voice cloning* como **Chatterbox** (MIT, permite uso
+comercial) o entrenar un modelo de Piper desde cero con audio propio, que sí
+requiere GPU y un dataset. Si más adelante quieres una voz de marca (clonada de
+un locutor real, o inventada), ese sería el siguiente paso — se conectaría como
+un tercer backend más en `pipeline/tts_engine.py`, igual que los otros dos.
+
 ## Qué calidad aplica por defecto
 
 - Audio normalizado a **-16 LUFS** (estándar de streaming) con el filtro

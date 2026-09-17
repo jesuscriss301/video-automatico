@@ -5,6 +5,7 @@ regados por el código.
 """
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ASSETS_DIR = PROJECT_ROOT / "assets"
@@ -53,6 +54,22 @@ class QualityDefaults:
     # --- TTS ---
     piper_voice: str = "es_ES-davefx-medium"
     tts_sample_rate: int = 22050
+
+    # Perillas de Piper para variar la voz SIN cambiar de modelo (ver README):
+    # - length_scale: < 1 más rápido / > 1 más lento (también cambia el "peso" percibido de la voz)
+    # - noise_scale: cuánta variación aleatoria mete el modelo al generar (más alto = más "vivo"/menos plano)
+    # - noise_w_scale: variación en la duración de cada fonema (más alto = ritmo menos robótico)
+    # - speaker_id: solo aplica si el modelo de voz es multi-hablante (varias voces en un mismo .onnx)
+    # None = usar el valor por defecto que trae el propio modelo.
+    piper_length_scale: Optional[float] = None
+    piper_noise_scale: Optional[float] = None
+    piper_noise_w_scale: Optional[float] = None
+    piper_speaker_id: Optional[int] = None
+
+    # Perillas del backend de respaldo (espeak-ng), para poder probar el efecto
+    # de "voz distinta" en este mismo sandbox sin depender de Piper.
+    espeak_pitch: int = 50  # 0-99, default 50
+    espeak_speed_wpm: int = 165
 
 
 DEFAULTS = QualityDefaults()

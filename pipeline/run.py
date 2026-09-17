@@ -27,6 +27,7 @@ def generate_video(
     output_path: str | Path,
     tts_backend: str = "piper",
     keep_work_dir: bool = False,
+    tts_options: dict | None = None,
 ) -> QAReport:
     script = load_script(script_path)
     output_path = Path(output_path)
@@ -34,7 +35,7 @@ def generate_video(
 
     work_dir = Path(tempfile.mkdtemp(prefix="video_pipeline_"))
     try:
-        report = _run_pipeline(script, output_path, tts_backend, work_dir)
+        report = _run_pipeline(script, output_path, tts_backend, work_dir, tts_options or {})
     finally:
         if not keep_work_dir:
             shutil.rmtree(work_dir, ignore_errors=True)
@@ -44,13 +45,19 @@ def generate_video(
     return report
 
 
-def _run_pipeline(script: Script, output_path: Path, tts_backend: str, work_dir: Path) -> QAReport:
+def _run_pipeline(
+    script: Script,
+    output_path: Path,
+    tts_backend: str,
+    work_dir: Path,
+    tts_options: dict | None = None,
+) -> QAReport:
     audio_dir = work_dir / "audio"
     images_dir = work_dir / "images"
     audio_dir.mkdir(parents=True, exist_ok=True)
     images_dir.mkdir(parents=True, exist_ok=True)
 
-    backend = get_backend(tts_backend)
+    backend = get_backend(tts_backend, **(tts_options or {}))
 
     rendered_scenes: list[RenderedScene] = []
     for scene in script.scenes:

@@ -27,10 +27,50 @@ def main() -> None:
         help="Backend de TTS a usar (default: piper; 'espeak' es el respaldo offline sin descargas)",
     )
     parser.add_argument(
+        "--voice", default=None,
+        help="Nombre del modelo de voz de Piper a usar (p.ej. es_ES-davefx-medium, es_ES-sharvard-medium). "
+        "Cada modelo es un hablante distinto — esta es la forma de tener una voz realmente diferente.",
+    )
+    parser.add_argument(
+        "--speaker-id", type=int, default=None,
+        help="Índice del hablante dentro del modelo, solo si es un modelo Piper multi-hablante.",
+    )
+    parser.add_argument(
+        "--length-scale", type=float, default=None,
+        help="Velocidad de habla de Piper: <1 más rápido, >1 más lento (default del modelo si se omite).",
+    )
+    parser.add_argument(
+        "--noise-scale", type=float, default=None,
+        help="Expresividad/variación de Piper: más alto suena menos plano (default del modelo si se omite).",
+    )
+    parser.add_argument(
+        "--noise-w-scale", type=float, default=None,
+        help="Variación de ritmo por sílaba de Piper: más alto suena menos robótico (default del modelo si se omite).",
+    )
+    parser.add_argument(
+        "--espeak-pitch", type=int, default=None,
+        help="Solo con --tts espeak: tono de la voz, 0-99 (default 50).",
+    )
+    parser.add_argument(
         "--keep-work-dir", action="store_true",
         help="No borrar los archivos intermedios (útil para depurar)",
     )
     args = parser.parse_args()
+
+    if args.tts == "piper":
+        tts_options = {
+            "voice": args.voice,
+            "speaker_id": args.speaker_id,
+            "length_scale": args.length_scale,
+            "noise_scale": args.noise_scale,
+            "noise_w_scale": args.noise_w_scale,
+        }
+    else:
+        tts_options = {}
+        if args.espeak_pitch is not None:
+            tts_options["pitch"] = args.espeak_pitch
+        if args.voice:
+            tts_options["voice"] = args.voice
 
     print(f"[run_pipeline] Generando video desde '{args.script}' con backend de TTS '{args.tts}'...")
     start = time.time()
@@ -40,6 +80,7 @@ def main() -> None:
         output_path=args.output,
         tts_backend=args.tts,
         keep_work_dir=args.keep_work_dir,
+        tts_options=tts_options,
     )
 
     elapsed = time.time() - start

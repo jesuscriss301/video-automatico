@@ -48,17 +48,27 @@ def _wav_duration_seconds(path: Path) -> float:
 
 
 class EspeakBackend:
-    """Backend offline de respaldo. No requiere descargar ningún modelo."""
+    """Backend offline de respaldo. No requiere descargar ningún modelo.
+
+    Expone las mismas dos perillas "universales" que casi cualquier motor de
+    TTS tiene (velocidad y tono), útiles aquí para probar rápido que un
+    cambio de parámetro sí suena distinto, sin depender de Piper."""
 
     name = "espeak"
 
-    def __init__(self, voice: str = "es", speed_wpm: int = 165):
+    def __init__(
+        self,
+        voice: str = "es",
+        speed_wpm: int | None = None,
+        pitch: int | None = None,
+    ):
         if shutil.which("espeak-ng") is None:
             raise TTSEngineError(
                 "espeak-ng no está instalado. Instálalo con: apt-get install espeak-ng"
             )
         self.voice = voice
-        self.speed_wpm = speed_wpm
+        self.speed_wpm = speed_wpm if speed_wpm is not None else DEFAULTS.espeak_speed_wpm
+        self.pitch = pitch if pitch is not None else DEFAULTS.espeak_pitch
 
     def synthesize(self, text: str, out_path: Path) -> SynthesizedAudio:
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -68,6 +78,8 @@ class EspeakBackend:
             self.voice,
             "-s",
             str(self.speed_wpm),
+            "-p",
+            str(self.pitch),
             "-w",
             str(out_path),
             text,
@@ -85,13 +97,36 @@ class PiperBackend:
       python -m piper.download_voices <voz> --download-dir assets/voices
 
     La voz por defecto se define en config/settings.py (DEFAULTS.piper_voice).
+
+    Hay dos formas de tener una voz "distinta" con Piper, y son cosas
+    diferentes:
+
+    1) Cambiar de modelo (`voice=`): cada modelo .onnx es un hablante
+       distinto entrenado por separado (davefx, sharvard, mls, carlfm...).
+       Esto SÍ es una voz nueva de verdad — solo hay que descargarla.
+
+    2) Tocar los parámetros de síntesis (`length_scale`, `noise_scale`,
+       `noise_w_scale`, `speaker_id`): esto NO cambia de hablante, varía
+       cómo suena el MISMO modelo — más rápido/lento, más "plano" o más
+       "expresivo", ritmo más o menos robótico. `speaker_id` sí cambia de
+       hablante, pero solo si el .onnx que descargaste es multi-hablante
+       (la mayoría de las voces en español no lo son).
     """
 
     name = "piper"
 
-    def __init__(self, voice: str | None = None, voices_dir: Path | None = None):
+    def __init__(
+        self,
+        voice: str | None = None,
+        voices_dir: Path | None = None,
+        length_scale: float | None = None,
+        noise_scale: float | None = None,
+        noise_w_scale: float | None = None,
+        speaker_id: int | None = None,
+    ):
         try:
             from piper import PiperVoice  # import diferido: no todos los entornos lo tienen
+            from piper.config import SynthesisConfig
         except ImportError as exc:  # pragma: no cover
             raise TTSEngineError(
                 "piper-tts no está instalado. Instálalo con: pip install piper-tts"
@@ -111,10 +146,17 @@ class PiperBackend:
 
         self._voice = PiperVoice.load(str(model_path), config_path=str(config_path) if config_path.exists() else None)
 
+        self._syn_config = SynthesisConfig(
+            speaker_id=speaker_id if speaker_id is not None else DEFAULTS.piper_speaker_id,
+            length_scale=length_scale if length_scale is not None else DEFAULTS.piper_length_scale,
+            noise_scale=noise_scale if noise_scale is not None else DEFAULTS.piper_noise_scale,
+            noise_w_scale=noise_w_scale if noise_w_scale is not None else DEFAULTS.piper_noise_w_scale,
+        )
+
     def synthesize(self, text: str, out_path: Path) -> SynthesizedAudio:
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with wave.open(str(out_path), "wb") as wav_file:
-            self._voice.synthesize_wav(text, wav_file)
+            self._voice.synthesize_wav(text, wav_file, syn_config=self._syn_config)
         return SynthesizedAudio(path=out_path, duration_seconds=_wav_duration_seconds(out_path))
 
 
