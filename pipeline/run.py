@@ -1,0 +1,103 @@
+"""
+Orquesta el pipeline completo de punta a punta:
+
+  guion (JSON) -> TTS por escena -> EDL -> imágenes validadas ->
+  render con Ken Burns/crossfade/subtítulos -> audio normalizado -> QA
+
+Este módulo es el que usan tanto la CLI (scripts/run_pipeline.py) como la
+API (api/main.py), para no duplicar la lógica.
+"""
+from __future__ import annotations
+
+import shutil
+import tempfile
+from pathlib import Path
+
+from config.settings import DEFAULTS
+from pipeline import audio_processor, edl as edl_module, video_renderer, qa_check
+from pipeline.image_processor import ensure_quality
+from pipeline.models import QAReport, RenderedScene, Script
+from pipeline.script_parser import load_script
+from pipeline.subtitles import build_ass_subtitles
+from pipeline.tts_engine import get_backend, synthesize_scene
+
+
+def generate_video(
+    script_path: str | Path,
+    output_path: str | Path,
+    tts_backend: str = "piper",
+    keep_work_dir: bool = False,
+) -> QAReport:
+    script = load_script(script_path)
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    work_dir = Path(tempfile.mkdtemp(prefix="video_pipeline_"))
+    try:
+        report = _run_pipeline(script, output_path, tts_backend, work_dir)
+    finally:
+        if not keep_work_dir:
+            shutil.rmtree(work_dir, ignore_errors=True)
+        else:
+            print(f"[run_pipeline] Archivos intermedios conservados en: {work_dir}")
+
+    return report
+
+
+def _run_pipeline(script: Script, output_path: Path, tts_backend: str, work_dir: Path) -> QAReport:
+    audio_dir = work_dir / "audio"
+    images_dir = work_dir / "images"
+    audio_dir.mkdir(parents=True, exist_ok=True)
+    images_dir.mkdir(parents=True, exist_ok=True)
+
+    backend = get_backend(tts_backend)
+
+    rendered_scenes: list[RenderedScene] = []
+    for scene in script.scenes:
+        synthesized = synthesize_scene(scene, backend, audio_dir)
+        image_resolved = ensure_quality(scene.image_path, images_dir, scene.id)
+        rendered_scenes.append(
+            RenderedScene(
+                scene=scene,
+                audio_path=str(synthesized.path),
+                duration_seconds=synthesized.duration_seconds,
+                image_path_resolved=str(image_resolved),
+            )
+        )
+
+    clips = edl_module.build_edl(rendered_scenes)
+    expected_duration = edl_module.total_duration(clips)
+
+    # --- audio: concatenar todas las escenas + normalizar (+ música opcional) ---
+    voice_track = audio_processor.concat_wavs(
+        [Path(rs.audio_path) for rs in rendered_scenes], work_dir / "voice_raw.wav"
+    )
+    normalized_track = audio_processor.normalize_loudness(voice_track, work_dir / "voice_normalized.wav")
+
+    final_audio = normalized_track
+    if script.background_music:
+        music_path = Path(script.background_music)
+        if music_path.exists():
+            final_audio = audio_processor.mix_with_background_music(
+                normalized_track, music_path, work_dir / "voice_with_music.wav"
+            )
+
+    # --- subtítulos ---
+    subtitles_path = build_ass_subtitles(clips, work_dir / "subtitles.ass")
+
+    # --- render final ---
+    video_renderer.render_final_video(
+        clips=clips,
+        final_audio=final_audio,
+        subtitles_ass=subtitles_path,
+        out_path=output_path,
+        work_dir=work_dir / "render",
+    )
+
+    # --- QA ---
+    report = qa_check.run_qa(output_path, expected_duration_seconds=expected_duration)
+
+    report_path = output_path.with_suffix(output_path.suffix + ".qa.json")
+    report_path.write_text(report.model_dump_json(indent=2), encoding="utf-8")
+
+    return report

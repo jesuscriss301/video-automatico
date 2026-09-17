@@ -1,0 +1,35 @@
+{
+  "title": "Demo Flujo 1 - EasyPro Digital",
+  "language": "es",
+  "scenes": [
+    {
+      "id": "escena_1",
+      "text": "Bienvenido a esta demostración de generación automática de video.",
+      "image_path": "../assets/images/sample/scene_1.png",
+      "image_description": "Fondo oscuro con el texto Escena 1, usado como marcador visual de prueba.",
+      "pause_after_ms": 300
+    },
+    {
+      "id": "escena_2",
+      "text": "A partir de un guion de texto y unas imágenes, el sistema genera la narración con inteligencia artificial.",
+      "image_path": "../assets/images/sample/scene_2.png",
+      "image_description": "Fondo café con el texto Escena 2, usado como marcador visual de prueba.",
+      "pause_after_ms": 300
+    },
+    {
+      "id": "escena_3",
+      "text": "Cada escena se sincroniza con precisión, usando la duración exacta del audio generado.",
+      "image_path": "../assets/images/sample/scene_3.png",
+      "image_description": "Fondo verde con el texto Escena 3, usado como marcador visual de prueba.",
+      "pause_after_ms": 300
+    },
+    {
+      "id": "escena_4",
+      "text": "Y el resultado final incluye transiciones suaves, subtítulos y audio normalizado.",
+      "image_path": "../assets/images/sample/scene_4.png",
+      "image_description": "Fondo azul con el texto Escena 4, usado como marcador visual de prueba.",
+      "pause_after_ms": 0
+    }
+  ],
+  "background_music": null
+}

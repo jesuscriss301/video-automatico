@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+outputs/*.mp4
+outputs/*.qa.json
+assets/voices/
+.env
