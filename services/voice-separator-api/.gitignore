@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+pretrained_models/
+outputs/
+test_tmp/
+*.pyc

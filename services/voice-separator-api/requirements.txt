@@ -1,0 +1,15 @@
+# IMPORTANTE: instalar esto en su PROPIO entorno virtual, separado del venv
+# del proyecto principal de video (pipeline/, api/). Spleeter arrastra
+# TensorFlow con versiones de numpy/protobuf/typing-extensions que chocan
+# con FastAPI/Pydantic del otro servicio — lo comprobamos: romper eso fue
+# justo lo que nos hizo aislar este servicio en su propia carpeta.
+#
+#   cd services/voice-separator-api
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+spleeter
+fastapi
+uvicorn[standard]
+python-multipart

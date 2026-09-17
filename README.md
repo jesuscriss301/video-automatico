@@ -58,8 +58,22 @@ video-editing-api-network/
 │   ├── images/                # Imágenes de entrada (o generadas de prueba)
 │   ├── fonts/                 # Tipografía para subtítulos
 │   └── music/                 # Música de fondo opcional
+├── services/
+│   └── voice-separator-api/   # API aparte: aísla voz de música instrumental (ver su propio README)
 └── outputs/                   # Videos renderizados
 ```
+
+## Otros nodos de la red de APIs
+
+Además del pipeline de Flujo 1 (arriba), el proyecto incluye servicios
+independientes que se pueden usar solos o encadenados:
+
+- **`services/voice-separator-api/`** — recibe un audio con voz y música
+  mezcladas, devuelve ambas por separado (backend real: Spleeter). Vive en
+  su propia carpeta con su propio venv porque sus dependencias (TensorFlow)
+  chocan con las de este proyecto principal — ver el README de esa carpeta
+  para instalación y uso. Útil antes de transcribir audio real con música de
+  fondo (Flujo 2), o para reciclar solo la música de un video existente.
 
 ## Instalación
 
