@@ -133,13 +133,40 @@ para no tener que pasarlos cada vez.
 Con el backend `espeak` (el de respaldo/pruebas) las perillas equivalentes son
 `--espeak-pitch` (0-99, tono) y la velocidad ya existente por config.
 
-**3) Clonar o inventar una voz de verdad (más trabajo, no incluido todavía en este
-proyecto).** Ni el punto 1 ni el 2 crean una voz que no exista — para eso hace
-falta un modelo de *voice cloning* como **Chatterbox** (MIT, permite uso
-comercial) o entrenar un modelo de Piper desde cero con audio propio, que sí
-requiere GPU y un dataset. Si más adelante quieres una voz de marca (clonada de
-un locutor real, o inventada), ese sería el siguiente paso — se conectaría como
-un tercer backend más en `pipeline/tts_engine.py`, igual que los otros dos.
+**3) Clonar tu propia voz (`--tts chatterbox`) — ya está integrado.** Si ninguna
+voz prefabricada te convence, esta es la opción real: clonar una voz a partir
+de un audio de referencia — la tuya, la de otra persona (con su permiso), o un
+locutor que contrates. No hay que entrenar nada, solo darle una muestra corta.
+
+Instalación (aparte, porque pesa varios GB):
+
+```bash
+pip install -r requirements-chatterbox.txt
+```
+
+Uso — necesitas un WAV de **10 a 30 segundos**, limpio (sin música ni ruido de
+fondo, una sola persona hablando):
+
+```bash
+python scripts/run_pipeline.py examples/sample_script.json outputs/video.mp4 \
+  --tts chatterbox --voice-sample mi_voz.wav
+```
+
+Perillas opcionales: `--exaggeration` (0-1, expresividad/dramatismo, default
+0.5) y `--cfg-weight` (0-1, qué tanto se apega al estilo del audio de
+referencia, default 0.5).
+
+**Importante — esto no se pudo probar de punta a punta desde este entorno de
+desarrollo:** la primera vez que se usa, Chatterbox descarga su modelo (~2 GB)
+desde Hugging Face automáticamente, y ese acceso está bloqueado por política
+de red tanto en este sandbox como en el equipo del usuario cuando se opera a
+través de Claude — no es un límite del proyecto, es de la red de estos
+entornos. El código quedó escrito y verificado contra el código fuente real de
+`chatterbox-tts` (confirmé los nombres exactos de clases y parámetros), pero la
+descarga del modelo y la primera síntesis real hay que probarlas en tu propia
+terminal o en tu servidor, donde el internet es normal. Además, sin GPU la
+generación es notablemente más lenta que Piper — para uso ocasional está bien,
+para producción en volumen te conviene correrlo en un servidor con GPU.
 
 ## Qué calidad aplica por defecto
 

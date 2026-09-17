@@ -23,8 +23,9 @@ def main() -> None:
     parser.add_argument("script", help="Ruta al guion JSON")
     parser.add_argument("output", help="Ruta del video de salida (.mp4)")
     parser.add_argument(
-        "--tts", default="piper", choices=["piper", "espeak"],
-        help="Backend de TTS a usar (default: piper; 'espeak' es el respaldo offline sin descargas)",
+        "--tts", default="piper", choices=["piper", "espeak", "chatterbox"],
+        help="Backend de TTS a usar (default: piper; 'espeak' es el respaldo offline sin descargas; "
+        "'chatterbox' clona una voz a partir de un audio de referencia)",
     )
     parser.add_argument(
         "--voice", default=None,
@@ -52,6 +53,22 @@ def main() -> None:
         help="Solo con --tts espeak: tono de la voz, 0-99 (default 50).",
     )
     parser.add_argument(
+        "--voice-sample", default=None,
+        help="Solo con --tts chatterbox: ruta a un WAV de 10-30s con la voz a clonar (limpio, sin ruido ni música).",
+    )
+    parser.add_argument(
+        "--language", default="es",
+        help="Solo con --tts chatterbox: código de idioma del texto (default: es).",
+    )
+    parser.add_argument(
+        "--exaggeration", type=float, default=None,
+        help="Solo con --tts chatterbox: expresividad de la clonación, 0-1 (default 0.5). Más alto = más dramático.",
+    )
+    parser.add_argument(
+        "--cfg-weight", type=float, default=None,
+        help="Solo con --tts chatterbox: qué tanto sigue el estilo del audio de referencia (default 0.5).",
+    )
+    parser.add_argument(
         "--keep-work-dir", action="store_true",
         help="No borrar los archivos intermedios (útil para depurar)",
     )
@@ -65,6 +82,14 @@ def main() -> None:
             "noise_scale": args.noise_scale,
             "noise_w_scale": args.noise_w_scale,
         }
+    elif args.tts == "chatterbox":
+        if not args.voice_sample:
+            parser.error("--tts chatterbox necesita --voice-sample <ruta al audio de referencia>")
+        tts_options = {"voice_sample": args.voice_sample, "language_id": args.language}
+        if args.exaggeration is not None:
+            tts_options["exaggeration"] = args.exaggeration
+        if args.cfg_weight is not None:
+            tts_options["cfg_weight"] = args.cfg_weight
     else:
         tts_options = {}
         if args.espeak_pitch is not None:

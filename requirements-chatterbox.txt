@@ -1,0 +1,11 @@
+# Dependencias EXTRA solo para clonación de voz (backend "chatterbox").
+# No se instalan por defecto porque son pesadas (~3-5 GB entre todo:
+# torch, transformers, diffusers...) y la mayoría de los videos no las
+# necesitan. Instalar solo si vas a usar --tts chatterbox:
+#
+#   pip install -r requirements-chatterbox.txt
+#
+# La primera vez que se use, chatterbox-tts descarga su modelo (~2 GB)
+# desde Hugging Face automáticamente — necesitas correr esto en una
+# máquina con internet normal (ver README, sección "Clonar tu propia voz").
+chatterbox-tts

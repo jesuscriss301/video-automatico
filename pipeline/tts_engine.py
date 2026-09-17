@@ -1,21 +1,27 @@
 """
 Motor de texto a voz.
 
-Tiene dos backends intercambiables:
+Tiene tres backends intercambiables:
 
-- "piper" (recomendado, calidad de producción): usa Piper TTS (MIT, CPU-only,
-  https://github.com/rhasspy/piper). Necesita un modelo de voz descargado una
-  vez (ver README). Los modelos se bajan de Hugging Face, así que esta parte
-  requiere que la máquina donde corra esto tenga salida a huggingface.co
-  (en este sandbox de desarrollo esa salida está bloqueada por política de
-  red, así que aquí se prueba con el backend "espeak" — en tu servidor/PC no
-  debería haber ese problema).
+- "piper" (recomendado, calidad de producción con voces prefabricadas): usa
+  Piper TTS (MIT, CPU-only, https://github.com/rhasspy/piper). Necesita un
+  modelo de voz descargado una vez (ver README). Los modelos se bajan de
+  Hugging Face, así que esta parte requiere que la máquina donde corra esto
+  tenga salida a huggingface.co (en este sandbox de desarrollo esa salida
+  está bloqueada por política de red, así que aquí se prueba con el backend
+  "espeak" — en tu servidor/PC no debería haber ese problema).
 
 - "espeak" (fallback offline, calidad robótica): usa espeak-ng, que no
   necesita descargar nada. Sirve para probar el pipeline completo sin
   depender de internet, o como respaldo si Piper falla.
 
-Ambos backends devuelven lo mismo: un WAV por escena + su duración exacta,
+- "chatterbox" (clonación de voz — tu propio hablante): usa Chatterbox
+  (MIT, https://github.com/resemble-ai/chatterbox) para clonar cualquier voz
+  a partir de un audio de referencia corto. También descarga su modelo de
+  Hugging Face la primera vez, así que aplica la misma limitación de red que
+  Piper en este sandbox — ver el docstring de ChatterboxBackend más abajo.
+
+Los tres backends devuelven lo mismo: un WAV por escena + su duración exacta,
 que es lo único que el resto del pipeline necesita.
 """
 from __future__ import annotations
@@ -160,11 +166,89 @@ class PiperBackend:
         return SynthesizedAudio(path=out_path, duration_seconds=_wav_duration_seconds(out_path))
 
 
+class ChatterboxBackend:
+    """
+    Backend de CLONACIÓN de voz — esta es la respuesta a "quiero mi propio
+    hablante". Usa Chatterbox (Resemble AI, MIT, https://github.com/resemble-ai/chatterbox),
+    que a partir de 10-30 segundos de un audio de referencia (tu voz, la de
+    otra persona con su permiso, o un locutor que contrates) genera CUALQUIER
+    texto con esa voz. No hace falta entrenar nada.
+
+    Requiere instalar dependencias pesadas aparte (ver requirements-chatterbox.txt):
+      pip install -r requirements-chatterbox.txt
+
+    Y, muy importante: la primera vez que se usa, descarga automáticamente el
+    modelo (~2 GB) desde Hugging Face. Esa descarga necesita una máquina con
+    internet normal — no funciona desde un entorno que Claude controle
+    directamente (este sandbox de desarrollo, o el equipo del usuario cuando
+    Claude opera ahí), porque esos entornos tienen bloqueado el acceso a
+    huggingface.co por política de red. Corre esto en tu propia terminal o en
+    tu servidor de producción.
+    """
+
+    name = "chatterbox"
+
+    def __init__(
+        self,
+        voice_sample: str | Path,
+        language_id: str = "es",
+        exaggeration: float = 0.5,
+        cfg_weight: float = 0.5,
+        temperature: float = 0.8,
+        device: str = "cpu",
+    ):
+        self.voice_sample = Path(voice_sample)
+        if not self.voice_sample.exists():
+            raise TTSEngineError(
+                f"No se encontró el audio de referencia en {self.voice_sample}. "
+                "Necesitas un WAV limpio de 10-30 segundos con la voz que quieres clonar "
+                "(sin música ni ruido de fondo, una sola persona hablando)."
+            )
+
+        self.language_id = language_id
+        self.exaggeration = exaggeration
+        self.cfg_weight = cfg_weight
+        self.temperature = temperature
+
+        try:
+            import torch
+            from chatterbox.mtl_tts import ChatterboxMultilingualTTS
+        except ImportError as exc:  # pragma: no cover
+            raise TTSEngineError(
+                "chatterbox-tts no está instalado. Instálalo con: "
+                "pip install -r requirements-chatterbox.txt"
+            ) from exc
+
+        resolved_device = device
+        if resolved_device == "cuda" and not torch.cuda.is_available():
+            resolved_device = "cpu"
+
+        self._torch = torch
+        self._model = ChatterboxMultilingualTTS.from_pretrained(device=resolved_device)
+
+    def synthesize(self, text: str, out_path: Path) -> SynthesizedAudio:
+        import torchaudio
+
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        wav = self._model.generate(
+            text,
+            language_id=self.language_id,
+            audio_prompt_path=str(self.voice_sample),
+            exaggeration=self.exaggeration,
+            cfg_weight=self.cfg_weight,
+            temperature=self.temperature,
+        )
+        torchaudio.save(str(out_path), wav, self._model.sr)
+        return SynthesizedAudio(path=out_path, duration_seconds=_wav_duration_seconds(out_path))
+
+
 def get_backend(name: str = "piper", **kwargs):
     if name == "piper":
         return PiperBackend(**kwargs)
     if name == "espeak":
         return EspeakBackend(**kwargs)
+    if name == "chatterbox":
+        return ChatterboxBackend(**kwargs)
     raise ValueError(f"Backend de TTS desconocido: {name}")
 
 
