@@ -68,7 +68,10 @@ class QualityDefaults:
 
     # Perillas del backend de respaldo (espeak-ng), para poder probar el efecto
     # de "voz distinta" en este mismo sandbox sin depender de Piper.
-    espeak_pitch: int = 50  # 0-99, default 50
+    # pitch=15 quedó guardado como default porque fue la variante "grave" que
+    # se probó y gustó (ver outputs/demo_voz_grave.mp4); el default de fábrica
+    # de espeak-ng es 50.
+    espeak_pitch: int = 15
     espeak_speed_wpm: int = 165
 
 
