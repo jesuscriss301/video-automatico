@@ -6,3 +6,5 @@ outputs/*.qa.json
 assets/voices/
 .env
 assets/uploads/
+assets/voices_library.json
+outputs/*.meta.json

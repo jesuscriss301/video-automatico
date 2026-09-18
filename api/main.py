@@ -48,6 +48,10 @@ from pipeline.run import _run_pipeline  # noqa: E402
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 UPLOADS_DIR = ASSETS_DIR / "uploads"
 VOICES_DIR = ASSETS_DIR / "voices"
+# Biblioteca de voces guardadas: un JSON con los ajustes de voz que el usuario
+# quiso conservar con un nombre (incluida la ruta del audio de referencia si
+# es una voz clonada), para no tener que volver a subir/configurar cada vez.
+VOICES_LIBRARY = ASSETS_DIR / "voices_library.json"
 for _d in (UPLOADS_DIR / "images", UPLOADS_DIR / "audio", UPLOADS_DIR / "music"):
     _d.mkdir(parents=True, exist_ok=True)
 
@@ -130,6 +134,20 @@ def _run_job(job_id: str, request: JobRequest) -> None:
             work_dir,
             options,
             progress_cb,
+        )
+        # Sidecar con los datos "humanos" del video (título, voz usada, fecha).
+        # El reporte de QA no los trae, y son justo los que la sección de
+        # videos generados necesita mostrar aunque se reinicie el servidor.
+        meta = {
+            "job_id": job_id,
+            "title": request.script.title,
+            "tts_backend": request.tts_backend,
+            "scenes": len(request.script.scenes),
+            "created_at": datetime.now().isoformat(timespec="seconds"),
+            "elapsed_seconds": round(time.time() - started, 1),
+        }
+        output_path.with_suffix(".meta.json").write_text(
+            json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8"
         )
         _set_job(
             job_id,
@@ -287,6 +305,171 @@ def download(job_id: str) -> FileResponse:
     nice_name = job.get("title") or job_id
     safe = "".join(c if c.isalnum() or c in "-_ " else "_" for c in str(nice_name)).strip()
     return FileResponse(path, media_type="video/mp4", filename=f"{safe or job_id}.mp4")
+
+
+# --------------------------------------------------------------------------
+# Voces guardadas
+# --------------------------------------------------------------------------
+class SavedVoice(BaseModel):
+    name: str = Field(..., min_length=1, max_length=60)
+    backend: Literal["piper", "espeak", "chatterbox"]
+    options: dict[str, Any] = Field(default_factory=dict)
+    note: Optional[str] = None
+
+
+def _read_voices() -> list[dict]:
+    if not VOICES_LIBRARY.exists():
+        return []
+    try:
+        data = json.loads(VOICES_LIBRARY.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except json.JSONDecodeError:
+        return []
+
+
+def _write_voices(voices: list[dict]) -> None:
+    VOICES_LIBRARY.write_text(
+        json.dumps(voices, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+@app.get("/api/voices")
+def list_voices() -> list[dict]:
+    """Las voces que el usuario guardó con un nombre. Para las voces clonadas
+    se marca si el audio de referencia todavía existe en el disco."""
+    voices = _read_voices()
+    for voice in voices:
+        sample = voice.get("options", {}).get("voice_sample")
+        voice["sample_exists"] = bool(sample) and Path(sample).exists()
+    return voices
+
+
+@app.post("/api/voices")
+def save_voice(voice: SavedVoice) -> dict:
+    options = _clean_tts_options(voice.backend, voice.options)
+
+    if voice.backend == "chatterbox":
+        sample = options.get("voice_sample")
+        if not sample:
+            raise HTTPException(
+                status_code=400,
+                detail="Una voz clonada necesita su audio de referencia para poder guardarse.",
+            )
+        if not Path(sample).exists():
+            raise HTTPException(status_code=400, detail=f"No existe el audio {sample}.")
+
+    voices = [v for v in _read_voices() if v.get("name") != voice.name]  # reemplaza si ya existía
+    voices.append({
+        "name": voice.name,
+        "backend": voice.backend,
+        "options": options,
+        "note": voice.note,
+        "created_at": datetime.now().isoformat(timespec="seconds"),
+    })
+    _write_voices(voices)
+    return {"saved": voice.name, "total": len(voices)}
+
+
+@app.delete("/api/voices/{name}")
+def delete_voice(name: str) -> dict:
+    voices = _read_voices()
+    remaining = [v for v in voices if v.get("name") != name]
+    if len(remaining) == len(voices):
+        raise HTTPException(status_code=404, detail="No existe esa voz guardada.")
+    # Solo se borra la entrada de la biblioteca: el audio de referencia se deja
+    # en assets/uploads/audio/ por si otra voz o otro video lo están usando.
+    _write_voices(remaining)
+    return {"deleted": name, "total": len(remaining)}
+
+
+# --------------------------------------------------------------------------
+# Videos ya generados (sección "outputs")
+# --------------------------------------------------------------------------
+def _safe_output(name: str) -> Path:
+    """Evita que alguien pida ../../algo: solo nombres de archivo simples
+    que existan dentro de outputs/."""
+    candidate = Path(name).name
+    if not candidate.endswith(".mp4"):
+        candidate += ".mp4"
+    path = (OUTPUTS_DIR / candidate).resolve()
+    if path.parent != OUTPUTS_DIR.resolve() or not path.exists():
+        raise HTTPException(status_code=404, detail="No existe ese video.")
+    return path
+
+
+@app.get("/api/outputs")
+def list_outputs() -> list[dict]:
+    """Lee la carpeta outputs/ del disco (no la memoria), así la lista sigue
+    ahí después de reiniciar el servidor."""
+    items = []
+    for path in OUTPUTS_DIR.glob("*.mp4"):
+        meta_path = path.with_suffix(".meta.json")
+        qa_path = Path(str(path) + ".qa.json")
+
+        meta: dict[str, Any] = {}
+        if meta_path.exists():
+            try:
+                meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                meta = {}
+
+        qa: dict[str, Any] = {}
+        if qa_path.exists():
+            try:
+                qa = json.loads(qa_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                qa = {}
+
+        stat = path.stat()
+        items.append({
+            "file": path.name,
+            "title": meta.get("title") or path.stem,
+            "tts_backend": meta.get("tts_backend"),
+            "scenes": meta.get("scenes"),
+            "created_at": meta.get("created_at")
+            or datetime.fromtimestamp(stat.st_mtime).isoformat(timespec="seconds"),
+            "modified_ts": stat.st_mtime,
+            "size_mb": round(stat.st_size / 1_048_576, 1),
+            "duration_seconds": qa.get("duration_seconds"),
+            "width": qa.get("width"),
+            "height": qa.get("height"),
+            "qa_ok": qa.get("ok"),
+            "video_url": f"/api/outputs/{path.name}/video",
+            "download_url": f"/api/outputs/{path.name}/download",
+        })
+
+    return sorted(items, key=lambda i: i["modified_ts"], reverse=True)
+
+
+@app.get("/api/outputs/{name}/video")
+def output_video(name: str) -> FileResponse:
+    return FileResponse(_safe_output(name), media_type="video/mp4")
+
+
+@app.get("/api/outputs/{name}/download")
+def output_download(name: str) -> FileResponse:
+    path = _safe_output(name)
+    meta_path = path.with_suffix(".meta.json")
+    filename = path.name
+    if meta_path.exists():
+        try:
+            title = json.loads(meta_path.read_text(encoding="utf-8")).get("title")
+            if title:
+                safe = "".join(c if c.isalnum() or c in "-_ " else "_" for c in title).strip()
+                filename = f"{safe or path.stem}.mp4"
+        except json.JSONDecodeError:
+            pass
+    return FileResponse(path, media_type="video/mp4", filename=filename)
+
+
+@app.delete("/api/outputs/{name}")
+def output_delete(name: str) -> dict:
+    path = _safe_output(name)
+    path.unlink()
+    for sidecar in (path.with_suffix(".meta.json"), Path(str(path) + ".qa.json")):
+        if sidecar.exists():
+            sidecar.unlink()
+    return {"deleted": path.name}
 
 
 # --------------------------------------------------------------------------

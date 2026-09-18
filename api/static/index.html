@@ -134,6 +134,21 @@
     background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.3); color: #ffc9c9;
     white-space: pre-wrap; word-break: break-word;
   }
+  /* --- videos generados --- */
+  .out {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 0; border-bottom: 1px solid var(--border);
+  }
+  .out:last-child { border-bottom: none; }
+  .out .meta { flex: 1; min-width: 0; }
+  .out .name {
+    font-size: 14px; font-weight: 550; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .out .sub { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .out .btns { display: flex; gap: 6px; flex-shrink: 0; }
+  #outputs video { margin: 4px 0 14px; }
+
   .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
   .actions .spacer { flex: 1; }
   .hidden { display: none !important; }
@@ -214,6 +229,17 @@
           </div>
         </div>
 
+        <div class="saved-voices">
+          <label for="saved-voice">Voces guardadas</label>
+          <select id="saved-voice"></select>
+          <div style="display:flex; gap:8px; margin-top:8px">
+            <button class="ghost" id="load-voice" style="flex:1">Usar</button>
+            <button class="ghost" id="save-voice" style="flex:1">Guardar…</button>
+            <button class="danger-text" id="delete-voice" title="Borrar la voz guardada">✕</button>
+          </div>
+          <div class="hint" id="saved-voice-hint">Guarda los ajustes de voz (incluido el audio de referencia si es clonada) para reusarlos después.</div>
+        </div>
+
         <label>Música de fondo (opcional)</label>
         <button class="ghost" id="music-btn" style="width:100%">Subir música…</button>
         <input type="file" id="music-input" accept="audio/*" class="hidden" />
@@ -259,6 +285,13 @@
           <div id="result"></div>
         </div>
       </div>
+
+      <!-- ================= Videos generados ================= -->
+      <div class="scenes-head" style="margin-top:34px">
+        <h2>Videos generados</h2>
+        <button class="ghost" id="refresh-outputs">Actualizar</button>
+      </div>
+      <div class="panel" id="outputs"><div class="hint">Cargando…</div></div>
     </div>
   </div>
 </div>
@@ -304,7 +337,173 @@ async function init() {
   addScene();
   addScene();
   render();
+  loadSavedVoices();
+  loadOutputs();
 }
+
+// ---------------------------------------------------------------------------
+// Voces guardadas
+// ---------------------------------------------------------------------------
+let savedVoices = [];
+
+async function loadSavedVoices() {
+  try {
+    savedVoices = await (await fetch('/api/voices')).json();
+  } catch (e) { savedVoices = []; }
+
+  const sel = $('saved-voice');
+  if (!savedVoices.length) {
+    sel.innerHTML = `<option value="">(ninguna guardada todavía)</option>`;
+  } else {
+    sel.innerHTML = savedVoices.map((v, i) => {
+      const roto = (v.backend === 'chatterbox' && !v.sample_exists) ? ' ⚠ falta el audio' : '';
+      return `<option value="${i}">${escapeHtml(v.name)} — ${v.backend}${roto}</option>`;
+    }).join('');
+  }
+}
+
+$('save-voice').onclick = async () => {
+  const backend = $('backend').value;
+  const options = buildTtsOptions();
+
+  if (backend === 'chatterbox' && !options.voice_sample) {
+    alert('Primero sube el audio de referencia de la voz que quieres guardar.');
+    return;
+  }
+
+  const name = prompt('¿Con qué nombre quieres guardar esta voz?',
+    backend === 'chatterbox' ? 'Mi voz clonada' : `Voz ${backend}`);
+  if (!name) return;
+
+  try {
+    const res = await fetch('/api/voices', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name.trim(), backend, options }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || `Error ${res.status}`);
+    await loadSavedVoices();
+    $('saved-voice').value = String(savedVoices.findIndex(v => v.name === name.trim()));
+    $('saved-voice-hint').textContent = `Guardada como "${name.trim()}".`;
+  } catch (e) {
+    alert('No se pudo guardar: ' + e.message);
+  }
+};
+
+$('load-voice').onclick = () => {
+  const idx = $('saved-voice').value;
+  if (idx === '') return;
+  const voice = savedVoices[parseInt(idx, 10)];
+  if (!voice) return;
+
+  $('backend').value = voice.backend;
+  $('backend').onchange();
+
+  const o = voice.options || {};
+  if (voice.backend === 'piper') {
+    if (o.voice) $('piper-voice').value = o.voice;
+    $('length-scale').value = o.length_scale ?? '';
+    $('noise-scale').value = o.noise_scale ?? '';
+  } else if (voice.backend === 'espeak') {
+    $('espeak-pitch').value = o.pitch ?? config.espeak_pitch;
+    $('espeak-speed').value = o.speed_wpm ?? config.espeak_speed_wpm;
+  } else {
+    voiceSample = o.voice_sample ? { path: o.voice_sample, name: o.voice_sample.split(/[\\/]/).pop() } : null;
+    $('voice-sample-name').textContent = voiceSample
+      ? (voice.sample_exists ? voiceSample.name : `⚠ Falta el archivo: ${voiceSample.name}`)
+      : 'Ningún archivo seleccionado.';
+    $('exaggeration').value = o.exaggeration ?? '';
+    $('cfg-weight').value = o.cfg_weight ?? '';
+  }
+  $('saved-voice-hint').textContent = `Usando "${voice.name}".`;
+};
+
+$('delete-voice').onclick = async () => {
+  const idx = $('saved-voice').value;
+  if (idx === '') return;
+  const voice = savedVoices[parseInt(idx, 10)];
+  if (!voice || !confirm(`¿Borrar la voz guardada "${voice.name}"?`)) return;
+  try {
+    await fetch(`/api/voices/${encodeURIComponent(voice.name)}`, { method: 'DELETE' });
+    await loadSavedVoices();
+    $('saved-voice-hint').textContent = `Borrada "${voice.name}". El audio de referencia se queda en el disco.`;
+  } catch (e) { alert('No se pudo borrar: ' + e.message); }
+};
+
+// ---------------------------------------------------------------------------
+// Videos generados
+// ---------------------------------------------------------------------------
+async function loadOutputs() {
+  const host = $('outputs');
+  try {
+    const items = await (await fetch('/api/outputs')).json();
+    if (!items.length) {
+      host.innerHTML = `<div class="hint">Todavía no hay videos generados. Los que generes van a aparecer acá.</div>`;
+      return;
+    }
+    host.innerHTML = items.map(it => {
+      const bits = [
+        it.duration_seconds ? `${it.duration_seconds.toFixed(1)}s` : null,
+        (it.width && it.height) ? `${it.width}×${it.height}` : null,
+        it.tts_backend,
+        it.scenes ? `${it.scenes} escenas` : null,
+        `${it.size_mb} MB`,
+        fmtDate(it.created_at),
+      ].filter(Boolean).join(' · ');
+      return `
+        <div class="out" data-file="${escapeHtml(it.file)}">
+          <div class="meta">
+            <div class="name">${escapeHtml(it.title)}${it.qa_ok === false ? ' <span class="chip bad">QA</span>' : ''}</div>
+            <div class="sub">${escapeHtml(bits)}</div>
+          </div>
+          <div class="btns">
+            <button class="ghost" data-act="play">Ver</button>
+            <button class="ghost" data-act="dl">Descargar</button>
+            <button class="danger-text" data-act="rm" title="Eliminar">✕</button>
+          </div>
+        </div>
+        <div class="player hidden" data-player="${escapeHtml(it.file)}"></div>
+      `;
+    }).join('');
+
+    items.forEach(it => {
+      const row = host.querySelector(`.out[data-file="${cssEscape(it.file)}"]`);
+      const player = host.querySelector(`[data-player="${cssEscape(it.file)}"]`);
+      row.querySelector('[data-act="play"]').onclick = () => {
+        if (player.classList.contains('hidden')) {
+          player.innerHTML = `<video controls src="${it.video_url}"></video>`;
+          player.classList.remove('hidden');
+        } else {
+          player.innerHTML = '';
+          player.classList.add('hidden');
+        }
+      };
+      row.querySelector('[data-act="dl"]').onclick = () => { window.location = it.download_url; };
+      row.querySelector('[data-act="rm"]').onclick = async () => {
+        if (!confirm(`¿Eliminar "${it.title}"? Esto borra el archivo del disco.`)) return;
+        await fetch(`/api/outputs/${encodeURIComponent(it.file)}`, { method: 'DELETE' });
+        loadOutputs();
+      };
+    });
+  } catch (e) {
+    host.innerHTML = `<div class="hint">No se pudo leer la lista de videos: ${escapeHtml(e.message)}</div>`;
+  }
+}
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleString('es', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+
+// Los nombres de archivo son hex + .mp4, pero por si acaso.
+function cssEscape(s) {
+  return String(s).replace(/["\\]/g, '\\$&');
+}
+
+$('refresh-outputs').onclick = loadOutputs;
 
 // ---------------------------------------------------------------------------
 // Escenas
@@ -566,6 +765,7 @@ function poll(jobId) {
         clearInterval(pollTimer);
         $('generate').disabled = false;
         showResult(job);
+        loadOutputs();   // el nuevo video aparece de una en la lista de abajo
       } else if (job.status === 'error') {
         clearInterval(pollTimer);
         fail(job.error || 'Falló la generación.');

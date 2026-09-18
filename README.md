@@ -105,9 +105,18 @@ JSON ni terminal:
   sus perillas de velocidad y expresividad), espeak (respaldo sin descargas),
   o Chatterbox (subes un audio de referencia y clona esa voz). También puedes
   subir música de fondo opcional.
+- **Voces guardadas:** "Guardar…" le pone un nombre a la configuración de voz
+  actual y la deja en `assets/voices_library.json` — incluida la ruta del
+  audio de referencia si es una voz clonada. Queda ahí aunque cierres el
+  navegador o reinicies el servidor, así que la próxima vez solo la eliges y
+  le das "Usar", sin volver a subir nada ni recordar los números.
 - "Generar video" muestra el avance en vivo (qué escena va, si está
   renderizando o normalizando audio) y al terminar reproduce el video ahí
   mismo, con el resultado del QA y un botón para descargarlo.
+- **Videos generados:** al final de la página está la lista de todo lo que hay
+  en `outputs/`, con su duración, resolución, voz usada, peso y fecha, y
+  botones para verlo ahí mismo, descargarlo o eliminarlo. Se lee del disco, no
+  de la memoria, así que también aparecen los videos de sesiones anteriores.
 - "Exportar JSON" guarda el guion armado para reusarlo luego (o correrlo por
   CLI); "Importar JSON" carga uno ya hecho.
 
@@ -134,6 +143,9 @@ Con el servidor levantado:
 | `GET /api/jobs/{id}` | estado, avance y reporte de QA |
 | `GET /api/jobs/{id}/video` | el mp4 para reproducir |
 | `GET /download/{id}` | el mp4 como descarga |
+| `GET /api/voices` · `POST /api/voices` · `DELETE /api/voices/{nombre}` | biblioteca de voces guardadas |
+| `GET /api/outputs` | lista de videos ya generados (lee `outputs/` del disco) |
+| `GET /api/outputs/{archivo}/video` · `/download` · `DELETE` | ver, descargar o eliminar uno |
 | `POST /generate` | generación síncrona con un guion JSON completo |
 
 ## Cambiar o "crear" voces
