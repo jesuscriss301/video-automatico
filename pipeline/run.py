@@ -12,6 +12,7 @@ from __future__ import annotations
 import shutil
 import tempfile
 from pathlib import Path
+from typing import Callable
 
 from config.settings import DEFAULTS
 from pipeline import audio_processor, edl as edl_module, video_renderer, qa_check
@@ -28,6 +29,7 @@ def generate_video(
     tts_backend: str = "piper",
     keep_work_dir: bool = False,
     tts_options: dict | None = None,
+    progress_cb: Callable[[str, float], None] | None = None,
 ) -> QAReport:
     script = load_script(script_path)
     output_path = Path(output_path)
@@ -35,7 +37,9 @@ def generate_video(
 
     work_dir = Path(tempfile.mkdtemp(prefix="video_pipeline_"))
     try:
-        report = _run_pipeline(script, output_path, tts_backend, work_dir, tts_options or {})
+        report = _run_pipeline(
+            script, output_path, tts_backend, work_dir, tts_options or {}, progress_cb
+        )
     finally:
         if not keep_work_dir:
             shutil.rmtree(work_dir, ignore_errors=True)
@@ -51,16 +55,29 @@ def _run_pipeline(
     tts_backend: str,
     work_dir: Path,
     tts_options: dict | None = None,
+    progress_cb: Callable[[str, float], None] | None = None,
 ) -> QAReport:
+    def progress(stage: str, pct: float) -> None:
+        # La interfaz gráfica (api/main.py) usa esto para mostrar en qué va;
+        # la CLI no pasa callback y aquí no pasa nada.
+        if progress_cb is not None:
+            progress_cb(stage, pct)
+
     audio_dir = work_dir / "audio"
     images_dir = work_dir / "images"
     audio_dir.mkdir(parents=True, exist_ok=True)
     images_dir.mkdir(parents=True, exist_ok=True)
 
+    progress("Preparando el motor de voz", 2)
     backend = get_backend(tts_backend, **(tts_options or {}))
 
+    total_scenes = len(script.scenes)
     rendered_scenes: list[RenderedScene] = []
-    for scene in script.scenes:
+    for index, scene in enumerate(script.scenes, start=1):
+        progress(
+            f"Generando voz — escena {index} de {total_scenes}",
+            5 + (index - 1) / max(total_scenes, 1) * 55,
+        )
         synthesized = synthesize_scene(scene, backend, audio_dir)
         image_resolved = ensure_quality(scene.image_path, images_dir, scene.id)
         rendered_scenes.append(
@@ -72,10 +89,12 @@ def _run_pipeline(
             )
         )
 
+    progress("Calculando los cortes (EDL)", 62)
     clips = edl_module.build_edl(rendered_scenes)
     expected_duration = edl_module.total_duration(clips)
 
     # --- audio: concatenar todas las escenas + normalizar (+ música opcional) ---
+    progress("Uniendo y normalizando el audio", 68)
     voice_track = audio_processor.concat_wavs(
         [Path(rs.audio_path) for rs in rendered_scenes], work_dir / "voice_raw.wav"
     )
@@ -90,9 +109,11 @@ def _run_pipeline(
             )
 
     # --- subtítulos ---
+    progress("Generando subtítulos", 74)
     subtitles_path = build_ass_subtitles(clips, work_dir / "subtitles.ass")
 
     # --- render final ---
+    progress("Renderizando el video (Ken Burns + transiciones)", 78)
     video_renderer.render_final_video(
         clips=clips,
         final_audio=final_audio,
@@ -102,9 +123,11 @@ def _run_pipeline(
     )
 
     # --- QA ---
+    progress("Verificando el resultado (QA)", 95)
     report = qa_check.run_qa(output_path, expected_duration_seconds=expected_duration)
 
     report_path = output_path.with_suffix(output_path.suffix + ".qa.json")
     report_path.write_text(report.model_dump_json(indent=2), encoding="utf-8")
 
+    progress("Listo", 100)
     return report

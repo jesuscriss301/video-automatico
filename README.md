@@ -46,7 +46,9 @@ video-editing-api-network/
 │   ├── qa_check.py          # Verificación automática del video final
 │   └── run.py                # Orquesta todo el pipeline de punta a punta
 ├── api/
-│   └── main.py               # API FastAPI para exponer el pipeline
+│   ├── main.py               # API FastAPI + interfaz gráfica (sirve la web en /)
+│   └── static/
+│       └── index.html        # Interfaz gráfica: armar el guion escena por escena
 ├── scripts/
 │   ├── run_pipeline.py       # CLI: genera un video a partir de un guion
 │   └── make_sample_assets.py # Genera imágenes de prueba (para probar sin fotos reales)
@@ -86,7 +88,30 @@ pip install -r requirements.txt
 python -m piper.download_voices es_ES-davefx-medium
 ```
 
-## Uso
+## Uso — interfaz gráfica (lo más fácil)
+
+```bash
+uvicorn api.main:app --reload --port 8000
+```
+
+Abre **http://localhost:8000** en el navegador. Ahí armas el video sin tocar
+JSON ni terminal:
+
+- Una tarjeta por escena: arrastras (o eliges) la imagen, escribes el texto
+  que se va a narrar, la descripción de la imagen, y la pausa que quieras
+  después de esa escena. Puedes reordenar las escenas con las flechas ↑↓ o
+  eliminarlas.
+- En el panel de la izquierda eliges la voz: Piper (voces prefabricadas, con
+  sus perillas de velocidad y expresividad), espeak (respaldo sin descargas),
+  o Chatterbox (subes un audio de referencia y clona esa voz). También puedes
+  subir música de fondo opcional.
+- "Generar video" muestra el avance en vivo (qué escena va, si está
+  renderizando o normalizando audio) y al terminar reproduce el video ahí
+  mismo, con el resultado del QA y un botón para descargarlo.
+- "Exportar JSON" guarda el guion armado para reusarlo luego (o correrlo por
+  CLI); "Importar JSON" carga uno ya hecho.
+
+## Uso — CLI
 
 1. Escribe tu guion en un JSON como `examples/sample_script.json` (cada escena:
    texto, ruta de imagen, descripción, y opcionalmente pausa después).
@@ -98,13 +123,18 @@ python scripts/run_pipeline.py examples/sample_script.json outputs/mi_video.mp4
 
 3. El video final queda en `outputs/`, junto con un reporte de QA (`*.qa.json`).
 
-También puedes levantar la API:
+## Uso — API (desde otro servicio: n8n, otro backend, etc.)
 
-```bash
-uvicorn api.main:app --reload --port 8000
-```
+Con el servidor levantado:
 
-y mandar un POST a `/generate` con el guion en el body.
+| Endpoint | Qué hace |
+|---|---|
+| `POST /api/upload?kind=images` | sube una imagen (o `audio` / `music`) y devuelve su ruta |
+| `POST /api/jobs` | arranca una generación, devuelve `job_id` (no bloquea) |
+| `GET /api/jobs/{id}` | estado, avance y reporte de QA |
+| `GET /api/jobs/{id}/video` | el mp4 para reproducir |
+| `GET /download/{id}` | el mp4 como descarga |
+| `POST /generate` | generación síncrona con un guion JSON completo |
 
 ## Cambiar o "crear" voces
 

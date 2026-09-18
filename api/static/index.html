@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video Automático — Flujo 1</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1e222b;
+    --border: #2a2f3a;
+    --text: #e7e9ee;
+    --muted: #949bab;
+    --accent: #5b8cff;
+    --accent-soft: rgba(91, 140, 255, 0.14);
+    --ok: #3ecf8e;
+    --warn: #f5a623;
+    --err: #ff6b6b;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  header {
+    padding: 22px 28px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  header h1 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.01em; }
+  header .sub { color: var(--muted); font-size: 13.5px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 24px 28px 80px; }
+  .cols { display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .panel h2 {
+    margin: 0 0 14px; font-size: 13px; font-weight: 650;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+  }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 5px; }
+  label:first-of-type { margin-top: 0; }
+  input[type="text"], input[type="number"], select, textarea {
+    width: 100%; padding: 9px 11px;
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px;
+    font: inherit; font-size: 14px;
+  }
+  textarea { resize: vertical; min-height: 68px; line-height: 1.45; }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  button {
+    font: inherit; font-size: 14px; font-weight: 550;
+    padding: 9px 15px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--panel-2); color: var(--text);
+    transition: border-color .12s, background .12s;
+  }
+  button:hover:not(:disabled) { border-color: #3a4151; background: #242935; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  button.primary {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  button.primary:hover:not(:disabled) { background: #4a7df0; border-color: #4a7df0; }
+  button.ghost { background: transparent; }
+  button.danger-text { background: transparent; border-color: transparent; color: var(--muted); padding: 5px 8px; }
+  button.danger-text:hover:not(:disabled) { color: var(--err); background: rgba(255,107,107,.08); }
+  button.icon { padding: 4px 9px; font-size: 13px; background: transparent; border-color: transparent; color: var(--muted); }
+  button.icon:hover:not(:disabled) { color: var(--text); background: var(--panel-2); }
+
+  /* --- escenas --- */
+  .scenes-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .scenes-head h2 { margin: 0; }
+  .scene {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px; margin-bottom: 14px;
+    display: grid; grid-template-columns: 172px 1fr; gap: 16px;
+  }
+  @media (max-width: 680px) { .scene { grid-template-columns: 1fr; } }
+  .scene-bar {
+    grid-column: 1 / -1; display: flex; align-items: center; gap: 8px;
+    margin: -4px 0 2px; color: var(--muted); font-size: 13px;
+  }
+  .scene-bar .num {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 2px 9px; font-weight: 600; color: var(--text); font-size: 12.5px;
+  }
+  .scene-bar .spacer { flex: 1; }
+
+  .drop {
+    aspect-ratio: 16 / 9; border-radius: 9px; border: 1.5px dashed var(--border);
+    background: var(--panel-2); display: flex; align-items: center; justify-content: center;
+    text-align: center; color: var(--muted); font-size: 12.5px; cursor: pointer;
+    overflow: hidden; position: relative; padding: 8px;
+  }
+  .drop:hover, .drop.over { border-color: var(--accent); color: var(--text); }
+  .drop.has-img { padding: 0; border-style: solid; }
+  .drop img { width: 100%; height: 100%; object-fit: cover; }
+  .drop .badge {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(15,17,21,.82); color: var(--text);
+    font-size: 11px; padding: 4px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* --- progreso / resultado --- */
+  #status { margin-top: 20px; }
+  .bar { height: 8px; background: var(--panel-2); border-radius: 99px; overflow: hidden; border: 1px solid var(--border); }
+  .bar > div { height: 100%; width: 0; background: var(--accent); transition: width .35s ease; }
+  .stage { display: flex; justify-content: space-between; gap: 12px; font-size: 13.5px; margin-bottom: 8px; }
+  .stage .pct { color: var(--muted); font-variant-numeric: tabular-nums; }
+  video { width: 100%; border-radius: 9px; background: #000; margin-top: 14px; display: block; }
+  .qa { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .chip {
+    font-size: 12.5px; padding: 4px 10px; border-radius: 99px;
+    background: var(--panel-2); border: 1px solid var(--border); color: var(--muted);
+  }
+  .chip.ok { color: var(--ok); border-color: rgba(62,207,142,.35); }
+  .chip.bad { color: var(--err); border-color: rgba(255,107,107,.35); }
+  .alert {
+    margin-top: 14px; padding: 12px 14px; border-radius: 9px; font-size: 13.5px;
+    background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.3); color: #ffc9c9;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+  .actions .spacer { flex: 1; }
+  .hidden { display: none !important; }
+  a.dl { color: var(--accent); text-decoration: none; font-size: 14px; font-weight: 550; }
+  a.dl:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Video Automático</h1>
+  <span class="sub">Flujo 1 — guion + imágenes → video con voz, transiciones y subtítulos</span>
+</header>
+
+<div class="wrap">
+  <div class="cols">
+    <!-- ================= Ajustes ================= -->
+    <div>
+      <div class="panel">
+        <h2>Ajustes del video</h2>
+
+        <label for="title">Título</label>
+        <input type="text" id="title" value="Mi video" />
+
+        <label for="backend">Voz (motor de TTS)</label>
+        <select id="backend">
+          <option value="piper">Piper — voz prefabricada (recomendado)</option>
+          <option value="espeak">espeak — robótica, sin descargas (pruebas)</option>
+          <option value="chatterbox">Chatterbox — clonar una voz</option>
+        </select>
+
+        <!-- Piper -->
+        <div id="opt-piper">
+          <label for="piper-voice">Modelo de voz</label>
+          <select id="piper-voice"></select>
+          <div class="hint" id="piper-hint"></div>
+          <div class="row">
+            <div>
+              <label for="length-scale">Velocidad</label>
+              <input type="number" id="length-scale" step="0.05" min="0.5" max="2" placeholder="1.0" />
+            </div>
+            <div>
+              <label for="noise-scale">Expresividad</label>
+              <input type="number" id="noise-scale" step="0.05" min="0" max="1.5" placeholder="auto" />
+            </div>
+          </div>
+          <div class="hint">Vacío = el valor por defecto del modelo. Velocidad: menos de 1 más rápido, más de 1 más lento.</div>
+        </div>
+
+        <!-- espeak -->
+        <div id="opt-espeak" class="hidden">
+          <div class="row">
+            <div>
+              <label for="espeak-pitch">Tono (0-99)</label>
+              <input type="number" id="espeak-pitch" min="0" max="99" />
+            </div>
+            <div>
+              <label for="espeak-speed">Palabras/min</label>
+              <input type="number" id="espeak-speed" min="80" max="350" />
+            </div>
+          </div>
+        </div>
+
+        <!-- chatterbox -->
+        <div id="opt-chatterbox" class="hidden">
+          <label>Audio de referencia (10-30s, limpio)</label>
+          <button class="ghost" id="voice-sample-btn" style="width:100%">Subir audio de la voz…</button>
+          <input type="file" id="voice-sample-input" accept="audio/*" class="hidden" />
+          <div class="hint" id="voice-sample-name">Ningún archivo seleccionado.</div>
+          <div class="row">
+            <div>
+              <label for="exaggeration">Expresividad</label>
+              <input type="number" id="exaggeration" step="0.05" min="0" max="1" placeholder="0.5" />
+            </div>
+            <div>
+              <label for="cfg-weight">Apego al estilo</label>
+              <input type="number" id="cfg-weight" step="0.05" min="0" max="1" placeholder="0.5" />
+            </div>
+          </div>
+        </div>
+
+        <label>Música de fondo (opcional)</label>
+        <button class="ghost" id="music-btn" style="width:100%">Subir música…</button>
+        <input type="file" id="music-input" accept="audio/*" class="hidden" />
+        <div class="hint" id="music-name">Sin música de fondo.</div>
+
+        <label for="default-pause">Pausa por defecto entre escenas (ms)</label>
+        <input type="number" id="default-pause" min="0" max="3000" step="50" />
+      </div>
+
+      <div class="panel" style="margin-top:14px">
+        <h2>Guion</h2>
+        <div style="display:flex; gap:10px">
+          <button class="ghost" id="export-btn" style="flex:1">Exportar JSON</button>
+          <button class="ghost" id="import-btn" style="flex:1">Importar JSON</button>
+        </div>
+        <input type="file" id="import-input" accept="application/json,.json" class="hidden" />
+        <div class="hint">Guarda el guion en un archivo para reusarlo después, o carga uno ya hecho.</div>
+      </div>
+    </div>
+
+    <!-- ================= Escenas ================= -->
+    <div>
+      <div class="scenes-head">
+        <h2>Escenas</h2>
+        <button class="ghost" id="add-scene">+ Agregar escena</button>
+      </div>
+
+      <div id="scenes"></div>
+
+      <div class="actions">
+        <button class="primary" id="generate">Generar video</button>
+        <span class="spacer"></span>
+        <span class="hint" id="summary"></span>
+      </div>
+
+      <div id="status" class="hidden">
+        <div class="panel">
+          <div class="stage">
+            <span id="stage-text">En cola…</span>
+            <span class="pct" id="stage-pct">0%</span>
+          </div>
+          <div class="bar"><div id="bar-fill"></div></div>
+          <div id="result"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Estado
+// ---------------------------------------------------------------------------
+let scenes = [];        // { uid, text, description, pause, imagePath, imageUrl, imageName }
+let voiceSample = null; // { path, name }
+let music = null;       // { path, name }
+let config = {};
+let pollTimer = null;
+let uid = 0;
+
+const $ = (id) => document.getElementById(id);
+
+// ---------------------------------------------------------------------------
+// Arranque
+// ---------------------------------------------------------------------------
+async function init() {
+  try {
+    config = await (await fetch('/api/config')).json();
+  } catch (e) {
+    config = { piper_voices: [], piper_default_voice: '', espeak_pitch: 15, espeak_speed_wpm: 165, silence_between_scenes_ms: 250 };
+  }
+
+  const sel = $('piper-voice');
+  if (config.piper_voices && config.piper_voices.length) {
+    sel.innerHTML = config.piper_voices.map(v => `<option value="${v}">${v}</option>`).join('');
+    if (config.piper_voices.includes(config.piper_default_voice)) sel.value = config.piper_default_voice;
+    $('piper-hint').textContent = `${config.piper_voices.length} voz(ces) descargada(s) en assets/voices/.`;
+  } else {
+    sel.innerHTML = `<option value="">(ninguna descargada)</option>`;
+    $('piper-hint').innerHTML = 'No hay voces de Piper descargadas. Corre:<br><code>python -m piper.download_voices ' +
+      (config.piper_default_voice || 'es_ES-davefx-medium') + ' --download-dir assets/voices</code>';
+  }
+
+  $('espeak-pitch').value = config.espeak_pitch;
+  $('espeak-speed').value = config.espeak_speed_wpm;
+  $('default-pause').value = config.silence_between_scenes_ms;
+
+  addScene();
+  addScene();
+  render();
+}
+
+// ---------------------------------------------------------------------------
+// Escenas
+// ---------------------------------------------------------------------------
+function addScene() {
+  scenes.push({ uid: ++uid, text: '', description: '', pause: null, imagePath: null, imageUrl: null, imageName: null });
+}
+
+function moveScene(index, delta) {
+  const target = index + delta;
+  if (target < 0 || target >= scenes.length) return;
+  [scenes[index], scenes[target]] = [scenes[target], scenes[index]];
+  render();
+}
+
+function removeScene(index) {
+  scenes.splice(index, 1);
+  if (!scenes.length) addScene();
+  render();
+}
+
+function render() {
+  const host = $('scenes');
+  host.innerHTML = '';
+
+  scenes.forEach((scene, i) => {
+    const el = document.createElement('div');
+    el.className = 'scene';
+    el.innerHTML = `
+      <div class="scene-bar">
+        <span class="num">Escena ${i + 1}</span>
+        <span class="spacer"></span>
+        <button class="icon" data-act="up" ${i === 0 ? 'disabled' : ''} title="Subir">↑</button>
+        <button class="icon" data-act="down" ${i === scenes.length - 1 ? 'disabled' : ''} title="Bajar">↓</button>
+        <button class="danger-text" data-act="del">Eliminar</button>
+      </div>
+
+      <div>
+        <div class="drop ${scene.imageUrl ? 'has-img' : ''}" data-act="pick">
+          ${scene.imageUrl
+            ? `<img src="${scene.imageUrl}" alt=""><span class="badge">${escapeHtml(scene.imageName || '')}</span>`
+            : 'Clic o arrastra<br>una imagen aquí'}
+        </div>
+        <input type="file" accept="image/*" class="hidden" data-act="file" />
+      </div>
+
+      <div>
+        <label>Texto que se narra</label>
+        <textarea data-field="text" placeholder="Lo que la voz va a decir en esta escena…">${escapeHtml(scene.text)}</textarea>
+
+        <label>Descripción de la imagen</label>
+        <textarea data-field="description" style="min-height:52px" placeholder="Qué se ve en la imagen (queda registrado en el guion)…">${escapeHtml(scene.description)}</textarea>
+
+        <label>Pausa después de esta escena (ms)</label>
+        <input type="number" data-field="pause" min="0" max="5000" step="50"
+               placeholder="por defecto: ${config.silence_between_scenes_ms ?? 250}"
+               value="${scene.pause ?? ''}" />
+      </div>
+    `;
+
+    // eventos de la tarjeta
+    el.querySelector('[data-act="up"]').onclick = () => moveScene(i, -1);
+    el.querySelector('[data-act="down"]').onclick = () => moveScene(i, 1);
+    el.querySelector('[data-act="del"]').onclick = () => removeScene(i);
+
+    const drop = el.querySelector('[data-act="pick"]');
+    const fileInput = el.querySelector('[data-act="file"]');
+    drop.onclick = () => fileInput.click();
+    fileInput.onchange = () => { if (fileInput.files[0]) uploadImage(i, fileInput.files[0], drop); };
+    drop.ondragover = (e) => { e.preventDefault(); drop.classList.add('over'); };
+    drop.ondragleave = () => drop.classList.remove('over');
+    drop.ondrop = (e) => {
+      e.preventDefault(); drop.classList.remove('over');
+      const f = e.dataTransfer.files[0];
+      if (f && f.type.startsWith('image/')) uploadImage(i, f, drop);
+    };
+
+    el.querySelector('[data-field="text"]').oninput = (e) => { scenes[i].text = e.target.value; updateSummary(); };
+    el.querySelector('[data-field="description"]').oninput = (e) => { scenes[i].description = e.target.value; };
+    el.querySelector('[data-field="pause"]').oninput = (e) => {
+      scenes[i].pause = e.target.value === '' ? null : parseInt(e.target.value, 10);
+    };
+
+    host.appendChild(el);
+  });
+
+  updateSummary();
+}
+
+function updateSummary() {
+  const withImage = scenes.filter(s => s.imagePath).length;
+  const words = scenes.reduce((n, s) => n + s.text.trim().split(/\s+/).filter(Boolean).length, 0);
+  // ~150 palabras por minuto es un ritmo de narración normal
+  const secs = Math.round(words / 150 * 60);
+  $('summary').textContent =
+    `${scenes.length} escena(s) · ${withImage} con imagen · ~${words} palabras (≈${secs}s de video)`;
+}
+
+// ---------------------------------------------------------------------------
+// Subidas
+// ---------------------------------------------------------------------------
+async function upload(file, kind) {
+  const form = new FormData();
+  form.append('file', file);
+  const res = await fetch(`/api/upload?kind=${kind}`, { method: 'POST', body: form });
+  if (!res.ok) throw new Error(`No se pudo subir el archivo (${res.status})`);
+  return res.json();
+}
+
+async function uploadImage(index, file, dropEl) {
+  dropEl.innerHTML = 'Subiendo…';
+  try {
+    const data = await upload(file, 'images');
+    scenes[index].imagePath = data.path;
+    scenes[index].imageUrl = data.url;
+    scenes[index].imageName = data.name;
+    render();
+  } catch (e) {
+    dropEl.innerHTML = 'Error al subir';
+    alert(e.message);
+  }
+}
+
+$('voice-sample-btn').onclick = () => $('voice-sample-input').click();
+$('voice-sample-input').onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  $('voice-sample-name').textContent = 'Subiendo…';
+  try {
+    const data = await upload(f, 'audio');
+    voiceSample = { path: data.path, name: data.name };
+    $('voice-sample-name').textContent = data.name;
+  } catch (err) { $('voice-sample-name').textContent = 'Error: ' + err.message; }
+};
+
+$('music-btn').onclick = () => $('music-input').click();
+$('music-input').onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  $('music-name').textContent = 'Subiendo…';
+  try {
+    const data = await upload(f, 'music');
+    music = { path: data.path, name: data.name };
+    $('music-name').textContent = data.name + ' (se baja de volumen cuando hay voz)';
+  } catch (err) { $('music-name').textContent = 'Error: ' + err.message; }
+};
+
+// ---------------------------------------------------------------------------
+// Backend de voz: mostrar solo las perillas que aplican
+// ---------------------------------------------------------------------------
+$('backend').onchange = () => {
+  const b = $('backend').value;
+  $('opt-piper').classList.toggle('hidden', b !== 'piper');
+  $('opt-espeak').classList.toggle('hidden', b !== 'espeak');
+  $('opt-chatterbox').classList.toggle('hidden', b !== 'chatterbox');
+};
+
+// ---------------------------------------------------------------------------
+// Armar el guion
+// ---------------------------------------------------------------------------
+function buildScript() {
+  return {
+    title: $('title').value.trim() || 'Mi video',
+    language: 'es',
+    scenes: scenes.map((s, i) => ({
+      id: `escena_${i + 1}`,
+      text: s.text.trim(),
+      image_path: s.imagePath,
+      image_description: s.description.trim() || null,
+      pause_after_ms: s.pause,
+    })),
+    background_music: music ? music.path : null,
+  };
+}
+
+function buildTtsOptions() {
+  const b = $('backend').value;
+  const num = (id) => { const v = $(id).value; return v === '' ? null : parseFloat(v); };
+
+  if (b === 'piper') {
+    return {
+      voice: $('piper-voice').value || null,
+      length_scale: num('length-scale'),
+      noise_scale: num('noise-scale'),
+    };
+  }
+  if (b === 'espeak') {
+    return { pitch: num('espeak-pitch'), speed_wpm: num('espeak-speed') };
+  }
+  return {
+    voice_sample: voiceSample ? voiceSample.path : null,
+    language_id: 'es',
+    exaggeration: num('exaggeration'),
+    cfg_weight: num('cfg-weight'),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Generar
+// ---------------------------------------------------------------------------
+$('generate').onclick = async () => {
+  const problems = [];
+  if (!scenes.length) problems.push('Agrega al menos una escena.');
+  scenes.forEach((s, i) => {
+    if (!s.imagePath) problems.push(`La escena ${i + 1} no tiene imagen.`);
+    if (!s.text.trim()) problems.push(`La escena ${i + 1} no tiene texto.`);
+  });
+  if ($('backend').value === 'chatterbox' && !voiceSample) {
+    problems.push('Para clonar voz hay que subir un audio de referencia.');
+  }
+  if (problems.length) { alert(problems.join('\n')); return; }
+
+  // La pausa por defecto la define el servidor (config/settings.py); si el
+  // usuario la cambió aquí, la aplicamos escena por escena a las que no
+  // tengan una pausa propia.
+  const defaultPause = $('default-pause').value === '' ? null : parseInt($('default-pause').value, 10);
+  const script = buildScript();
+  if (defaultPause !== null) {
+    script.scenes.forEach(sc => { if (sc.pause_after_ms === null) sc.pause_after_ms = defaultPause; });
+  }
+
+  const payload = {
+    script,
+    tts_backend: $('backend').value,
+    tts_options: buildTtsOptions(),
+  };
+
+  $('generate').disabled = true;
+  $('status').classList.remove('hidden');
+  $('result').innerHTML = '';
+  setProgress('Enviando…', 1);
+
+  try {
+    const res = await fetch('/api/jobs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || `Error ${res.status}`);
+    poll(data.job_id);
+  } catch (e) {
+    fail(e.message);
+  }
+};
+
+function setProgress(stage, pct) {
+  $('stage-text').textContent = stage;
+  $('stage-pct').textContent = `${Math.round(pct)}%`;
+  $('bar-fill').style.width = `${pct}%`;
+}
+
+function poll(jobId) {
+  clearInterval(pollTimer);
+  pollTimer = setInterval(async () => {
+    try {
+      const job = await (await fetch(`/api/jobs/${jobId}`)).json();
+      setProgress(job.stage || '…', job.progress || 0);
+
+      if (job.status === 'done') {
+        clearInterval(pollTimer);
+        $('generate').disabled = false;
+        showResult(job);
+      } else if (job.status === 'error') {
+        clearInterval(pollTimer);
+        fail(job.error || 'Falló la generación.');
+      }
+    } catch (e) {
+      clearInterval(pollTimer);
+      fail('Se perdió la conexión con el servidor.');
+    }
+  }, 1000);
+}
+
+function showResult(job) {
+  const qa = job.qa || {};
+  const chips = [
+    `<span class="chip ${qa.ok ? 'ok' : 'bad'}">QA: ${qa.ok ? 'OK' : 'con problemas'}</span>`,
+    `<span class="chip">${(qa.duration_seconds ?? 0).toFixed(1)}s</span>`,
+    `<span class="chip">${qa.width}×${qa.height}</span>`,
+    `<span class="chip ${qa.has_audio ? 'ok' : 'bad'}">${qa.has_audio ? 'con audio' : 'sin audio'}</span>`,
+    `<span class="chip">generado en ${job.elapsed_seconds ?? '?'}s</span>`,
+  ].join('');
+
+  const issues = (qa.issues && qa.issues.length)
+    ? `<div class="alert">${qa.issues.map(escapeHtml).join('\n')}</div>` : '';
+
+  $('result').innerHTML = `
+    <video controls src="${job.video_url}"></video>
+    <div class="qa">${chips}</div>
+    ${issues}
+    <div class="actions"><a class="dl" href="${job.download_url}" download>Descargar el video ↓</a></div>
+  `;
+}
+
+function fail(message) {
+  $('generate').disabled = false;
+  $('stage-text').textContent = 'Falló';
+  $('result').innerHTML = `<div class="alert">${escapeHtml(message)}</div>`;
+}
+
+// ---------------------------------------------------------------------------
+// Exportar / importar el guion
+// ---------------------------------------------------------------------------
+$('export-btn').onclick = () => {
+  const blob = new Blob([JSON.stringify(buildScript(), null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = ($('title').value.trim() || 'guion') + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+$('import-btn').onclick = () => $('import-input').click();
+$('import-input').onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const data = JSON.parse(await f.text());
+    $('title').value = data.title || 'Mi video';
+    scenes = (data.scenes || []).map(s => ({
+      uid: ++uid,
+      text: s.text || '',
+      description: s.image_description || '',
+      pause: s.pause_after_ms ?? null,
+      imagePath: s.image_path || null,
+      // Las imágenes de un guion importado viven donde estén en el disco; si
+      // no están dentro de assets/ no se pueden previsualizar aquí, pero el
+      // pipeline sí las lee igual.
+      imageUrl: null,
+      imageName: s.image_path ? s.image_path.split(/[\\/]/).pop() : null,
+    }));
+    if (!scenes.length) addScene();
+    render();
+  } catch (err) {
+    alert('No se pudo leer ese JSON: ' + err.message);
+  }
+};
+
+$('add-scene').onclick = () => { addScene(); render(); };
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+init();
+</script>
+</body>
+</html>

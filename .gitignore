@@ -5,3 +5,4 @@ outputs/*.mp4
 outputs/*.qa.json
 assets/voices/
 .env
+assets/uploads/
