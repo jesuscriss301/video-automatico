@@ -90,11 +90,27 @@ python -m piper.download_voices es_ES-davefx-medium
 
 ## Uso — interfaz gráfica (lo más fácil)
 
+En Windows basta con:
+
+```powershell
+.\start.ps1
+```
+
+Ese script pone la variable que evita el choque de OpenMP con Anaconda (el
+error `OMP: Error #15` al usar clonación de voz), levanta el servidor con
+`--reload` y abre el navegador. El equivalente a mano, en cualquier sistema:
+
 ```bash
 uvicorn api.main:app --reload --port 8000
 ```
 
-Abre **http://localhost:8000** en el navegador. Ahí armas el video sin tocar
+Abre **http://localhost:8000** en el navegador.
+
+**Qué necesita reinicio y qué no:** los cambios en la interfaz
+(`api/static/index.html`) se sirven leyendo el archivo del disco en cada
+visita y sin caché, así que basta con recargar la página. Los cambios en
+código Python los recoge `--reload` solo. Reiniciar a mano no debería hacer
+falta nunca. Ahí armas el video sin tocar
 JSON ni terminal:
 
 - Una tarjeta por escena: arrastras (o eliges) la imagen, escribes el texto

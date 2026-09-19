@@ -177,7 +177,13 @@ def ui() -> HTMLResponse:
     index = STATIC_DIR / "index.html"
     if not index.exists():
         raise HTTPException(status_code=500, detail="Falta api/static/index.html")
-    return HTMLResponse(index.read_text(encoding="utf-8"))
+    # Se lee del disco en cada visita y se pide al navegador que no la cachee:
+    # así, si se cambia el HTML de la interfaz, basta con recargar la página —
+    # no hay que reiniciar el servidor ni hacer Ctrl+Shift+R.
+    return HTMLResponse(
+        index.read_text(encoding="utf-8"),
+        headers={"Cache-Control": "no-store, must-revalidate"},
+    )
 
 
 @app.get("/health")
