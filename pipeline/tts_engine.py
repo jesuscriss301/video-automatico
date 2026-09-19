@@ -204,7 +204,9 @@ class ChatterboxBackend:
         cfg_weight: float = 0.5,
         temperature: float = 0.8,
         device: str = "cpu",
+        max_chars_per_chunk: int = 280,
     ):
+        self.max_chars_per_chunk = max_chars_per_chunk
         self.voice_sample = Path(voice_sample)
         if not self.voice_sample.exists():
             raise TTSEngineError(
@@ -234,11 +236,8 @@ class ChatterboxBackend:
         self._torch = torch
         self._model = ChatterboxMultilingualTTS.from_pretrained(device=resolved_device)
 
-    def synthesize(self, text: str, out_path: Path) -> SynthesizedAudio:
-        import torchaudio
-
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        wav = self._model.generate(
+    def _generate_one(self, text: str):
+        return self._model.generate(
             text,
             language_id=self.language_id,
             audio_prompt_path=str(self.voice_sample),
@@ -246,6 +245,32 @@ class ChatterboxBackend:
             cfg_weight=self.cfg_weight,
             temperature=self.temperature,
         )
+
+    def synthesize(self, text: str, out_path: Path) -> SynthesizedAudio:
+        import torchaudio
+
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Un párrafo largo en una sola pasada sale atropellado o cortado: el
+        # modelo tiene un tope de tokens por generación y, al acercarse, fuerza
+        # el final de la frase. Por eso el texto se parte en trozos por frase
+        # (ver split_for_cloning) y se genera cada uno por separado con la
+        # MISMA voz de referencia, pegándolos con una pausa corta. Para textos
+        # cortos esto es exactamente igual que antes: un solo trozo.
+        chunks = split_for_cloning(text, self.max_chars_per_chunk)
+
+        if len(chunks) == 1:
+            wav = self._generate_one(chunks[0])
+        else:
+            torch = self._torch
+            piezas = []
+            silencio = torch.zeros(1, int(self._model.sr * 0.18))
+            for i, chunk in enumerate(chunks):
+                print(f"[chatterbox] trozo {i + 1}/{len(chunks)} ({len(chunk)} caracteres)")
+                piezas.append(self._generate_one(chunk))
+                if i < len(chunks) - 1:
+                    piezas.append(silencio)
+            wav = torch.cat(piezas, dim=1)
         # encoding/bits_per_sample explícitos: por defecto torchaudio.save
         # escribe float32 (formato WAV 3), que ffmpeg lee sin problema pero
         # es el doble de pesado y menos compatible en general que el PCM de
@@ -253,6 +278,72 @@ class ChatterboxBackend:
         # pipeline — lo dejamos igual para todos los backends.
         torchaudio.save(str(out_path), wav, self._model.sr, encoding="PCM_S", bits_per_sample=16)
         return SynthesizedAudio(path=out_path, duration_seconds=_wav_duration_seconds(out_path))
+
+
+def split_for_cloning(text: str, max_chars: int = 280) -> list[str]:
+    """Parte un texto largo en trozos para clonación de voz, cortando SIEMPRE
+    en final de frase cuando se puede (nunca a mitad de palabra).
+
+    Por qué: los modelos de clonación generan bien tramos cortos, pero con un
+    párrafo largo se quedan sin presupuesto de tokens y aceleran o cortan la
+    última frase. Partir por frases y pegar los trozos suena mucho mejor que
+    una sola pasada larga.
+
+    Si una sola frase ya pasa del límite (frases kilométricas con muchas
+    comas), se parte por comas y puntos y comas; y si aún así no cabe, por
+    palabras — nunca a mitad de palabra.
+    """
+    text = " ".join(text.split())  # normaliza espacios y saltos de línea
+    if len(text) <= max_chars:
+        return [text] if text else [""]
+
+    import re
+
+    # Corta después de . ! ? … y de : ; cuando van seguidos de espacio.
+    frases = [f.strip() for f in re.split(r"(?<=[.!?…])\s+", text) if f.strip()]
+
+    trozos: list[str] = []
+    actual = ""
+
+    def empujar(pieza: str) -> None:
+        nonlocal actual
+        if not pieza:
+            return
+        if not actual:
+            actual = pieza
+        elif len(actual) + 1 + len(pieza) <= max_chars:
+            actual = f"{actual} {pieza}"
+        else:
+            trozos.append(actual)
+            actual = pieza
+
+    for frase in frases:
+        if len(frase) <= max_chars:
+            empujar(frase)
+            continue
+
+        # Frase demasiado larga por sí sola: se parte por comas / puntos y coma.
+        partes = [p.strip() for p in re.split(r"(?<=[,;:])\s+", frase) if p.strip()]
+        for parte in partes:
+            if len(parte) <= max_chars:
+                empujar(parte)
+                continue
+            # Último recurso: por palabras.
+            linea = ""
+            for palabra in parte.split():
+                if not linea:
+                    linea = palabra
+                elif len(linea) + 1 + len(palabra) <= max_chars:
+                    linea = f"{linea} {palabra}"
+                else:
+                    empujar(linea)
+                    linea = palabra
+            empujar(linea)
+
+    if actual:
+        trozos.append(actual)
+
+    return trozos
 
 
 def get_backend(name: str = "piper", **kwargs):

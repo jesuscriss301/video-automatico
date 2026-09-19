@@ -107,6 +107,7 @@ def _clean_tts_options(backend: str, options: dict[str, Any]) -> dict[str, Any]:
         "espeak": {"voice", "speed_wpm", "pitch"},
         "chatterbox": {
             "voice_sample", "language_id", "exaggeration", "cfg_weight", "temperature", "device",
+            "max_chars_per_chunk",
         },
     }[backend]
     return {
