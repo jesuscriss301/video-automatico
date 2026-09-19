@@ -199,6 +199,10 @@ def config() -> dict:
     return {
         "piper_voices": piper_voices,
         "piper_default_voice": DEFAULTS.piper_voice,
+        "piper_voices_dir": str(VOICES_DIR),
+        "piper_download_cmd": (
+            f"python -m piper.download_voices {DEFAULTS.piper_voice} --download-dir \"{VOICES_DIR}\""
+        ),
         "espeak_pitch": DEFAULTS.espeak_pitch,
         "espeak_speed_wpm": DEFAULTS.espeak_speed_wpm,
         "silence_between_scenes_ms": DEFAULTS.silence_between_scenes_ms,
@@ -257,6 +261,26 @@ def create_job(request: JobRequest) -> dict:
             status_code=400,
             detail="Para clonar voz (chatterbox) hay que subir un audio de referencia.",
         )
+
+    # Piper necesita su modelo .onnx descargado. Se comprueba ANTES de arrancar
+    # el trabajo: si no, un guion largo se pone a generar y falla a mitad de la
+    # primera escena, cuando ya el usuario está esperando.
+    if request.tts_backend == "piper":
+        voice_name = request.tts_options.get("voice") or DEFAULTS.piper_voice
+        if not (VOICES_DIR / f"{voice_name}.onnx").exists():
+            disponibles = sorted(p.stem for p in VOICES_DIR.glob("*.onnx"))
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    f"Falta el modelo de voz '{voice_name}'. Descárgalo una sola vez con:\n"
+                    f"python -m piper.download_voices {voice_name} --download-dir \"{VOICES_DIR}\"\n"
+                    + (
+                        f"Voces que ya tienes: {', '.join(disponibles)}."
+                        if disponibles
+                        else "Mientras tanto puedes usar una voz clonada (chatterbox) o espeak."
+                    )
+                ),
+            )
 
     job_id = uuid.uuid4().hex[:12]
     _set_job(

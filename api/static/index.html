@@ -61,6 +61,12 @@
     outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
   }
   .hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
+  .cmd {
+    margin-top: 6px; padding: 8px 10px; border-radius: 7px;
+    background: #0b0d11; border: 1px solid var(--border);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11.5px; color: var(--text); word-break: break-all; user-select: all;
+  }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
   button {
@@ -279,6 +285,7 @@
 
       <div class="actions">
         <button class="primary" id="generate">Generar video</button>
+        <span class="hint" id="generate-note" style="color:#ffc9c9"></span>
         <span class="spacer"></span>
         <span class="hint" id="summary"></span>
       </div>
@@ -334,9 +341,33 @@ async function init() {
     $('piper-hint').textContent = `${config.piper_voices.length} voz(ces) descargada(s) en assets/voices/.`;
   } else {
     sel.innerHTML = `<option value="">(ninguna descargada)</option>`;
-    $('piper-hint').innerHTML = 'No hay voces de Piper descargadas. Corre:<br><code>python -m piper.download_voices ' +
-      (config.piper_default_voice || 'es_ES-davefx-medium') + ' --download-dir assets/voices</code>';
+    $('piper-hint').innerHTML =
+      '<span style="color:#ffc9c9">⚠ No hay ninguna voz de Piper descargada, así que con este motor el video no se puede generar.</span>' +
+      '<br><br>Córrelo una sola vez en PowerShell (copia y pega):' +
+      `<div class="cmd" id="piper-cmd">${escapeHtml(config.piper_download_cmd || '')}</div>` +
+      '<button class="ghost" id="copy-cmd" style="margin-top:6px">Copiar comando</button>' +
+      '<br><br>Después recarga esta página y la voz aparece acá. Mientras tanto puedes generar con una voz clonada o con espeak.';
+
+    setTimeout(() => {
+      const btn = $('copy-cmd');
+      if (!btn) return;
+      btn.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(config.piper_download_cmd || '');
+          btn.textContent = '¡Copiado!';
+          setTimeout(() => { btn.textContent = 'Copiar comando'; }, 1800);
+        } catch (e) {
+          // si el navegador no da permiso al portapapeles, se selecciona para copiar a mano
+          const range = document.createRange();
+          range.selectNodeContents($('piper-cmd'));
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+          btn.textContent = 'Selecciónalo y copia (Ctrl+C)';
+        }
+      };
+    }, 0);
   }
+  updateGenerateState();
 
   $('espeak-pitch').value = config.espeak_pitch;
   $('espeak-speed').value = config.espeak_speed_wpm;
@@ -793,7 +824,26 @@ $('backend').onchange = () => {
   $('opt-piper').classList.toggle('hidden', b !== 'piper');
   $('opt-espeak').classList.toggle('hidden', b !== 'espeak');
   $('opt-chatterbox').classList.toggle('hidden', b !== 'chatterbox');
+  updateGenerateState();
 };
+
+// Si el motor elegido no puede funcionar (Piper sin ningún modelo descargado),
+// se bloquea el botón de generar en vez de dejar arrancar un guion largo que
+// va a fallar en la primera escena.
+function updateGenerateState() {
+  const piperSinVoz = $('backend').value === 'piper'
+    && !(config.piper_voices && config.piper_voices.length);
+  const btn = $('generate');
+  if (!btn) return;
+  btn.disabled = piperSinVoz;
+  btn.title = piperSinVoz ? 'Falta descargar una voz de Piper (ver el aviso a la izquierda)' : '';
+  const nota = $('generate-note');
+  if (nota) {
+    nota.textContent = piperSinVoz
+      ? 'Elige otra voz (clonada o espeak) o descarga la voz de Piper — el aviso de la izquierda tiene el comando.'
+      : '';
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Armar el guion
