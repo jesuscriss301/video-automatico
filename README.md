@@ -117,6 +117,12 @@ JSON ni terminal:
   en `outputs/`, con su duración, resolución, voz usada, peso y fecha, y
   botones para verlo ahí mismo, descargarlo o eliminarlo. Se lee del disco, no
   de la memoria, así que también aparecen los videos de sesiones anteriores.
+- **No se pierde el trabajo:** todo lo que armas (escenas, textos,
+  descripciones, pausas, imágenes ya subidas y los ajustes de voz) se guarda
+  solo en el navegador mientras trabajas. Si recargas la página, la cierras
+  por accidente o reinicias el servidor, al volver aparece tal cual estaba.
+  El botón "Empezar de cero" borra ese borrador cuando quieras arrancar
+  limpio (las imágenes subidas se quedan en el disco).
 - "Exportar JSON" guarda el guion armado para reusarlo luego (o correrlo por
   CLI); "Importar JSON" carga uno ya hecho.
 

@@ -108,6 +108,12 @@
   }
   .drop:hover, .drop.over { border-color: var(--accent); color: var(--text); }
   .drop.has-img { padding: 0; border-style: solid; }
+  .drop.missing { border-color: var(--err); }
+  .drop.missing img { display: none; }
+  .drop.missing::before {
+    content: '⚠ la imagen ya no está en el disco — vuelve a subirla';
+    padding: 10px; color: #ffc9c9; font-size: 12px;
+  }
   .drop img { width: 100%; height: 100%; object-fit: cover; }
   .drop .badge {
     position: absolute; bottom: 0; left: 0; right: 0;
@@ -257,6 +263,8 @@
         </div>
         <input type="file" id="import-input" accept="application/json,.json" class="hidden" />
         <div class="hint">Guarda el guion en un archivo para reusarlo después, o carga uno ya hecho.</div>
+        <div class="hint" id="draft-info" style="margin-top:10px"></div>
+        <button class="danger-text" id="reset-draft" style="margin-top:4px; padding-left:0">Empezar de cero</button>
       </div>
     </div>
 
@@ -334,12 +342,134 @@ async function init() {
   $('espeak-speed').value = config.espeak_speed_wpm;
   $('default-pause').value = config.silence_between_scenes_ms;
 
-  addScene();
-  addScene();
+  // Si había un borrador guardado (de esta misma máquina), se recupera tal
+  // cual estaba — escenas, textos, imágenes y ajustes de voz. Si no, se
+  // arranca con dos escenas vacías.
+  if (!restoreDraft()) {
+    addScene();
+    addScene();
+  }
   render();
+  showDraftInfo();
   loadSavedVoices();
   loadOutputs();
 }
+
+// ---------------------------------------------------------------------------
+// Borrador automático
+// ---------------------------------------------------------------------------
+// Todo lo que se está armando se guarda en el navegador (localStorage) cada
+// vez que cambia algo, así recargar la página, cerrarla por accidente o
+// reiniciar el servidor no borra el trabajo. Las imágenes ya están subidas al
+// disco del servidor, así que lo único que hay que recordar aquí son sus
+// rutas — y eso es justo lo que se guarda.
+const DRAFT_KEY = 'video-automatico:borrador';
+let saveTimer = null;
+
+function draftSnapshot() {
+  return {
+    title: $('title').value,
+    backend: $('backend').value,
+    scenes,
+    voiceSample,
+    music,
+    piper: {
+      voice: $('piper-voice').value,
+      length_scale: $('length-scale').value,
+      noise_scale: $('noise-scale').value,
+    },
+    espeak: { pitch: $('espeak-pitch').value, speed: $('espeak-speed').value },
+    chatterbox: { exaggeration: $('exaggeration').value, cfg_weight: $('cfg-weight').value },
+    default_pause: $('default-pause').value,
+    saved_at: new Date().toISOString(),
+  };
+}
+
+function saveDraft() {
+  try {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(draftSnapshot()));
+    showDraftInfo();
+  } catch (e) { /* modo privado o storage lleno: no es crítico */ }
+}
+
+function saveDraftSoon() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveDraft, 400);
+}
+
+function restoreDraft() {
+  let draft;
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return false;
+    draft = JSON.parse(raw);
+  } catch (e) { return false; }
+
+  if (!draft || !Array.isArray(draft.scenes) || !draft.scenes.length) return false;
+
+  scenes = draft.scenes.map(s => ({ ...s, uid: ++uid }));
+  if (draft.title) $('title').value = draft.title;
+  voiceSample = draft.voiceSample || null;
+  music = draft.music || null;
+
+  if (draft.backend) { $('backend').value = draft.backend; $('backend').onchange(); }
+  if (draft.piper) {
+    if (draft.piper.voice) {
+      const opt = [...$('piper-voice').options].find(o => o.value === draft.piper.voice);
+      if (opt) $('piper-voice').value = draft.piper.voice;
+    }
+    $('length-scale').value = draft.piper.length_scale ?? '';
+    $('noise-scale').value = draft.piper.noise_scale ?? '';
+  }
+  if (draft.espeak) {
+    $('espeak-pitch').value = draft.espeak.pitch ?? config.espeak_pitch;
+    $('espeak-speed').value = draft.espeak.speed ?? config.espeak_speed_wpm;
+  }
+  if (draft.chatterbox) {
+    $('exaggeration').value = draft.chatterbox.exaggeration ?? '';
+    $('cfg-weight').value = draft.chatterbox.cfg_weight ?? '';
+  }
+  if (draft.default_pause !== undefined && draft.default_pause !== '') {
+    $('default-pause').value = draft.default_pause;
+  }
+
+  if (voiceSample) $('voice-sample-name').textContent = voiceSample.name || voiceSample.path;
+  if (music) $('music-name').textContent = (music.name || music.path) + ' (se baja de volumen cuando hay voz)';
+
+  return true;
+}
+
+function showDraftInfo() {
+  let saved = null;
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (raw) saved = JSON.parse(raw).saved_at;
+  } catch (e) { /* nada */ }
+
+  $('draft-info').textContent = saved
+    ? `Borrador guardado automáticamente en este navegador · ${fmtDate(saved)}`
+    : 'El borrador se guarda solo en este navegador mientras trabajas.';
+}
+
+$('reset-draft').onclick = () => {
+  if (!confirm('¿Borrar el borrador y empezar de cero? Las imágenes ya subidas se quedan en el disco.')) return;
+  try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* nada */ }
+  scenes = [];
+  voiceSample = null;
+  music = null;
+  $('title').value = 'Mi video';
+  $('voice-sample-name').textContent = 'Ningún archivo seleccionado.';
+  $('music-name').textContent = 'Sin música de fondo.';
+  addScene();
+  addScene();
+  render();
+  showDraftInfo();
+};
+
+// Cualquier cambio en el formulario (escribir, elegir una opción) dispara el
+// guardado del borrador, sin esperar a que el usuario haga nada.
+document.addEventListener('input', saveDraftSoon);
+document.addEventListener('change', saveDraftSoon);
 
 // ---------------------------------------------------------------------------
 // Voces guardadas
@@ -544,8 +674,11 @@ function render() {
       <div>
         <div class="drop ${scene.imageUrl ? 'has-img' : ''}" data-act="pick">
           ${scene.imageUrl
-            ? `<img src="${scene.imageUrl}" alt=""><span class="badge">${escapeHtml(scene.imageName || '')}</span>`
-            : 'Clic o arrastra<br>una imagen aquí'}
+            ? `<img src="${scene.imageUrl}" alt="" onerror="this.closest('.drop').classList.add('missing')">
+               <span class="badge">${escapeHtml(scene.imageName || '')}</span>`
+            : (scene.imagePath
+                ? `<span class="badge" style="position:static">${escapeHtml(scene.imageName || '')}</span>`
+                : 'Clic o arrastra<br>una imagen aquí')}
         </div>
         <input type="file" accept="image/*" class="hidden" data-act="file" />
       </div>
@@ -591,6 +724,7 @@ function render() {
   });
 
   updateSummary();
+  saveDraft();
 }
 
 function updateSummary() {
@@ -635,6 +769,7 @@ $('voice-sample-input').onchange = async (e) => {
     const data = await upload(f, 'audio');
     voiceSample = { path: data.path, name: data.name };
     $('voice-sample-name').textContent = data.name;
+    saveDraft();
   } catch (err) { $('voice-sample-name').textContent = 'Error: ' + err.message; }
 };
 
@@ -646,6 +781,7 @@ $('music-input').onchange = async (e) => {
     const data = await upload(f, 'music');
     music = { path: data.path, name: data.name };
     $('music-name').textContent = data.name + ' (se baja de volumen cuando hay voz)';
+    saveDraft();
   } catch (err) { $('music-name').textContent = 'Error: ' + err.message; }
 };
 
@@ -828,10 +964,11 @@ $('import-input').onchange = async (e) => {
       description: s.image_description || '',
       pause: s.pause_after_ms ?? null,
       imagePath: s.image_path || null,
-      // Las imágenes de un guion importado viven donde estén en el disco; si
-      // no están dentro de assets/ no se pueden previsualizar aquí, pero el
-      // pipeline sí las lee igual.
-      imageUrl: null,
+      // Si la imagen del guion importado está dentro de assets/uploads/images/
+      // (o sea, se subió por esta interfaz antes), se puede volver a
+      // previsualizar; si vive en otra parte del disco el pipeline la lee
+      // igual, solo que sin miniatura.
+      imageUrl: previewUrlFor(s.image_path),
       imageName: s.image_path ? s.image_path.split(/[\\/]/).pop() : null,
     }));
     if (!scenes.length) addScene();
@@ -842,6 +979,15 @@ $('import-input').onchange = async (e) => {
 };
 
 $('add-scene').onclick = () => { addScene(); render(); };
+
+function previewUrlFor(path) {
+  if (!path) return null;
+  const parts = String(path).split(/[\\/]/);
+  const i = parts.lastIndexOf('uploads');
+  // .../assets/uploads/images/archivo.png  ->  /files/uploads/images/archivo.png
+  if (i !== -1 && parts.length > i + 2) return '/files/' + parts.slice(i).join('/');
+  return null;
+}
 
 function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, c =>
