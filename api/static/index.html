@@ -172,6 +172,8 @@
 <header>
   <h1>Video Automático</h1>
   <span class="sub">Flujo 1 — guion + imágenes → video con voz, transiciones y subtítulos</span>
+  <span class="spacer" style="flex:1"></span>
+  <span class="chip" id="hw-chip" title="Cargando...">…</span>
 </header>
 
 <div class="wrap">
@@ -384,6 +386,29 @@ async function init() {
   showDraftInfo();
   loadSavedVoices();
   loadOutputs();
+  loadHardware();
+}
+
+// ---------------------------------------------------------------------------
+// Hardware en uso (gráfica / procesador)
+// ---------------------------------------------------------------------------
+async function loadHardware() {
+  const chip = $('hw-chip');
+  try {
+    const hw = await (await fetch('/api/hw')).json();
+    const gpu = hw.acelerado_por_gpu;
+    chip.textContent = gpu
+      ? `Video: ${hw.encoder_video} (gráfica)`
+      : 'Video: procesador';
+    chip.className = 'chip' + (gpu ? ' ok' : '');
+    chip.title =
+      `Codificación de video: ${hw.encoder_descripcion}\n` +
+      `Voz clonada: ${hw.voz_clonada_en}\n` +
+      `Trabajos a la vez: ${hw.workers}\n\n` +
+      (gpu ? '' : 'Corre "python scripts/check_hw.py" para ver si tu gráfica puede acelerar esto.');
+  } catch (e) {
+    chip.textContent = '';
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -952,9 +977,10 @@ function poll(jobId) {
         $('generate').disabled = false;
         showResult(job);
         loadOutputs();   // el nuevo video aparece de una en la lista de abajo
-      } else if (job.status === 'error') {
+      } else if (job.status === 'error' || job.status === 'interrupted') {
         clearInterval(pollTimer);
         fail(job.error || 'Falló la generación.');
+        loadOutputs();
       }
     } catch (e) {
       clearInterval(pollTimer);

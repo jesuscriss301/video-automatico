@@ -44,6 +44,7 @@ video-editing-api-network/
 │   ├── subtitles.py         # Genera subtítulos .ass a partir del guion
 │   ├── video_renderer.py   # Ken Burns + crossfade + subtítulos + export final
 │   ├── qa_check.py          # Verificación automática del video final
+│   ├── hw.py                 # Detecta qué gráfica hay y qué puede acelerar
 │   └── run.py                # Orquesta todo el pipeline de punta a punta
 ├── api/
 │   ├── main.py               # API FastAPI + interfaz gráfica (sirve la web en /)
@@ -51,6 +52,7 @@ video-editing-api-network/
 │       └── index.html        # Interfaz gráfica: armar el guion escena por escena
 ├── scripts/
 │   ├── run_pipeline.py       # CLI: genera un video a partir de un guion
+│   ├── check_hw.py           # Prueba qué aceleración por gráfica funciona aquí
 │   └── make_sample_assets.py # Genera imágenes de prueba (para probar sin fotos reales)
 ├── examples/
 │   └── sample_script.json    # Guion de ejemplo con 4 escenas
@@ -97,11 +99,13 @@ En Windows basta con:
 ```
 
 Ese script pone la variable que evita el choque de OpenMP con Anaconda (el
-error `OMP: Error #15` al usar clonación de voz), levanta el servidor con
-`--reload` y abre el navegador. El equivalente a mano, en cualquier sistema:
+error `OMP: Error #15` al usar clonación de voz), levanta el servidor y abre el
+navegador. Para desarrollar con recarga automática: `.\start.ps1 -Dev` (ojo:
+recargar mata el render que esté en curso). El equivalente a mano, en cualquier
+sistema:
 
 ```bash
-uvicorn api.main:app --reload --port 8000
+uvicorn api.main:app --port 8000
 ```
 
 Abre **http://localhost:8000** en el navegador. Ahí armas el video sin tocar
@@ -139,7 +143,9 @@ JSON ni terminal:
 **Qué necesita reinicio y qué no:** los cambios en la interfaz
 (`api/static/index.html`) se sirven leyendo el archivo del disco en cada visita
 y sin caché, así que basta con recargar la página. Los cambios en código Python
-los recoge `--reload` solo. Reiniciar a mano no debería hacer falta nunca.
+sí necesitan reiniciar el servidor — o arrancarlo con `.\start.ps1 -Dev`, que
+recarga solo. En modo normal no recarga a propósito: un reinicio corta el
+render que esté corriendo (ver "Cola de trabajos" más abajo).
 
 ## Uso — CLI
 
@@ -300,6 +306,36 @@ solo un 25% por encima de la salida antes del Ken Burns en vez de a 4K.
 Si el que está al 100% no es ffmpeg sino Python, entonces es la clonación de
 voz (Chatterbox), y eso es otro asunto: no usa Quick Sync — necesitaría una
 gráfica NVIDIA. En procesador es inevitablemente lento.
+
+## Cola de trabajos (los renders no se pisan ni se cortan)
+
+Los videos no se generan en el momento en que le das a "Generar": entran en una
+cola y se procesan **de a uno** (configurable con `JOB_WORKERS`). Dos renders a
+la vez en un PC tardan más en total que en fila y pueden quedarse sin memoria,
+que es justo lo que hace que un trabajo se caiga a medias.
+
+Qué pasa en cada caso:
+
+- Si mandas varios videos seguidos, la interfaz te dice *"En cola — hay 2
+  trabajo(s) delante"* y los va sacando en orden. Ninguno se pierde.
+- Si un trabajo falla, el worker sigue vivo y atiende el siguiente; el que
+  falló queda marcado con el error, no desaparece.
+- El estado de cada trabajo se guarda en `outputs/jobs/<id>.json`, así que
+  sobrevive a reiniciar el servidor. Los que estaban a medias quedan marcados
+  como **interrumpidos** con la razón, en vez de quedarse en "generando" para
+  siempre o esfumarse.
+- Puedes cerrar el navegador: el trabajo corre en el servidor, no en la página,
+  y el video aparece en "Videos generados" cuando termine.
+
+Lo único que sí corta un render en curso es reiniciar el servidor. Por eso
+`.\start.ps1` **ya no usa `--reload`** por defecto: con recarga automática,
+guardar un archivo `.py` mientras renderizas mata el trabajo. Para desarrollar
+usa `.\start.ps1 -Dev`, que además excluye `outputs/` y `assets/` del vigilante
+de cambios.
+
+Limitar hilos (`VIDEO_THREADS`) no corta nada: solo hace que ffmpeg use menos
+núcleos y tarde un poco más. Se combina bien con la cola — un trabajo a la vez,
+con cores libres para que puedas seguir trabajando.
 
 ## Qué calidad aplica por defecto
 

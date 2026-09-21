@@ -1,10 +1,12 @@
+*.pyc
+.env
 .venv/
 __pycache__/
-*.pyc
-outputs/*.mp4
-outputs/*.qa.json
-assets/voices/
-.env
 assets/uploads/
+assets/voices/
 assets/voices_library.json
 outputs/*.meta.json
+outputs/*.mp4
+outputs/*.qa.json
+outputs/.hw_cache.json
+outputs/jobs/

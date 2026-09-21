@@ -203,7 +203,7 @@ class ChatterboxBackend:
         exaggeration: float = 0.5,
         cfg_weight: float = 0.5,
         temperature: float = 0.8,
-        device: str = "cpu",
+        device: str | None = None,
         max_chars_per_chunk: int = 280,
     ):
         self.max_chars_per_chunk = max_chars_per_chunk
@@ -229,10 +229,26 @@ class ChatterboxBackend:
                 "pip install -r requirements-chatterbox.txt"
             ) from exc
 
-        resolved_device = device
-        if resolved_device == "cuda" and not torch.cuda.is_available():
+        # Dónde correr el modelo. Por defecto "auto": si hay una gráfica NVIDIA
+        # con CUDA se usa (pasa de minutos a segundos por escena); si no, CPU.
+        # Solo CUDA acelera esto — Quick Sync de Intel sirve para codificar
+        # video, no para redes neuronales.
+        preferencia = (device or DEFAULTS.tts_device or "auto").lower()
+        if preferencia == "auto":
+            resolved_device = "cuda" if torch.cuda.is_available() else "cpu"
+        elif preferencia == "cuda" and not torch.cuda.is_available():
+            print("[chatterbox] Se pidió CUDA pero no hay gráfica NVIDIA usable; se usa el procesador.")
             resolved_device = "cpu"
+        else:
+            resolved_device = preferencia
 
+        if resolved_device == "cuda":
+            nombre = torch.cuda.get_device_name(0)
+            print(f"[chatterbox] Generando la voz en la gráfica: {nombre}")
+        else:
+            print("[chatterbox] Generando la voz en el procesador (sin GPU NVIDIA disponible).")
+
+        self.device = resolved_device
         self._torch = torch
         self._model = ChatterboxMultilingualTTS.from_pretrained(device=resolved_device)
 
@@ -264,13 +280,24 @@ class ChatterboxBackend:
         else:
             torch = self._torch
             piezas = []
-            silencio = torch.zeros(1, int(self._model.sr * 0.18))
             for i, chunk in enumerate(chunks):
                 print(f"[chatterbox] trozo {i + 1}/{len(chunks)} ({len(chunk)} caracteres)")
-                piezas.append(self._generate_one(chunk))
+                pieza = self._generate_one(chunk)
+                piezas.append(pieza)
                 if i < len(chunks) - 1:
-                    piezas.append(silencio)
+                    # El silencio se crea en el mismo dispositivo y tipo que el
+                    # audio generado (en GPU no se pueden concatenar tensores
+                    # que están en distinta memoria).
+                    piezas.append(
+                        torch.zeros(
+                            pieza.shape[0], int(self._model.sr * 0.18),
+                            dtype=pieza.dtype, device=pieza.device,
+                        )
+                    )
             wav = torch.cat(piezas, dim=1)
+
+        if hasattr(wav, "detach"):
+            wav = wav.detach().cpu()  # torchaudio.save necesita el tensor en CPU
         # encoding/bits_per_sample explícitos: por defecto torchaudio.save
         # escribe float32 (formato WAV 3), que ffmpeg lee sin problema pero
         # es el doble de pesado y menos compatible en general que el PCM de

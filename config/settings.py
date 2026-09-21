@@ -55,7 +55,11 @@ class VideoQuality:
     # "casi sin pérdida visible". Para bajar consumo se toca el preset, que es
     # lo que de verdad cuesta CPU.
     crf: int = field(default_factory=lambda: _env("VIDEO_CRF", 17))
-    video_codec: str = field(default_factory=lambda: _env("VIDEO_ENCODER", "libx264"))
+    # "auto" = detecta y usa la gráfica más rápida que funcione en esta máquina
+    # (dedicada NVIDIA > integrada Intel > AMD), y si ninguna sirve, el
+    # procesador. También se puede fijar a mano: libx264, h264_nvenc,
+    # h264_qsv, h264_amf.
+    video_codec: str = field(default_factory=lambda: _env("VIDEO_ENCODER", "auto"))
     pixel_format: str = "yuv420p"
     # El preset es EL factor que más pesa en el consumo de CPU del render
     # (medido: preset slow tarda ~2.4x más que veryfast en el mismo video, y
@@ -120,6 +124,19 @@ class QualityDefaults:
     # --- TTS ---
     piper_voice: str = "es_ES-davefx-medium"
     tts_sample_rate: int = 22050
+
+    # Dónde generar la voz clonada (Chatterbox): "auto" usa la gráfica NVIDIA
+    # si hay una con CUDA (pasa de minutos a segundos por escena), y si no,
+    # el procesador. "cpu" o "cuda" lo fuerzan.
+    # OJO: esto solo lo acelera una NVIDIA. Quick Sync (Intel) sirve para
+    # codificar video, no para redes neuronales.
+    tts_device: str = field(default_factory=lambda: _env("TTS_DEVICE", "auto"))
+
+    # --- Cola de trabajos ---
+    # Cuántos videos se generan a la vez. 1 = uno detrás de otro: es lo
+    # correcto en un PC, porque dos renders peleándose el procesador tardan
+    # más que en fila y arriesgan quedarse sin memoria.
+    job_workers: int = field(default_factory=lambda: _env("JOB_WORKERS", 1))
 
     # Perillas de Piper para variar la voz SIN cambiar de modelo (ver README):
     # - length_scale: < 1 más rápido / > 1 más lento (también cambia el "peso" percibido de la voz)

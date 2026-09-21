@@ -47,6 +47,29 @@ def _run(cmd: list[str]) -> None:
         raise RuntimeError(f"ffmpeg falló: {' '.join(cmd)}\n{result.stderr[-3000:]}")
 
 
+_encoder_resuelto: str | None = None
+
+
+def encoder_activo() -> str:
+    """El encoder que se va a usar de verdad. Si la configuración dice "auto",
+    se detecta la mejor gráfica disponible una sola vez por proceso (y queda
+    en caché en disco, ver pipeline/hw.py)."""
+    global _encoder_resuelto
+    configurado = DEFAULTS.video.video_codec
+
+    if configurado != "auto":
+        return configurado
+    if _encoder_resuelto is not None:
+        return _encoder_resuelto
+
+    from pipeline import hw
+
+    encoder, motivo = hw.mejor_encoder()
+    print(f"[video_renderer] Codificando con '{encoder}' — {motivo}")
+    _encoder_resuelto = encoder
+    return encoder
+
+
 def _encoder_args(final: bool) -> list[str]:
     """Argumentos de codificación de video.
 
@@ -60,25 +83,28 @@ def _encoder_args(final: bool) -> list[str]:
     argumentos cambian.
     """
     v = DEFAULTS.video
+    encoder = encoder_activo()
 
     if not final:
         args = ["-c:v", "libx264", "-preset", v.intermediate_preset, "-crf", str(v.intermediate_crf)]
-    elif v.video_codec.endswith("_qsv"):
+    elif encoder.endswith("_qsv"):
         # QSV toma nv12; si le llega yuv420p ffmpeg convierte solo, pero
         # pedirlo explícito evita una conversión extra por frame.
         args = [
-            "-c:v", v.video_codec,
+            "-c:v", encoder,
             "-global_quality", str(v.qsv_global_quality),
             "-preset", v.preset if v.preset in _QSV_PRESETS else "medium",
             "-pix_fmt", "nv12",
         ]
-    elif v.video_codec.endswith("_nvenc"):
-        args = ["-c:v", v.video_codec, "-rc", "vbr", "-cq", str(v.qsv_global_quality), "-preset", "p5"]
-    elif v.video_codec.endswith("_amf"):
-        args = ["-c:v", v.video_codec, "-rc", "cqp", "-qp_i", str(v.qsv_global_quality),
+    elif encoder.endswith("_nvenc"):
+        # La NVIDIA dedicada: calidad constante (vbr + cq) y preset p5, que es
+        # el equilibrio calidad/velocidad recomendado por NVIDIA.
+        args = ["-c:v", encoder, "-rc", "vbr", "-cq", str(v.qsv_global_quality), "-preset", "p5"]
+    elif encoder.endswith("_amf"):
+        args = ["-c:v", encoder, "-rc", "cqp", "-qp_i", str(v.qsv_global_quality),
                 "-qp_p", str(v.qsv_global_quality)]
     else:
-        args = ["-c:v", v.video_codec, "-preset", v.preset, "-crf", str(v.crf),
+        args = ["-c:v", encoder, "-preset", v.preset, "-crf", str(v.crf),
                 "-pix_fmt", v.pixel_format]
 
     if v.threads:
@@ -212,10 +238,10 @@ def render_final_video(
         # Si el encoder de hardware no está disponible en esta máquina (no hay
         # gráfica compatible, driver viejo, ffmpeg sin QSV), no se pierde el
         # render: se reintenta una vez con libx264 y se avisa.
-        if q.video.video_codec == "libx264":
+        if encoder_activo() == "libx264":
             raise
         print(
-            f"[video_renderer] El encoder '{q.video.video_codec}' falló en esta máquina; "
+            f"[video_renderer] El encoder '{encoder_activo()}' falló en esta máquina; "
             f"reintentando con libx264 (CPU). Detalle: {str(exc)[-400:]}"
         )
         cmd_cpu = [

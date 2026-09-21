@@ -24,6 +24,7 @@ y abrir http://localhost:8000 en el navegador.
 from __future__ import annotations
 
 import json
+import queue
 import shutil
 import sys
 import tempfile
@@ -79,10 +80,98 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 _jobs: dict[str, dict[str, Any]] = {}
 _jobs_lock = threading.Lock()
 
+# --- Cola ---
+# Los trabajos NO arrancan al llegar: entran en una cola y un worker los saca
+# de a uno (JOB_WORKERS=1 por defecto). Así dos renders no se pelean el
+# procesador ni la memoria, que es lo que hace que un trabajo se caiga o que
+# el PC quede inservible. La cola no se pierde si llegan 5 pedidos de golpe:
+# se atienden en orden.
+_cola: "queue.Queue[tuple[str, JobRequest]]" = queue.Queue()
+_workers_arrancados = False
+
+# Los trabajos también se guardan en disco (outputs/jobs/<id>.json), para que
+# si el servidor se reinicia —por ejemplo porque uvicorn --reload detectó un
+# cambio en el código— no desaparezcan de la lista sin explicación.
+JOBS_DIR = OUTPUTS_DIR / "jobs"
+JOBS_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def _guardar_job(job: dict[str, Any]) -> None:
+    try:
+        (JOBS_DIR / f"{job['job_id']}.json").write_text(
+            json.dumps(job, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    except (OSError, TypeError):
+        pass  # el estado en memoria es la fuente principal; el disco es respaldo
+
 
 def _set_job(job_id: str, **fields: Any) -> None:
     with _jobs_lock:
-        _jobs.setdefault(job_id, {"job_id": job_id}).update(fields)
+        job = _jobs.setdefault(job_id, {"job_id": job_id})
+        job.update(fields)
+        copia = dict(job)
+    # Solo se escribe a disco en los cambios que importan, no en cada 1% de avance.
+    if any(k in fields for k in ("status", "qa", "error", "created_at")):
+        _guardar_job(copia)
+
+
+def _cargar_jobs_del_disco() -> None:
+    """Al arrancar: recupera los trabajos de sesiones anteriores. Los que
+    quedaron en 'running' o 'queued' no sobrevivieron al reinicio, así que se
+    marcan como interrumpidos — mejor eso que dejarlos 'generando' para
+    siempre o hacerlos desaparecer."""
+    for archivo in sorted(JOBS_DIR.glob("*.json")):
+        try:
+            job = json.loads(archivo.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        if job.get("status") in ("running", "queued"):
+            job["status"] = "interrupted"
+            job["stage"] = "Interrumpido porque el servidor se reinició"
+            job["error"] = (
+                "El servidor se reinició mientras este trabajo estaba en curso "
+                "(por ejemplo al recargar el código). Vuelve a generarlo."
+            )
+            _guardar_job(job)
+        _jobs[job.get("job_id", archivo.stem)] = job
+
+
+def _posicion_en_cola(job_id: str) -> int | None:
+    """Cuántos trabajos hay delante de este. Se calcula sobre el estado, no
+    sobre la Queue, porque la Queue no se puede inspeccionar de forma segura."""
+    with _jobs_lock:
+        pendientes = [
+            j for j in _jobs.values() if j.get("status") == "queued"
+        ]
+    pendientes.sort(key=lambda j: j.get("created_at", ""))
+    for i, job in enumerate(pendientes, start=1):
+        if job.get("job_id") == job_id:
+            return i
+    return None
+
+
+def _worker(nombre: str) -> None:
+    while True:
+        job_id, request = _cola.get()
+        try:
+            _run_job(job_id, request)
+        except Exception as exc:  # noqa: BLE001 — un trabajo que falle no puede tumbar el worker
+            _set_job(job_id, status="error", stage="Falló",
+                     error=f"Error inesperado en el worker: {type(exc).__name__}: {exc}")
+        finally:
+            _cola.task_done()
+
+
+def _arrancar_workers() -> None:
+    global _workers_arrancados
+    if _workers_arrancados:
+        return
+    _workers_arrancados = True
+    cantidad = max(1, DEFAULTS.job_workers)
+    for i in range(cantidad):
+        threading.Thread(target=_worker, args=(f"worker-{i + 1}",), daemon=True).start()
+    print(f"[api] Cola de trabajos lista con {cantidad} worker(s) — los videos se generan de a "
+          f"{cantidad} para no pelearse los recursos.")
 
 
 def _get_job(job_id: str) -> dict[str, Any] | None:
@@ -187,9 +276,38 @@ def ui() -> HTMLResponse:
     )
 
 
+@app.on_event("startup")
+def _al_arrancar() -> None:
+    _cargar_jobs_del_disco()
+    _arrancar_workers()
+
+
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok"}
+
+
+@app.get("/api/hw")
+def hardware() -> dict:
+    """Qué está usando el sistema para codificar video y para la voz clonada.
+    La interfaz lo muestra para que no haya que adivinar si la gráfica se está
+    aprovechando o no."""
+    from pipeline import hw
+    from pipeline.video_renderer import encoder_activo
+
+    informe = hw.detectar()
+    encoder = encoder_activo()
+    encoders = informe.get("encoders", {})
+
+    return {
+        "encoder_video": encoder,
+        "encoder_descripcion": encoders.get(encoder, {}).get("descripcion", encoder),
+        "acelerado_por_gpu": encoder != "libx264",
+        "voz_clonada_en": "gráfica NVIDIA (CUDA)" if informe.get("cuda") else "procesador",
+        "cuda": bool(informe.get("cuda")),
+        "detalle": encoders,
+        "workers": max(1, DEFAULTS.job_workers),
+    }
 
 
 @app.get("/api/config")
@@ -295,10 +413,18 @@ def create_job(request: JobRequest) -> dict:
         created_at=datetime.now().isoformat(timespec="seconds"),
     )
 
-    thread = threading.Thread(target=_run_job, args=(job_id, request), daemon=True)
-    thread.start()
+    _arrancar_workers()
+    _cola.put((job_id, request))
 
-    return {"job_id": job_id, "status_url": f"/api/jobs/{job_id}"}
+    posicion = _posicion_en_cola(job_id)
+    if posicion and posicion > 1:
+        _set_job(job_id, stage=f"En cola — hay {posicion - 1} trabajo(s) delante")
+
+    return {
+        "job_id": job_id,
+        "status_url": f"/api/jobs/{job_id}",
+        "posicion_en_cola": posicion,
+    }
 
 
 @app.get("/api/jobs/{job_id}")
@@ -309,6 +435,11 @@ def job_status(job_id: str) -> dict:
     if job.get("status") == "done":
         job["video_url"] = f"/api/jobs/{job_id}/video"
         job["download_url"] = f"/download/{job_id}"
+    if job.get("status") == "queued":
+        posicion = _posicion_en_cola(job_id)
+        job["posicion_en_cola"] = posicion
+        if posicion and posicion > 1:
+            job["stage"] = f"En cola — hay {posicion - 1} trabajo(s) delante"
     return job
 
 
