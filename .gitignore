@@ -10,3 +10,4 @@ outputs/*.mp4
 outputs/*.qa.json
 outputs/.hw_cache.json
 outputs/jobs/
+outputs/previews/

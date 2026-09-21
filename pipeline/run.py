@@ -86,6 +86,7 @@ def _run_pipeline(
                 audio_path=str(synthesized.path),
                 duration_seconds=synthesized.duration_seconds,
                 image_path_resolved=str(image_resolved),
+                cues=synthesized.cues,
             )
         )
 
@@ -109,8 +110,12 @@ def _run_pipeline(
             )
 
     # --- subtítulos ---
+    # Se construyen desde los cues (una frase cada uno, con su duración real
+    # medida al sintetizar), no desde los clips: así el subtítulo va sincronizado
+    # con la voz en vez de mostrar el párrafo entero toda la escena.
     progress("Generando subtítulos", 74)
-    subtitles_path = build_ass_subtitles(clips, work_dir / "subtitles.ass")
+    cues = edl_module.build_subtitle_cues(rendered_scenes)
+    subtitles_path = build_ass_subtitles(cues, work_dir / "subtitles.ass")
 
     # --- render final ---
     progress("Renderizando el video (Ken Burns + transiciones)", 78)

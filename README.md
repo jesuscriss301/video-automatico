@@ -119,6 +119,10 @@ JSON ni terminal:
   sus perillas de velocidad y expresividad), espeak (respaldo sin descargas),
   o Chatterbox (subes un audio de referencia y clona esa voz). También puedes
   subir música de fondo opcional.
+- **Escuchar la voz antes de renderizar:** el botón "▶ Escuchar esta voz"
+  genera una frase de muestra con la voz elegida (incluida la clonada) y la
+  reproduce ahí mismo. La muestra queda en caché, así que repetir la misma voz
+  es inmediato.
 - **Voces guardadas:** "Guardar…" le pone un nombre a la configuración de voz
   actual y la deja en `assets/voices_library.json` — incluida la ruta del
   audio de referencia si es una voz clonada. Queda ahí aunque cierres el
@@ -139,6 +143,10 @@ JSON ni terminal:
   limpio (las imágenes subidas se quedan en el disco).
 - "Exportar JSON" guarda el guion armado para reusarlo luego (o correrlo por
   CLI); "Importar JSON" carga uno ya hecho.
+- El panel de la izquierda solo muestra lo que se usa en cada video (título,
+  voz, música). Lo que casi nunca hay que tocar — velocidad y expresividad de
+  la voz, perillas de la clonación, pausa entre escenas — está plegado en
+  "Ajustes avanzados", porque los valores por defecto ya están afinados.
 
 **Qué necesita reinicio y qué no:** los cambios en la interfaz
 (`api/static/index.html`) se sirven leyendo el archivo del disco en cada visita
@@ -345,7 +353,12 @@ con cores libres para que puedas seguir trabajando.
 - Ken Burns (zoom/pan lento) con interpolación suave, exportado a **1080p /
   30fps** por defecto (configurable a 4K/60fps en `config/settings.py`).
 - Transición de crossfade de 0.6s entre escenas.
-- Subtítulos quemados en formato `.ass` con tipografía legible.
+- **Subtítulos sincronizados con la voz:** el texto de cada escena se parte por
+  frases y cada frase se sintetiza aparte, así se conoce su duración real y el
+  subtítulo entra y sale con la voz. No se muestra el párrafo entero toda la
+  escena, y cada subtítulo se parte en dos líneas equilibradas (máximo 84
+  caracteres, configurable en `config/settings.py`). Quemados en `.ass` con
+  tipografía legible.
 - Validación de que cada imagen tenga resolución suficiente para el zoom sin
   pixelarse; si no, se hace upscaling básico (con un hook listo para conectar
   Real-ESRGAN más adelante si se necesita más calidad).

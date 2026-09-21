@@ -40,6 +40,18 @@ class Script(BaseModel):
     )
 
 
+class SubtitleCue(BaseModel):
+    """Un subtítulo: el trozo de texto que se muestra, con su tiempo exacto.
+
+    Los tiempos NO se estiman: cada trozo se sintetiza por separado y se mide
+    su duración real, así el subtítulo entra y sale con la voz.
+    """
+
+    text: str
+    start_seconds: float
+    duration_seconds: float
+
+
 class RenderedScene(BaseModel):
     """Una escena ya con su audio generado y su duración medida."""
 
@@ -47,6 +59,10 @@ class RenderedScene(BaseModel):
     audio_path: str
     duration_seconds: float
     image_path_resolved: str  # después de validar/ajustar resolución
+    cues: list[SubtitleCue] = Field(
+        default_factory=list,
+        description="Subtítulos de esta escena con tiempos relativos al inicio de la escena",
+    )
 
 
 class EDLClip(BaseModel):

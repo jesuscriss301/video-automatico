@@ -123,10 +123,17 @@ class QualityDefaults:
     subtitle_font: str = "DejaVuSans-Bold"
     subtitle_font_size: int = 46
     subtitle_margin_v: int = 80
+    # Máximo de caracteres por subtítulo. El texto de cada escena se parte por
+    # frases en trozos de este tamaño y cada trozo se sintetiza aparte, así el
+    # subtítulo entra y sale con la voz. 84 ≈ dos líneas legibles a 1080p.
+    subtitle_max_chars: int = 84
+    # Ancho al que se parte en dos líneas dentro de un mismo subtítulo.
+    subtitle_wrap_chars: int = 44
+    # Un subtítulo nunca se muestra menos de esto, aunque la frase sea cortísima.
+    subtitle_min_seconds: float = 0.9
 
     # --- TTS ---
     piper_voice: str = "es_ES-davefx-medium"
-    tts_sample_rate: int = 22050
 
     # Dónde generar la voz clonada (Chatterbox): "auto" usa la gráfica NVIDIA
     # si hay una con CUDA (pasa de minutos a segundos por escena), y si no,

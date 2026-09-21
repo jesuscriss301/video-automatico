@@ -68,6 +68,14 @@
     font-size: 11.5px; color: var(--text); word-break: break-all; user-select: all;
   }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  details#avanzado { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px; }
+  details#avanzado summary {
+    cursor: pointer; font-size: 13px; color: var(--muted); font-weight: 550;
+    list-style: none; user-select: none;
+  }
+  details#avanzado summary::before { content: '▸ '; }
+  details#avanzado[open] summary::before { content: '▾ '; }
+  details#avanzado summary:hover { color: var(--text); }
 
   button {
     font: inherit; font-size: 14px; font-weight: 550;
@@ -186,11 +194,11 @@
         <label for="title">Título</label>
         <input type="text" id="title" value="Mi video" />
 
-        <label for="backend">Voz (motor de TTS)</label>
+        <label for="backend">Voz</label>
         <select id="backend">
           <option value="piper">Piper — voz prefabricada (recomendado)</option>
-          <option value="espeak">espeak — robótica, sin descargas (pruebas)</option>
           <option value="chatterbox">Chatterbox — clonar una voz</option>
+          <option value="espeak">espeak — robótica, sin descargas (pruebas)</option>
         </select>
 
         <!-- Piper -->
@@ -198,20 +206,22 @@
           <label for="piper-voice">Modelo de voz</label>
           <select id="piper-voice"></select>
           <div class="hint" id="piper-hint"></div>
-          <div class="row">
-            <div>
-              <label for="length-scale">Velocidad</label>
-              <input type="number" id="length-scale" step="0.05" min="0.5" max="2" placeholder="1.0" />
-            </div>
-            <div>
-              <label for="noise-scale">Expresividad</label>
-              <input type="number" id="noise-scale" step="0.05" min="0" max="1.5" placeholder="auto" />
-            </div>
-          </div>
-          <div class="hint">Vacío = el valor por defecto del modelo. Velocidad: menos de 1 más rápido, más de 1 más lento.</div>
         </div>
 
-        <!-- espeak -->
+        <!-- chatterbox -->
+        <div id="opt-chatterbox" class="hidden">
+          <label>Audio de referencia (10-30s, limpio)</label>
+          <button class="ghost" id="voice-sample-btn" style="width:100%">Subir audio de la voz…</button>
+          <input type="file" id="voice-sample-input" accept="audio/*" class="hidden" />
+          <div class="hint" id="voice-sample-name">Ningún archivo seleccionado.</div>
+        </div>
+
+        <!-- escuchar la voz elegida -->
+        <button class="ghost" id="preview-btn" style="width:100%; margin-top:10px">▶ Escuchar esta voz</button>
+        <div class="hint" id="preview-hint">Genera una frase de muestra para oírla antes de renderizar.</div>
+        <audio id="preview-audio" controls class="hidden" style="width:100%; margin-top:8px"></audio>
+
+        <!-- espeak (solo pruebas) -->
         <div id="opt-espeak" class="hidden">
           <div class="row">
             <div>
@@ -221,24 +231,6 @@
             <div>
               <label for="espeak-speed">Palabras/min</label>
               <input type="number" id="espeak-speed" min="80" max="350" />
-            </div>
-          </div>
-        </div>
-
-        <!-- chatterbox -->
-        <div id="opt-chatterbox" class="hidden">
-          <label>Audio de referencia (10-30s, limpio)</label>
-          <button class="ghost" id="voice-sample-btn" style="width:100%">Subir audio de la voz…</button>
-          <input type="file" id="voice-sample-input" accept="audio/*" class="hidden" />
-          <div class="hint" id="voice-sample-name">Ningún archivo seleccionado.</div>
-          <div class="row">
-            <div>
-              <label for="exaggeration">Expresividad</label>
-              <input type="number" id="exaggeration" step="0.05" min="0" max="1" placeholder="0.5" />
-            </div>
-            <div>
-              <label for="cfg-weight">Apego al estilo</label>
-              <input type="number" id="cfg-weight" step="0.05" min="0" max="1" placeholder="0.5" />
             </div>
           </div>
         </div>
@@ -259,8 +251,44 @@
         <input type="file" id="music-input" accept="audio/*" class="hidden" />
         <div class="hint" id="music-name">Sin música de fondo.</div>
 
-        <label for="default-pause">Pausa por defecto entre escenas (ms)</label>
-        <input type="number" id="default-pause" min="0" max="3000" step="50" />
+        <details id="avanzado">
+          <summary>Ajustes avanzados</summary>
+          <div class="hint" style="margin-bottom:4px">
+            Casi nunca hay que tocarlos: los valores por defecto ya están afinados.
+          </div>
+
+          <div id="avanzado-piper">
+            <div class="row">
+              <div>
+                <label for="length-scale">Velocidad</label>
+                <input type="number" id="length-scale" step="0.05" min="0.5" max="2" placeholder="1.0" />
+              </div>
+              <div>
+                <label for="noise-scale">Expresividad</label>
+                <input type="number" id="noise-scale" step="0.05" min="0" max="1.5" placeholder="auto" />
+              </div>
+            </div>
+            <div class="hint">Vacío = lo que trae el modelo. Velocidad: menos de 1 más rápido.</div>
+          </div>
+
+          <div id="avanzado-chatterbox" class="hidden">
+            <div class="row">
+              <div>
+                <label for="exaggeration">Expresividad</label>
+                <input type="number" id="exaggeration" step="0.05" min="0" max="1" placeholder="0.5" />
+              </div>
+              <div>
+                <label for="cfg-weight">Apego a la muestra</label>
+                <input type="number" id="cfg-weight" step="0.05" min="0" max="1" placeholder="0.5" />
+              </div>
+            </div>
+            <div class="hint">Si la voz clonada no convence, mover esto es lo segundo que vale probar (lo primero es cambiar el audio de referencia).</div>
+          </div>
+
+          <label for="default-pause">Pausa entre escenas (ms)</label>
+          <input type="number" id="default-pause" min="0" max="3000" step="50" />
+          <div class="hint">Silencio que se agrega al final de cada escena. Cada escena puede llevar la suya.</div>
+        </details>
       </div>
 
       <div class="panel" style="margin-top:14px">
@@ -603,6 +631,9 @@ $('load-voice').onclick = () => {
     $('cfg-weight').value = o.cfg_weight ?? '';
   }
   $('saved-voice-hint').textContent = `Usando "${voice.name}".`;
+  $('preview-audio').classList.add('hidden');
+  $('preview-audio').removeAttribute('src');
+  $('preview-hint').textContent = 'Genera una frase de muestra para oírla antes de renderizar.';
 };
 
 $('delete-voice').onclick = async () => {
@@ -849,7 +880,49 @@ $('backend').onchange = () => {
   $('opt-piper').classList.toggle('hidden', b !== 'piper');
   $('opt-espeak').classList.toggle('hidden', b !== 'espeak');
   $('opt-chatterbox').classList.toggle('hidden', b !== 'chatterbox');
+  $('avanzado-piper').classList.toggle('hidden', b !== 'piper');
+  $('avanzado-chatterbox').classList.toggle('hidden', b !== 'chatterbox');
+  // La muestra escuchada ya no corresponde a la voz nueva.
+  $('preview-audio').classList.add('hidden');
+  $('preview-audio').removeAttribute('src');
+  $('preview-hint').textContent = 'Genera una frase de muestra para oírla antes de renderizar.';
   updateGenerateState();
+};
+
+// ---------------------------------------------------------------------------
+// Escuchar la voz elegida antes de renderizar
+// ---------------------------------------------------------------------------
+$('preview-btn').onclick = async () => {
+  const backend = $('backend').value;
+  const btn = $('preview-btn');
+  const audio = $('preview-audio');
+
+  btn.disabled = true;
+  btn.textContent = 'Generando muestra…';
+  $('preview-hint').textContent = backend === 'chatterbox'
+    ? 'La voz clonada tarda: la primera vez carga el modelo (1-2 minutos). Después es inmediato.'
+    : 'Generando…';
+
+  try {
+    const res = await fetch('/api/voice-preview', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tts_backend: backend, tts_options: buildTtsOptions() }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || `Error ${res.status}`);
+
+    audio.src = data.url;
+    audio.classList.remove('hidden');
+    audio.play().catch(() => {});   // si el navegador bloquea el autoplay, quedan los controles
+    $('preview-hint').textContent = `"${data.texto}"`;
+  } catch (e) {
+    $('preview-hint').innerHTML = `<span style="color:#ffc9c9">${escapeHtml(e.message)}</span>`;
+    audio.classList.add('hidden');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '▶ Escuchar esta voz';
+  }
 };
 
 // Si el motor elegido no puede funcionar (Piper sin ningún modelo descargado),

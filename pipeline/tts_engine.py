@@ -29,17 +29,20 @@ from __future__ import annotations
 import shutil
 import subprocess
 import wave
-from dataclasses import dataclass
+from dataclasses import dataclass, field as dataclass_field
 from pathlib import Path
 
 from config.settings import DEFAULTS
-from pipeline.models import Scene
+from pipeline.models import Scene, SubtitleCue
 
 
 @dataclass
 class SynthesizedAudio:
     path: Path
     duration_seconds: float
+    # Subtítulos de este audio, con tiempos relativos a su inicio. Los llena
+    # synthesize_scene (los backends devuelven audio, no subtítulos).
+    cues: list["SubtitleCue"] = dataclass_field(default_factory=list)
 
 
 class TTSEngineError(RuntimeError):
@@ -384,19 +387,73 @@ def get_backend(name: str = "piper", **kwargs):
 
 
 def synthesize_scene(scene: Scene, backend, work_dir: Path) -> SynthesizedAudio:
-    """Sintetiza el audio de una escena y le agrega la micro-pausa configurada
-    (o la de la escena, si la define) al final, para que la voz no suene
-    'atropellada' al pegar una escena con la siguiente."""
-    raw_path = work_dir / f"{scene.id}.raw.wav"
-    audio = backend.synthesize(scene.text, raw_path)
+    """Sintetiza el audio de una escena, frase por frase, y devuelve también
+    los subtítulos con su tiempo exacto.
+
+    Por qué frase por frase: antes se sintetizaba el párrafo completo de la
+    escena y el subtítulo era ese párrafo entero, en pantalla durante toda la
+    escena — ilegible. Ahora cada frase se sintetiza aparte, se mide su
+    duración real y se concatenan; con eso el subtítulo entra y sale con la
+    voz, sin estimar nada.
+
+    Al final se agrega la micro-pausa configurada (o la de la escena, si la
+    define), para que la voz no suene 'atropellada' al pegar una escena con la
+    siguiente. Esa pausa no lleva subtítulo.
+    """
+    # Si el usuario puso un subtítulo distinto al texto narrado, no se puede
+    # sincronizar frase por frase (son textos distintos): en ese caso se
+    # mantiene el comportamiento simple de un solo subtítulo por escena.
+    trozos = (
+        [scene.subtitle_override]
+        if scene.subtitle_override
+        else split_into_cues(scene.text, DEFAULTS.subtitle_max_chars)
+    )
+
+    if scene.subtitle_override:
+        audio = backend.synthesize(scene.text, work_dir / f"{scene.id}.raw.wav")
+        cues = [SubtitleCue(text=scene.subtitle_override, start_seconds=0.0,
+                            duration_seconds=audio.duration_seconds)]
+    elif len(trozos) == 1:
+        audio = backend.synthesize(trozos[0], work_dir / f"{scene.id}.raw.wav")
+        cues = [SubtitleCue(text=trozos[0], start_seconds=0.0,
+                            duration_seconds=audio.duration_seconds)]
+    else:
+        from pipeline import audio_processor
+
+        partes: list[Path] = []
+        cues = []
+        cursor = 0.0
+        for i, trozo in enumerate(trozos):
+            parte = backend.synthesize(trozo, work_dir / f"{scene.id}.frase{i:02d}.wav")
+            partes.append(parte.path)
+            cues.append(SubtitleCue(text=trozo, start_seconds=round(cursor, 3),
+                                    duration_seconds=round(parte.duration_seconds, 3)))
+            cursor += parte.duration_seconds
+
+        unido = audio_processor.concat_wavs(partes, work_dir / f"{scene.id}.raw.wav")
+        audio = SynthesizedAudio(path=unido, duration_seconds=_wav_duration_seconds(unido))
 
     pause_ms = scene.pause_after_ms if scene.pause_after_ms is not None else DEFAULTS.silence_between_scenes_ms
     if pause_ms <= 0:
-        return audio
+        return SynthesizedAudio(path=audio.path, duration_seconds=audio.duration_seconds, cues=cues)
 
     final_path = work_dir / f"{scene.id}.wav"
     _append_silence(audio.path, final_path, pause_ms)
-    return SynthesizedAudio(path=final_path, duration_seconds=audio.duration_seconds + pause_ms / 1000.0)
+    return SynthesizedAudio(
+        path=final_path,
+        duration_seconds=audio.duration_seconds + pause_ms / 1000.0,
+        cues=cues,
+    )
+
+
+def split_into_cues(text: str, max_chars: int = 84) -> list[str]:
+    """Parte el texto en trozos del tamaño de un subtítulo legible.
+
+    Usa el mismo criterio que la clonación de voz (cortar por frase, nunca a
+    mitad de palabra), solo con un límite más corto: un subtítulo de más de
+    dos líneas no se alcanza a leer.
+    """
+    return split_for_cloning(text, max_chars)
 
 
 def _append_silence(src: Path, dst: Path, ms: int) -> None:

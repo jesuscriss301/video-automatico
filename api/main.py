@@ -470,6 +470,78 @@ def download(job_id: str) -> FileResponse:
 
 
 # --------------------------------------------------------------------------
+# Escuchar una voz antes de generar el video
+# --------------------------------------------------------------------------
+PREVIEWS_DIR = OUTPUTS_DIR / "previews"
+PREVIEWS_DIR.mkdir(parents=True, exist_ok=True)
+
+FRASE_DE_PRUEBA = "Esta es la voz que va a narrar tu video. Así suena leyendo una frase normal."
+
+
+class PreviewRequest(BaseModel):
+    tts_backend: Literal["piper", "espeak", "chatterbox"] = "piper"
+    tts_options: dict[str, Any] = Field(default_factory=dict)
+    texto: Optional[str] = None
+
+
+@app.post("/api/voice-preview")
+def voice_preview(request: PreviewRequest) -> dict:
+    """Sintetiza una frase corta con la voz elegida y devuelve el audio, para
+    poder escucharla antes de gastar un render completo.
+
+    El resultado se guarda en caché por combinación de voz + parámetros: la
+    segunda vez que se pide la misma voz, la respuesta es inmediata (importa
+    sobre todo con la voz clonada, que tarda en cargar el modelo)."""
+    import hashlib
+
+    from pipeline.tts_engine import TTSEngineError, get_backend
+
+    texto = (request.texto or FRASE_DE_PRUEBA).strip()[:300]
+    opciones = _clean_tts_options(request.tts_backend, request.tts_options)
+
+    if request.tts_backend == "chatterbox" and not opciones.get("voice_sample"):
+        raise HTTPException(status_code=400,
+                            detail="Para escuchar la voz clonada hay que subir primero el audio de referencia.")
+    if request.tts_backend == "piper":
+        voz = opciones.get("voice") or DEFAULTS.piper_voice
+        if not (VOICES_DIR / f"{voz}.onnx").exists():
+            raise HTTPException(
+                status_code=400,
+                detail=f"Falta el modelo de voz '{voz}'. Descárgalo con:\n"
+                       f"python -m piper.download_voices {voz} --download-dir \"{VOICES_DIR}\"",
+            )
+
+    firma = json.dumps(
+        {"b": request.tts_backend, "o": opciones, "t": texto}, sort_keys=True, ensure_ascii=False
+    )
+    nombre = hashlib.sha1(firma.encode("utf-8")).hexdigest()[:16] + ".wav"
+    destino = PREVIEWS_DIR / nombre
+
+    if not destino.exists():
+        try:
+            backend = get_backend(request.tts_backend, **opciones)
+            backend.synthesize(texto, destino)
+        except TTSEngineError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        except Exception as exc:  # noqa: BLE001
+            raise HTTPException(status_code=500, detail=f"{type(exc).__name__}: {exc}") from exc
+
+    return {
+        "url": f"/api/voice-preview/{nombre}",
+        "texto": texto,
+        "backend": request.tts_backend,
+    }
+
+
+@app.get("/api/voice-preview/{nombre}")
+def voice_preview_audio(nombre: str) -> FileResponse:
+    path = (PREVIEWS_DIR / Path(nombre).name).resolve()
+    if path.parent != PREVIEWS_DIR.resolve() or not path.exists():
+        raise HTTPException(status_code=404, detail="Esa muestra de voz no existe.")
+    return FileResponse(path, media_type="audio/wav")
+
+
+# --------------------------------------------------------------------------
 # Voces guardadas
 # --------------------------------------------------------------------------
 class SavedVoice(BaseModel):
