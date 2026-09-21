@@ -43,11 +43,19 @@ def normalize_loudness(src: Path, dst: Path, target_lufs: float | None = None) -
     result = subprocess.run(measure_cmd, capture_output=True, text=True)
     measured = _extract_loudnorm_json(result.stderr)
 
+    # El filtro loudnorm trabaja internamente a 192kHz y, si no se le dice nada,
+    # deja el audio de salida a 96kHz. Eso no es un error, pero tampoco es lo
+    # que espera un video: el estándar de entrega es 48kHz, y a 96kHz algunos
+    # reproductores y celulares se portan raro y el archivo pesa más por nada.
+    # Por eso se fuerza la frecuencia de salida.
+    salida_hz = ["-ar", str(DEFAULTS.audio_output_hz)]
+
     if measured is None:
         # Si por lo que sea no se pudo medir, aplicamos una sola pasada simple.
         cmd = [
             "ffmpeg", "-y", "-i", str(src),
             "-af", f"loudnorm=I={target}:TP=-1.5:LRA=11",
+            *salida_hz,
             str(dst),
         ]
         _run(cmd)
@@ -59,7 +67,7 @@ def normalize_loudness(src: Path, dst: Path, target_lufs: float | None = None) -
         f"measured_LRA={measured['input_lra']}:measured_thresh={measured['input_thresh']}:"
         f"offset={measured.get('target_offset', 0)}:linear=true:print_format=summary"
     )
-    cmd = ["ffmpeg", "-y", "-i", str(src), "-af", af, str(dst)]
+    cmd = ["ffmpeg", "-y", "-i", str(src), "-af", af, *salida_hz, str(dst)]
     _run(cmd)
     return dst
 

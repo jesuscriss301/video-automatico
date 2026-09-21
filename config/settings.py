@@ -105,6 +105,9 @@ class QualityDefaults:
 
     # --- Audio ---
     target_lufs: float = -16.0  # estándar de loudness para streaming/redes
+    # Frecuencia del audio en el video final. 48kHz es el estándar de entrega
+    # de video; sin fijarlo, el filtro loudnorm dejaba el audio en 96kHz.
+    audio_output_hz: int = 48000
     silence_between_scenes_ms: int = 250  # micro-pausa natural por defecto
     music_duck_db: float = -18.0  # cuánto se baja la música cuando hay voz
 
