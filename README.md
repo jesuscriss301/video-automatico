@@ -104,13 +104,7 @@ error `OMP: Error #15` al usar clonación de voz), levanta el servidor con
 uvicorn api.main:app --reload --port 8000
 ```
 
-Abre **http://localhost:8000** en el navegador.
-
-**Qué necesita reinicio y qué no:** los cambios en la interfaz
-(`api/static/index.html`) se sirven leyendo el archivo del disco en cada
-visita y sin caché, así que basta con recargar la página. Los cambios en
-código Python los recoge `--reload` solo. Reiniciar a mano no debería hacer
-falta nunca. Ahí armas el video sin tocar
+Abre **http://localhost:8000** en el navegador. Ahí armas el video sin tocar
 JSON ni terminal:
 
 - Una tarjeta por escena: arrastras (o eliges) la imagen, escribes el texto
@@ -141,6 +135,11 @@ JSON ni terminal:
   limpio (las imágenes subidas se quedan en el disco).
 - "Exportar JSON" guarda el guion armado para reusarlo luego (o correrlo por
   CLI); "Importar JSON" carga uno ya hecho.
+
+**Qué necesita reinicio y qué no:** los cambios en la interfaz
+(`api/static/index.html`) se sirven leyendo el archivo del disco en cada visita
+y sin caché, así que basta con recargar la página. Los cambios en código Python
+los recoge `--reload` solo. Reiniciar a mano no debería hacer falta nunca.
 
 ## Uso — CLI
 
@@ -245,6 +244,62 @@ descarga del modelo y la primera síntesis real hay que probarlas en tu propia
 terminal o en tu servidor, donde el internet es normal. Además, sin GPU la
 generación es notablemente más lenta que Piper — para uso ocasional está bien,
 para producción en volumen te conviene correrlo en un servidor con GPU.
+
+## Consumo de CPU y aceleración por hardware
+
+Al renderizar, ffmpeg se come casi todo el procesador. Midiendo dónde se va el
+tiempo (32 segundos de video, 4 escenas):
+
+| Paso | Tiempo |
+|---|---|
+| Filtros: decodificar + crossfades + subtítulos | 6,4 s |
+| **Codificar el video (preset slow)** | **43,8 s** |
+| Codificar el video (preset veryfast) | 18,4 s |
+
+O sea que **casi el 90% del trabajo es codificar**, no los efectos. De ahí
+salen las tres palancas, en orden de impacto:
+
+**1) Codificar en la gráfica en vez del procesador.** Las gráficas integradas
+Intel traen un bloque dedicado a esto (Quick Sync) que no compite con los
+núcleos del procesador; las Iris Plus lo tienen. Para saber si funciona en tu
+máquina y cuánto gana, hay un script que lo prueba de verdad codificando un
+video:
+
+```bash
+python scripts/check_hw.py
+```
+
+Te dice qué encoders funcionan, cuánto tardan comparados con el procesador, y
+qué poner en el archivo `.env` (copia `.env.example`). Normalmente:
+
+```
+VIDEO_ENCODER=h264_qsv
+```
+
+Ojo con la expectativa: Quick Sync se lleva solo la codificación. El Ken Burns,
+los crossfades y los subtítulos siguen en el procesador, y en un portátil la
+gráfica integrada comparte RAM y calor con el procesador — vas a ver el CPU
+bajar bastante, pero el tiempo total baja menos de lo que parece. Si el encoder
+de hardware falla (driver viejo, ffmpeg sin QSV), el render **no se pierde**:
+se reintenta solo con el procesador y te avisa.
+
+**2) Bajarle al preset si te quedas en procesador.** El preset es la palanca de
+velocidad; el CRF es la de calidad. En `.env`: `VIDEO_PRESET=veryfast` para que
+el PC quede libre antes, dejando `VIDEO_CRF=17` para no perder calidad.
+
+**3) Que el PC siga usable aunque marque 99%.** Ya viene activo: ffmpeg se
+lanza con prioridad baja (`VIDEO_LOW_PRIORITY=true`), así cede procesador a lo
+que estés haciendo. Con `VIDEO_THREADS=4` además le dejas núcleos libres.
+
+Otras dos cosas que ya están aplicadas por defecto y bajaron el consumo sin
+tocar la calidad final: los clips intermedios de cada escena se codifican en
+`ultrafast` (se recodifican en el paso final, así que comprimirlos bien era
+gastar procesador para nada: 8,3 s → 3,2 s por escena), y la imagen se escala
+solo un 25% por encima de la salida antes del Ken Burns en vez de a 4K.
+
+Si el que está al 100% no es ffmpeg sino Python, entonces es la clonación de
+voz (Chatterbox), y eso es otro asunto: no usa Quick Sync — necesitaría una
+gráfica NVIDIA. En procesador es inevitablemente lento.
 
 ## Qué calidad aplica por defecto
 

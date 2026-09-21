@@ -3,15 +3,45 @@ Configuración central del pipeline. Todo lo que define "qué tan buena"
 sale la calidad del video vive aquí, para no tener números mágicos
 regados por el código.
 """
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
+
+try:  # opcional: permite dejar los ajustes en un archivo .env
+    from dotenv import load_dotenv
+
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+except ImportError:  # pragma: no cover
+    pass
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ASSETS_DIR = PROJECT_ROOT / "assets"
 OUTPUTS_DIR = PROJECT_ROOT / "outputs"
 FONTS_DIR = ASSETS_DIR / "fonts"
 MUSIC_DIR = ASSETS_DIR / "music"
+
+
+def _env(nombre: str, default):
+    """Lee una variable de entorno (o del archivo .env) y la convierte al tipo
+    del valor por defecto. Permite cambiar cómo se codifica el video sin tocar
+    el código: por ejemplo VIDEO_ENCODER=h264_qsv para usar la gráfica Intel."""
+    raw = os.getenv(nombre)
+    if raw is None or raw == "":
+        return default
+    if isinstance(default, bool):
+        return raw.strip().lower() in ("1", "true", "yes", "si", "sí", "on")
+    if isinstance(default, int):
+        try:
+            return int(raw)
+        except ValueError:
+            return default
+    if isinstance(default, float):
+        try:
+            return float(raw)
+        except ValueError:
+            return default
+    return raw
 
 
 @dataclass
@@ -21,12 +51,48 @@ class VideoQuality:
     fps: int = 30
     # CRF más bajo = más calidad / archivo más pesado. 17-18 es "casi visualmente
     # sin pérdida" para H.264.
-    crf: int = 17
-    video_codec: str = "libx264"
+    # El CRF es la perilla de CALIDAD (no de velocidad): se deja en 17, que es
+    # "casi sin pérdida visible". Para bajar consumo se toca el preset, que es
+    # lo que de verdad cuesta CPU.
+    crf: int = field(default_factory=lambda: _env("VIDEO_CRF", 17))
+    video_codec: str = field(default_factory=lambda: _env("VIDEO_ENCODER", "libx264"))
     pixel_format: str = "yuv420p"
-    preset: str = "slow"  # más lento de codificar, mejor relación calidad/peso
+    # El preset es EL factor que más pesa en el consumo de CPU del render
+    # (medido: preset slow tarda ~2.4x más que veryfast en el mismo video, y
+    # el encode es ~88% del tiempo total del paso final). "fast" es el punto
+    # medio razonable; "veryfast" si quieres el PC libre cuanto antes.
+    preset: str = field(default_factory=lambda: _env("VIDEO_PRESET", "fast"))
     audio_codec: str = "aac"
     audio_bitrate: str = "320k"
+
+    # --- Aceleración por hardware (gráfica Intel / NVIDIA) ---
+    # h264_qsv usa la gráfica integrada Intel (Quick Sync) y baja el uso de CPU
+    # drásticamente, porque el encode deja de hacerlo el procesador. Requiere
+    # que el ffmpeg instalado traiga QSV compilado (los builds de gyan.dev para
+    # Windows sí) y una gráfica Intel con Quick Sync (Iris Plus la tiene).
+    # Comprobarlo con: python scripts/check_hw.py
+    # Los encoders de hardware no usan CRF sino "global_quality" (misma idea:
+    # menos = mejor calidad).
+    qsv_global_quality: int = field(default_factory=lambda: _env("VIDEO_QSV_QUALITY", 22))
+
+    # 0 = todos los hilos. Poner 2-4 deja cores libres para trabajar mientras
+    # renderiza (a cambio de más tiempo total).
+    threads: int = field(default_factory=lambda: _env("VIDEO_THREADS", 0))
+
+    # Los clips intermedios de cada escena se vuelven a codificar en el paso
+    # final, así que no tiene sentido gastar CPU en comprimirlos bien: con
+    # ultrafast el paso 1 baja de ~8.3s a ~3.2s por escena (medido).
+    intermediate_preset: str = field(default_factory=lambda: _env("VIDEO_INTERMEDIATE_PRESET", "ultrafast"))
+    intermediate_crf: int = field(default_factory=lambda: _env("VIDEO_INTERMEDIATE_CRF", 18))
+
+    # Cuánto más grande que la salida se escala la imagen antes del Ken Burns.
+    # Solo hace falta un poco más que el zoom máximo (1.12): con 3840 fijo se
+    # gastaba CPU de más en cada frame.
+    kenburns_oversample: float = field(default_factory=lambda: _env("VIDEO_KENBURNS_OVERSAMPLE", 1.25))
+
+    # Lanza ffmpeg con prioridad baja: usa la CPU que sobre, pero el resto del
+    # sistema (navegador, editor) sigue respondiendo aunque marque 99%.
+    low_priority: bool = field(default_factory=lambda: _env("VIDEO_LOW_PRIORITY", True))
 
 
 @dataclass

@@ -21,10 +21,72 @@ from pipeline.image_processor import crop_to_aspect
 from pipeline.models import EDLClip
 
 
+def _low_priority_kwargs() -> dict:
+    """Hace que ffmpeg corra con prioridad baja, para que aunque marque 99% de
+    CPU el resto del sistema siga respondiendo. En Windows se usa la clase de
+    prioridad 'below normal'; en Linux/mac, nice."""
+    if not DEFAULTS.video.low_priority:
+        return {}
+    if hasattr(subprocess, "BELOW_NORMAL_PRIORITY_CLASS"):  # Windows
+        return {"creationflags": subprocess.BELOW_NORMAL_PRIORITY_CLASS}
+
+    import os
+
+    def _nice() -> None:
+        try:
+            os.nice(10)
+        except (OSError, AttributeError):
+            pass
+
+    return {"preexec_fn": _nice}
+
+
 def _run(cmd: list[str]) -> None:
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, **_low_priority_kwargs())
     if result.returncode != 0:
         raise RuntimeError(f"ffmpeg falló: {' '.join(cmd)}\n{result.stderr[-3000:]}")
+
+
+def _encoder_args(final: bool) -> list[str]:
+    """Argumentos de codificación de video.
+
+    Para los clips intermedios (final=False) se usa siempre libx264 en
+    ultrafast: se van a recodificar en el paso final, así que comprimirlos bien
+    es CPU tirada a la basura.
+
+    Para el render final se respeta el encoder configurado. Si es uno de
+    hardware (h264_qsv en gráficas Intel, h264_nvenc en NVIDIA, h264_amf en
+    AMD), el control de calidad no es -crf sino global_quality/cq, así que los
+    argumentos cambian.
+    """
+    v = DEFAULTS.video
+
+    if not final:
+        args = ["-c:v", "libx264", "-preset", v.intermediate_preset, "-crf", str(v.intermediate_crf)]
+    elif v.video_codec.endswith("_qsv"):
+        # QSV toma nv12; si le llega yuv420p ffmpeg convierte solo, pero
+        # pedirlo explícito evita una conversión extra por frame.
+        args = [
+            "-c:v", v.video_codec,
+            "-global_quality", str(v.qsv_global_quality),
+            "-preset", v.preset if v.preset in _QSV_PRESETS else "medium",
+            "-pix_fmt", "nv12",
+        ]
+    elif v.video_codec.endswith("_nvenc"):
+        args = ["-c:v", v.video_codec, "-rc", "vbr", "-cq", str(v.qsv_global_quality), "-preset", "p5"]
+    elif v.video_codec.endswith("_amf"):
+        args = ["-c:v", v.video_codec, "-rc", "cqp", "-qp_i", str(v.qsv_global_quality),
+                "-qp_p", str(v.qsv_global_quality)]
+    else:
+        args = ["-c:v", v.video_codec, "-preset", v.preset, "-crf", str(v.crf),
+                "-pix_fmt", v.pixel_format]
+
+    if v.threads:
+        args += ["-threads", str(v.threads)]
+    return args
+
+
+_QSV_PRESETS = {"veryfast", "faster", "fast", "medium", "slow", "slower", "veryslow"}
 
 
 def _render_scene_clip(image_path: Path, duration: float, out_path: Path) -> None:
@@ -34,8 +96,13 @@ def _render_scene_clip(image_path: Path, duration: float, out_path: Path) -> Non
     frames = max(1, round(duration * fps))
     zoom_step = (q.zoom_end - q.zoom_start) / frames
 
+    # La imagen se escala solo un poco más que el zoom máximo: escalar a 4K
+    # para hacer un zoom de 1.12x era gastar CPU y memoria en cada frame.
+    source_width = int(q.video.width * max(q.zoom_end, q.video.kenburns_oversample))
+    source_width -= source_width % 2  # ancho par, requisito de yuv420p
+
     vf = (
-        f"scale=3840:-2,"
+        f"scale={source_width}:-2,"
         f"zoompan=z='min(zoom+{zoom_step:.6f},{q.zoom_end})':"
         f"d={frames}:"
         f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
@@ -48,6 +115,7 @@ def _render_scene_clip(image_path: Path, duration: float, out_path: Path) -> Non
         "-vf", vf,
         "-t", f"{duration:.3f}",
         "-an",
+        *_encoder_args(final=False),
         str(out_path),
     ]
     _run(cmd)
@@ -130,15 +198,40 @@ def render_final_video(
         "-filter_complex", filter_complex,
         "-map", "[vout]",
         "-map", f"{audio_input_index}:a",
-        "-c:v", q.video.video_codec,
-        "-preset", q.video.preset,
-        "-crf", str(q.video.crf),
-        "-pix_fmt", q.video.pixel_format,
+        *_encoder_args(final=True),
         "-r", str(q.video.fps),
         "-c:a", q.video.audio_codec,
         "-b:a", q.video.audio_bitrate,
         "-shortest",
         str(out_path),
     ]
-    _run(cmd)
+
+    try:
+        _run(cmd)
+    except RuntimeError as exc:
+        # Si el encoder de hardware no está disponible en esta máquina (no hay
+        # gráfica compatible, driver viejo, ffmpeg sin QSV), no se pierde el
+        # render: se reintenta una vez con libx264 y se avisa.
+        if q.video.video_codec == "libx264":
+            raise
+        print(
+            f"[video_renderer] El encoder '{q.video.video_codec}' falló en esta máquina; "
+            f"reintentando con libx264 (CPU). Detalle: {str(exc)[-400:]}"
+        )
+        cmd_cpu = [
+            "ffmpeg", "-y",
+            *inputs_cmd,
+            "-filter_complex", filter_complex,
+            "-map", "[vout]",
+            "-map", f"{audio_input_index}:a",
+            "-c:v", "libx264", "-preset", q.video.preset, "-crf", str(q.video.crf),
+            "-pix_fmt", q.video.pixel_format,
+            "-r", str(q.video.fps),
+            "-c:a", q.video.audio_codec,
+            "-b:a", q.video.audio_bitrate,
+            "-shortest",
+            str(out_path),
+        ]
+        _run(cmd_cpu)
+
     return out_path
