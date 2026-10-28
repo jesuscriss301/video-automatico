@@ -4,7 +4,6 @@
 __pycache__/
 assets/uploads/
 assets/voices/
-assets/voices_library.json
 outputs/*.meta.json
 outputs/*.mp4
 outputs/*.qa.json

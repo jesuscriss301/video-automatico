@@ -19,10 +19,12 @@ Herramientas útiles:
 - `scripts/muestra_voces.py`: video de muestra de todas las voces (`--kokoro todas` suma las 54 voces gratis de HyperFrames).
 - `muestra_clonadas.bat`: doble clic para oír las voces clonadas.
 
-**Voces clonadas:** los audios de referencia (`assets/voice_samples/`) y la
-biblioteca de voces (`assets/voices_library.json`) no están en el repo. Para usar
-una voz clonada, pon tu propio WAV de 10–30 s (una persona, sin música) y guárdala
-desde la interfaz (`.\start.ps1` → Chatterbox → "Guardar…").
+**Voces:** la biblioteca (`assets/voices_library.json`) y los audios de
+referencia (`assets/voice_samples/`) vienen en el repo, con rutas relativas, así
+que la voz clonada **"El documentalista de español latino"** (versiones 20s y
+60s) funciona apenas instales Chatterbox. La voz de Piper se descarga aparte
+(`python -m piper.download_voices es_ES-davefx-medium --download-dir assets/voices`).
+Cómo agregar o comparar voces: sección 2b de `.claude/skills/estudio-video/SKILL.md`.
 
 Primer flujo de la red de APIs de edición automática de video: convierte un
 **guion de texto** (dividido en escenas, cada una con su imagen) en un video

@@ -1,0 +1,21 @@
+{
+  "title": "Prueba 10 segundos",
+  "language": "es",
+  "scenes": [
+    {
+      "id": "escena_1",
+      "text": "Tenía veintitrés años cuando la peste entró por el puerto de Génova.",
+      "image_path": "../assets/uploads/images/4e6dddbd_Gemini_Generated_Image_u0efabu0efabu0ef.jpg",
+      "image_description": "Elías joven, de pie solo en un muelle vacío, casas medievales al fondo y un barco pequeño entrando.",
+      "pause_after_ms": 250
+    },
+    {
+      "id": "escena_2",
+      "text": "Enterré a mi madre, a mi hermana, a mi vecino. Después me senté a esperar.",
+      "image_path": "../assets/uploads/images/24f0e3e1_Gemini_Generated_Image_wysmv4wysmv4wysm.jpg",
+      "image_description": "Elías sentado en el suelo, escribiendo en un rollo de papel que se extiende hacia la izquierda.",
+      "pause_after_ms": 0
+    }
+  ],
+  "background_music": null
+}

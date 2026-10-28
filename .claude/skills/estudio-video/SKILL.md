@@ -56,6 +56,22 @@ Deja en la carpeta destino: `<id>.wav` por línea, `narracion.wav` (todo unido, 
 
 La voz **manda el reloj**: la duración de cada escena sale de `narracion.json`, nunca de un número inventado.
 
+## 2b. Voces disponibles y cómo gestionarlas
+
+| Voz | Motor | Dónde vive | Cuándo |
+|---|---|---|---|
+| **El documentalista de español latino (20s / 60s)** | Chatterbox (clonada) | `assets/voices_library.json` + `assets/voice_samples/` | Narración principal en español latino. La de 20s suele sonar más fiel. |
+| Voz piper | Piper (`es_ES-davefx-medium`) | `assets/voices/` (se descarga, ver README) | Borradores rápidos, sin GPU. |
+| Grave (espeak) | espeak-ng | sistema | Solo pruebas offline. |
+| 54 voces Kokoro (`ef_dora`, `em_alex`, `em_santa` en español) | Kokoro vía HyperFrames | `npx hyperframes tts --voice <id>` | Voz gratis y local cuando no se quiere la clonada. |
+| HeyGen, ElevenLabs, Gemini | servicios de pago | skill `media-use` / `remotion-markup/voiceover.md` | Solo si el usuario tiene cuenta o API key. |
+
+- **Usar una voz guardada:** por su nombre exacto en `voices_library.json` (en `narrar.py`, en el JSON del guion o en la interfaz). `muestra_voces.py --voces` acepta parte del nombre (ej. `documentalista`).
+- **Las rutas de `voice_sample` son relativas a la raíz del proyecto**, así la biblioteca funciona en cualquier PC. Al agregar una voz a mano, usa `assets/voice_samples/<archivo>.wav`.
+- **Agregar una voz clonada:** WAV de 10–30 s, una sola persona, sin música (si tiene música, pasar antes por `services/voice-separator-api`). Guardarlo en `assets/voice_samples/` y agregar una entrada `{"name", "backend": "chatterbox", "options": {"voice_sample", "language_id": "es"}}`, o usar la interfaz (`.\start.ps1` → Chatterbox → "Guardar…").
+- **Comparar voces:** `python scripts/muestra_voces.py` (voces del proyecto + Kokoro en español), `--kokoro todas` para las 54, `--kokoro no` para solo las del proyecto. Doble clic en `muestra_clonadas.bat` para solo las clonadas.
+- **Chatterbox en Windows:** usa el Python que tenga `chatterbox-tts` instalado (en este equipo, `%USERPROFILE%\anaconda3\python.exe`) y `KMP_DUPLICATE_LIB_OK=TRUE`. La primera vez descarga ~2 GB de Hugging Face, así que debe correr en la PC del usuario, no en un entorno de Claude. Si Claude controla la PC, lanzar un `.bat` desde el Explorador funciona.
+
 ## 3. Recetas
 
 ### A. Voz clonada + motion graphics en HyperFrames

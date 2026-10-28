@@ -32,7 +32,7 @@ import wave
 from dataclasses import dataclass, field as dataclass_field
 from pathlib import Path
 
-from config.settings import DEFAULTS
+from config.settings import DEFAULTS, PROJECT_ROOT
 from pipeline.models import Scene, SubtitleCue
 
 
@@ -211,6 +211,10 @@ class ChatterboxBackend:
     ):
         self.max_chars_per_chunk = max_chars_per_chunk
         self.voice_sample = Path(voice_sample)
+        # Rutas relativas (como las de assets/voices_library.json) se leen desde la
+        # raiz del proyecto, asi la biblioteca funciona en cualquier PC.
+        if not self.voice_sample.is_absolute():
+            self.voice_sample = PROJECT_ROOT / self.voice_sample
         if not self.voice_sample.exists():
             raise TTSEngineError(
                 f"No se encontró el audio de referencia en {self.voice_sample}. "

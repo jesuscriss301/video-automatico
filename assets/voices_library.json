@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Voz piper",
+    "backend": "piper",
+    "options": {
+      "length_scale": 1
+    },
+    "note": null,
+    "created_at": "2026-09-18T20:43:21"
+  },
+  {
+    "name": "El documentalista de español latino (20s)",
+    "backend": "chatterbox",
+    "options": {
+      "voice_sample": "assets/voice_samples/referencia_20s.wav",
+      "language_id": "es"
+    },
+    "note": "Recorte de 20s (del segundo 27 al 47) del audio de la prueba, mono 24kHz. Es el rango que Chatterbox aprovecha mejor.",
+    "created_at": "2026-09-19T01:45:35"
+  },
+  {
+    "name": "El documentalista de español latino (60s)",
+    "backend": "chatterbox",
+    "options": {
+      "voice_sample": "assets/voice_samples/documentalista_60s.wav",
+      "language_id": "es"
+    },
+    "note": "El audio de referencia tal cual se usó en la prueba del 17/09.",
+    "created_at": "2026-09-19T01:45:35"
+  },
+  {
+    "name": "Grave (espeak)",
+    "backend": "espeak",
+    "options": {
+      "pitch": 15,
+      "speed_wpm": 165
+    },
+    "note": "Los parametros de la voz grave que se probaron y gustaron (ya son el default en config/settings.py).",
+    "created_at": "2026-09-19T01:45:35"
+  }
+]
