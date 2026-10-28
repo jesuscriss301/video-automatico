@@ -36,7 +36,7 @@ Es la pieza que une todo: genera la narración con **cualquier voz guardada del 
 
 ```json
 {
-  "voz": "Voz clonada — referencia 20s",
+  "voz": "El documentalista de español latino (20s)",
   "pausa_ms": 250,
   "lineas": [
     {"id": "gancho", "texto": "..."},

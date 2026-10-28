@@ -6,7 +6,7 @@ voz CLONADA de Chatterbox) y la deja lista para HyperFrames o Remotion.
 Entrada: un JSON con las lineas a narrar, en orden.
 
     {
-      "voz": "Voz clonada — referencia 20s",     # nombre en assets/voices_library.json
+      "voz": "El documentalista de español latino (20s)",     # nombre en assets/voices_library.json
       "pausa_ms": 250,                           # opcional, silencio entre lineas
       "lineas": [
         {"id": "gancho", "texto": "Tu negocio pierde clientes cada noche."},

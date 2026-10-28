@@ -1,5 +1,29 @@
 # Video Editing API Network — Flujo 1 (Guion → Video)
 
+## Empezar rápido con Claude Code
+
+1. Clona el repo y abre la carpeta con Claude Code:
+   ```bash
+   git clone https://github.com/jesuscriss301/video-automatico
+   cd video-automatico
+   ```
+2. Instala lo básico: Python 3.10+, FFmpeg y Node.js 22+. Luego
+   `pip install -r requirements.txt` (y `pip install -r requirements-chatterbox.txt`
+   si vas a clonar voces).
+3. Pídele a Claude el video que quieras. Las skills de `.claude/skills/` se cargan
+   solas; la que coordina todo es **estudio-video** (pipeline propio + HyperFrames +
+   Remotion + diseño de movimiento de iart-ai).
+
+Herramientas útiles:
+- `scripts/narrar.py`: narración con cualquier voz guardada, con tiempos exactos para HyperFrames o Remotion.
+- `scripts/muestra_voces.py`: video de muestra de todas las voces (`--kokoro todas` suma las 54 voces gratis de HyperFrames).
+- `muestra_clonadas.bat`: doble clic para oír las voces clonadas.
+
+**Voces clonadas:** los audios de referencia (`assets/voice_samples/`) y la
+biblioteca de voces (`assets/voices_library.json`) no están en el repo. Para usar
+una voz clonada, pon tu propio WAV de 10–30 s (una persona, sin música) y guárdala
+desde la interfaz (`.\start.ps1` → Chatterbox → "Guardar…").
+
 Primer flujo de la red de APIs de edición automática de video: convierte un
 **guion de texto** (dividido en escenas, cada una con su imagen) en un video
 terminado, con voz generada por TTS, efecto Ken Burns, transiciones,
