@@ -11,3 +11,8 @@ outputs/*.qa.json
 outputs/.hw_cache.json
 outputs/jobs/
 outputs/previews/
+
+# Proyectos de video (HyperFrames / Remotion)
+estudio/*/node_modules/
+estudio/*/renders/
+estudio/*/out/

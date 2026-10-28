@@ -1,0 +1,9 @@
+{
+  "voz": "Voz clonada — referencia 20s",
+  "pausa_ms": 250,
+  "lineas": [
+    {"id": "gancho", "texto": "Tu negocio pierde clientes cada noche que nadie responde."},
+    {"id": "solucion", "texto": "EasyPro Digital crea asistentes que atienden por ti, a cualquier hora."},
+    {"id": "cierre", "texto": "Escríbenos y te mostramos una demo con tu propio negocio."}
+  ]
+}
