@@ -37,5 +37,14 @@
     },
     "note": "Los parametros de la voz grave que se probaron y gustaron (ya son el default en config/settings.py).",
     "created_at": "2026-09-19T01:45:35"
+  },
+  {
+    "name": "Heart (Kokoro, inglés)",
+    "backend": "kokoro",
+    "options": {
+      "voice": "af_heart"
+    },
+    "note": "Voz femenina en inglés EE. UU., gratis y local. Elegida para las versiones en inglés de la web (29/10/2026).",
+    "created_at": "2026-10-29T12:30:00"
   }
 ]

@@ -107,6 +107,37 @@ class EspeakBackend:
         return SynthesizedAudio(path=out_path, duration_seconds=_wav_duration_seconds(out_path))
 
 
+class KokoroBackend:
+    """Voces Kokoro-82M (gratis, locales) a través del CLI de HyperFrames:
+    `npx hyperframes tts`. 54 voces en 9 idiomas; la primera letra del id dice
+    el idioma (a = inglés EE. UU., b = inglés británico, e = español...).
+    Necesita Node.js y `pip install kokoro-onnx soundfile`; la primera vez el
+    CLI descarga el modelo (~300 MB) desde GitHub."""
+
+    name = "kokoro"
+
+    def __init__(self, voice: str = "af_heart", lang: str | None = None, speed: float | None = None):
+        self.npx = shutil.which("npx") or shutil.which("npx.cmd")
+        if not self.npx:
+            raise TTSEngineError("Kokoro necesita Node.js (npx) instalado.")
+        self.voice = voice
+        self.lang = lang
+        self.speed = speed
+
+    def synthesize(self, text: str, out_path: Path) -> SynthesizedAudio:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        cmd = [self.npx, "-y", "hyperframes@latest", "tts", text, "--voice", self.voice,
+               "-o", str(out_path)]
+        if self.lang:
+            cmd += ["--lang", self.lang]
+        if self.speed:
+            cmd += ["--speed", str(self.speed)]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0 or not out_path.exists():
+            raise TTSEngineError(f"Kokoro falló: {(result.stderr or result.stdout)[-400:]}")
+        return SynthesizedAudio(path=out_path, duration_seconds=_wav_duration_seconds(out_path))
+
+
 class PiperBackend:
     """
     Backend de producción. Requiere:
@@ -387,6 +418,8 @@ def get_backend(name: str = "piper", **kwargs):
         return EspeakBackend(**kwargs)
     if name == "chatterbox":
         return ChatterboxBackend(**kwargs)
+    if name == "kokoro":
+        return KokoroBackend(**kwargs)
     raise ValueError(f"Backend de TTS desconocido: {name}")
 
 

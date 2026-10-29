@@ -20,3 +20,7 @@ estudio/*/out/
 local/tarea.cmd
 local/tarea.log
 local/tarea.fin
+
+# Plan de videos: proyectos generados y perfil del navegador de capturas
+estudio/*/cortes/
+estudio/*/.perfil-captura/

@@ -50,6 +50,7 @@ PERMITIDAS = {
     "espeak": {"voice", "speed_wpm", "pitch"},
     "chatterbox": {"voice_sample", "language_id", "exaggeration", "cfg_weight",
                    "temperature", "device", "max_chars_per_chunk"},
+    "kokoro": {"voice", "lang", "speed"},
 }
 
 

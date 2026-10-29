@@ -1,0 +1,34 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 250,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "La mayoría de proyectos de software se caen entre el que vende y el que programa. Aquí no existe ese intermediario."
+    },
+    {
+      "id": "gancho_b",
+      "texto": "¿Tienes una idea de app y no sabes por dónde empezar? Mira esto."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Tres mil transacciones diarias en un sistema de salud. Lo construyó una sola persona."
+    },
+    {
+      "id": "intro",
+      "texto": "Soy Jesús, desarrollador full stack en Medellín. Convierto ideas de negocio en software que funciona."
+    },
+    {
+      "id": "servicios",
+      "texto": "Páginas web y tiendas en línea, apps, plataformas SaaS, inteligencia artificial y SEO. Todo con un solo responsable."
+    },
+    {
+      "id": "caso",
+      "texto": "Ejemplo: una integración con el Ministerio de Salud que procesa tres mil transacciones al día y respondió un cuarenta por ciento más rápido."
+    },
+    {
+      "id": "cierre",
+      "texto": "Cuéntame tu idea por WhatsApp y en veinticuatro horas te digo cómo la haría."
+    }
+  ]
+}
