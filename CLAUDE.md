@@ -17,6 +17,15 @@ reel, short, promo, explicativo, animación, motion graphic, narración…):
 Excepción: si el usuario dice "hazlo sin preguntar", "tú decide" o similar, usa
 los valores por defecto del briefing y dilo en una línea al inicio.
 
+## Funciones que solo corren en la PC
+
+Voz clonada, interfaz web, vistas previas para editar, renders largos y
+aceleración por gráfica **solo funcionan en la PC del usuario**. Antes de
+ejecutarlas, mira si estás en la PC o en la nube y sigue la sección
+"2c. Lo que solo funciona en la PC del usuario" de la skill `estudio-video`
+(en la nube con la PC enlazada: escribir `local/tarea.cmd` y lanzar
+`local\correr_tarea.bat`). Lanzadores listos en `local/`.
+
 ## Otras notas
 - Todo en español.
 - La voz clonada principal es "El documentalista de español latino" (versiones 20s y 60s).

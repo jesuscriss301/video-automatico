@@ -113,6 +113,36 @@ La voz **manda el reloj**: la duración de cada escena sale de `narracion.json`,
 - **Comparar voces:** `python scripts/muestra_voces.py` (voces del proyecto + Kokoro en español), `--kokoro todas` para las 54, `--kokoro no` para solo las del proyecto. Doble clic en `muestra_clonadas.bat` para solo las clonadas.
 - **Chatterbox en Windows:** usa el Python que tenga `chatterbox-tts` instalado (en este equipo, `%USERPROFILE%\anaconda3\python.exe`) y `KMP_DUPLICATE_LIB_OK=TRUE`. La primera vez descarga ~2 GB de Hugging Face, así que debe correr en la PC del usuario, no en un entorno de Claude. Si Claude controla la PC, lanzar un `.bat` desde el Explorador funciona.
 
+## 2c. Lo que solo funciona en la PC del usuario (local)
+
+Antes de ejecutar algo, ubícate: **¿estás corriendo en la PC del usuario** (Claude Code
+local, la ruta del proyecto es `C:\...\video-automatico`) **o en la nube**?
+
+| Función | ¿Nube? | Por qué |
+|---|---|---|
+| Voz clonada (Chatterbox) | No | Descarga ~2 GB de Hugging Face (bloqueado en la nube) y los audios de referencia están en la PC |
+| Voz Piper (primera descarga del modelo) | No | Hugging Face |
+| Interfaz web (`localhost:8000`), cola de renders | No | Es un servidor en la PC del usuario |
+| Vista previa de HyperFrames / Remotion Studio para que el usuario edite | No | Se abre en el navegador de la PC |
+| Renders largos (más de unos minutos) | No | La sesión en la nube se detiene al terminar la respuesta |
+| Aceleración por gráfica (Intel QSV) | No | Depende del hardware de la PC |
+| Separador de voz (`services/voice-separator-api`) | No recomendado | Usa su propio entorno con TensorFlow |
+| Kokoro, espeak, renders cortos, revisar fotogramas | Sí | — |
+
+**Cómo ejecutarlo según dónde estés:**
+
+1. **En la PC del usuario (Claude Code local):** córrelo directo en la terminal. Antes: `set KMP_DUPLICATE_LIB_OK=TRUE` y usa el Python que tiene Chatterbox (`local\_entorno.cmd` lo detecta; en el equipo de Jesús es `%USERPROFILE%\anaconda3\python.exe`).
+2. **En la nube con la PC enlazada** (herramientas `device_*` y `computer_*`):
+   - Escribe el comando exacto en `local/tarea.cmd` (líneas `.cmd` de Windows; usa `%PY%` para Python; rutas relativas a la raíz del proyecto).
+   - Abre `local\correr_tarea.bat` con doble clic desde el Explorador de archivos (computer use, nivel "click").
+   - Espera revisando `local/tarea.fin` (aparece al terminar, con el código de salida) y lee `local/tarea.log`. Libera el control de la pantalla mientras esperas.
+   - Para un render largo, avisa al usuario cuánto puede tardar.
+3. **Sin acceso a la PC:** prepara todo (guion, JSON, proyecto) y dale al usuario el `.bat` o comando exacto en una línea; continúa cuando confirme.
+
+**Lanzadores listos** en `local/` (doble clic): `interfaz.bat` (interfaz web), `muestra_voces.bat`, `revisar_equipo.bat` (qué está instalado y aceleración por gráfica), `correr_tarea.bat` (tareas que deja Claude). En la raíz: `muestra_clonadas.bat`.
+
+**Equipo de Jesús (29/10/2026):** Python 3.13 de Anaconda con Chatterbox, FastAPI y Piper; FFmpeg; Node v26 (HyperFrames y Remotion funcionan); **sin GPU NVIDIA**: la voz clonada va por procesador (~1,5 min por frase corta).
+
 ## 3. Recetas
 
 ### A. Voz clonada + motion graphics en HyperFrames

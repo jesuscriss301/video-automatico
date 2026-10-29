@@ -15,3 +15,8 @@ outputs/previews/
 estudio/*/node_modules/
 estudio/*/renders/
 estudio/*/out/
+
+# Tareas que Claude lanza en la PC
+local/tarea.cmd
+local/tarea.log
+local/tarea.fin
