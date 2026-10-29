@@ -1,6 +1,6 @@
 ---
 name: estudio-video
-description: Leer primero para cualquier video en este proyecto. Une los 4 proyectos (pipeline video-automatico con voz clonada, HyperFrames, Remotion y las skills de diseño de movimiento de iart-ai) y dice cuál usar en cada paso y cómo pasar audio, subtítulos y clips de uno a otro.
+description: Usar SIEMPRE que el usuario pida hacer, crear, generar o editar un video (intro, reel, short, promo, explicativo, motion graphic, narración). Empieza con un briefing (voz, colores, idea previa, gancho) y luego une los 4 proyectos (pipeline con voz clonada, HyperFrames, Remotion y diseño de movimiento de iart-ai) para producirlo.
 ---
 
 # Estudio de video unificado
@@ -15,6 +15,47 @@ Este repo tiene cuatro piezas que se combinan. Ninguna hace todo; esta skill dec
 | **iart-ai motion design** | skills `animation-principles`, `shot-composition`, `motion-art-direction`, `color-motion`, `logo-animation`, `beat-sync-editing`, `motion-background`, `remotion-video`, `after-effects`; scripts en `motion-verify-tools/` | Criterio: easing, tiempos, composición, color, ritmo con la música, y verificación con fotogramas. Aplica a todo lo anterior. |
 
 Los proyectos visuales nuevos viven en `estudio/<nombre>/` (HyperFrames o Remotion). Su `node_modules` y renders están en `.gitignore`.
+
+## 0. Briefing (siempre, antes de construir)
+
+Ningún video se empieza sin estas respuestas. Pregunta **en una sola tanda** con la
+herramienta de preguntas (AskUserQuestion, máx. 4 preguntas por tanda) y **salta
+las que el pedido ya responde**. Si el usuario dice "tú decide" o "sin preguntas",
+usa los valores por defecto (★) y dilo en una línea.
+
+**Tanda 1 — lo creativo**
+
+1. **Voz** — ¿Quién narra?
+   - ★ El documentalista de español latino (voz clonada, 20s)
+   - Voz Kokoro en español (Dora mujer / Alex hombre), gratis y rápida
+   - Piper (borrador rápido)
+   - Sin voz, solo música y texto
+2. **Colores / estilo**
+   - ★ Marca EasyPro Digital: fondo oscuro + acento verde, tipografía moderna en negrita
+   - Colores del cliente (pedir logo, web o códigos de color)
+   - Claro y minimalista
+   - Que Claude proponga 2–3 paletas
+3. **Idea previa**
+   - Tengo guion o texto (que lo pegue)
+   - Tengo un video o imagen de referencia (que lo comparta y diga qué copiar: ritmo, look, apertura)
+   - ★ Partir de cero: Claude propone 3 enfoques distintos en palabras y el usuario elige
+4. **Gancho** (primeros 1–3 segundos)
+   - ★ Pregunta que toque un dolor ("¿Tu negocio deja de responder cuando cierras?")
+   - Dato o cifra impactante
+   - Promesa de resultado ("En 30 días…")
+   - Sin gancho, entrada directa
+   - (Si elige uno, proponer 2–3 frases de gancho concretas para que escoja.)
+
+**Tanda 2 — lo técnico** (solo si no se sabe; se puede deducir del destino)
+
+5. **Formato**: ★ vertical 1080×1920 (Reels/TikTok/Shorts) · horizontal 1920×1080 (YouTube/web) · cuadrado 1080×1080.
+6. **Duración**: ★ 15–30 s · 30–60 s · más de 1 min.
+7. **Cierre / llamado a la acción**: ★ logo + easyprodigital.com · WhatsApp · otro.
+8. **Música**: ★ suave bajo la voz · enérgica · ninguna · la del usuario.
+
+**Después del briefing:** resume en 4–6 líneas lo elegido (voz, paleta en hex,
+gancho exacto, formato, duración, cierre) y empieza. Guarda ese resumen como
+`SPEC.md` dentro de `estudio/<nombre>/` para que el video sea reproducible.
 
 ## 1. Elegir la ruta
 
