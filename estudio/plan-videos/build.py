@@ -48,7 +48,8 @@ T = {
             "turnero": ["Turno", "Pantalla", "Siguiente"],
             "reservas": ["Reserva online", "Confirmación", "Anticipo"],
             "cierre": ["Prueba la demo", "Escríbeme por WhatsApp"],
-            "cap_tv": "Pantalla del local", "cap_panel": "Panel del asesor",
+            "caps": {"turnero": [("turnero_recepcion", "Recepción: emite el turno"), ("turnero_operador", "Asesor: atiende el A-001")],
+                     "reservas": [("turnero_admin", "Panel de administración"), ("turnero_siguiente", "Siguiente, con un clic")]},
         },
         "en": {
             "gancho": {"a": "How many left *without being served*?",
@@ -58,7 +59,8 @@ T = {
             "turnero": ["Number", "Screen", "Next"],
             "reservas": ["Online booking", "Confirmation", "Deposit"],
             "cierre": ["Try the demo", "Message us on WhatsApp"],
-            "cap_tv": "In-store screen", "cap_panel": "Staff panel",
+            "caps": {"turnero": [("turnero_recepcion", "Reception: issue a number"), ("turnero_operador", "Staff: serving A-001")],
+                     "reservas": [("turnero_admin", "Admin panel"), ("turnero_siguiente", "Next, in one click")]},
         },
     },
     "v1": {
@@ -190,13 +192,13 @@ def js_etiquetas(sid, n, t0, paso, con_sep=True):
     return js
 
 
-def marco_captura(cid, src, g, x, y, w, h, etiqueta=""):
+def marco_captura(cid, src, g, x, y, w, h, etiqueta="", ajuste="cover"):
     """Captura dentro de un marco con barra de navegador; la imagen se mueve (Ken Burns)."""
     eti = (f'<div id="{cid}-eti" class="cap-eti" style="left:{x}px; top:{y + h + 14}px; width:{w}px">{etiqueta}</div>'
            if etiqueta else "")
     return (f'<div id="{cid}" class="marco" style="left:{x}px; top:{y}px; width:{w}px; height:{h}px">'
             f'<div class="barra"><i></i><i></i><i></i></div>'
-            f'<div class="vista" data-layout-allow-overflow><img id="{cid}-img" src="assets/capturas/{src}.png" alt=""></div></div>{eti}')
+            f'<div class="vista {ajuste}" data-layout-allow-overflow><img id="{cid}-img" src="assets/capturas/{src}.png" alt=""></div></div>{eti}')
 
 
 CSS_MARCO = """
@@ -206,6 +208,8 @@ CSS_MARCO = """
 .barra i { width:11px; height:11px; border-radius:50%; background:#2A3550; display:block; }
 .vista { position:absolute; left:0; right:0; top:34px; bottom:0; overflow:hidden; }
 .vista img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; }
+.vista.contain { background:#0F172A; }
+.vista.contain img { object-fit:contain; object-position:center; }
 .cap-eti { position:absolute; text-align:center; font-size:30px; color:%s; font-family:'JetBrains Mono',monospace; }
 """.replace("%s", SUAVE)
 
@@ -343,13 +347,13 @@ def escena_cuerpo(v, lang, sid, g, dur, demos_dur=None):
         et, fs = etiquetas_html(sid, tx[sid], g, g.top, apilar=False)
         css += f".ets {{ font-size:{int(fs * (0.8 if g.v else 1))}px; flex-wrap:wrap; }}"
         html += et
+        (src1, eti1), (src2, eti2) = tx["caps"][sid]
         if g.v:
-            w = 940
-            html += marco_captura(f"{sid}-tv", "turnero_tv" if sid == "turnero" else "turnero_panel", g, 70, 430, w, 280, tx["cap_tv" if sid == "turnero" else "cap_panel"])
-            html += marco_captura(f"{sid}-pn", "turnero_panel" if sid == "turnero" else "turnero_tv", g, 70, 790, w, 280, tx["cap_panel" if sid == "turnero" else "cap_tv"])
+            html += marco_captura(f"{sid}-tv", src1, g, 50, 420, 480, 560, eti1, ajuste="contain")
+            html += marco_captura(f"{sid}-pn", src2, g, 550, 420, 480, 560, eti2, ajuste="contain")
         else:
-            html += marco_captura(f"{sid}-tv", "turnero_tv" if sid == "turnero" else "turnero_panel", g, 130, 260, 820, 470, tx["cap_tv" if sid == "turnero" else "cap_panel"])
-            html += marco_captura(f"{sid}-pn", "turnero_panel" if sid == "turnero" else "turnero_tv", g, 970, 260, 820, 470, tx["cap_panel" if sid == "turnero" else "cap_tv"])
+            html += marco_captura(f"{sid}-tv", src1, g, 130, 250, 820, 500, eti1, ajuste="contain")
+            html += marco_captura(f"{sid}-pn", src2, g, 970, 250, 820, 500, eti2, ajuste="contain")
         js += js_etiquetas(sid, 3, .2, dur * .25)
         js += js_kenburns(f"{sid}-tv", dur, .3) + js_kenburns(f"{sid}-pn", dur, .55, hasta=1.1, y_hasta=-6)
 

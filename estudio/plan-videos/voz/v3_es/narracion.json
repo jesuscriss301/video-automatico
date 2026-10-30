@@ -1,0 +1,204 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 54.55,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "¿Cuántas personas se fueron hoy de tu sala de espera sin ser atendidas?",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 5.01,
+      "subtitulos": [
+        {
+          "texto": "¿Cuántas personas se fueron hoy de tu sala de espera sin ser atendidas?",
+          "inicio": 0.0,
+          "fin": 4.76
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Esta clínica dejó de tener filas en la puerta con una pantalla y un código QR.",
+      "archivo": "gancho_b.wav",
+      "inicio": 5.01,
+      "duracion": 6.53,
+      "subtitulos": [
+        {
+          "texto": "Esta clínica dejó de tener filas en la puerta con una pantalla y un código QR.",
+          "inicio": 5.01,
+          "fin": 11.29
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Si todavía agendas en un cuaderno, este video es para ti.",
+      "archivo": "gancho_c.wav",
+      "inicio": 11.54,
+      "duracion": 4.33,
+      "subtitulos": [
+        {
+          "texto": "Si todavía agendas en un cuaderno, este video es para ti.",
+          "inicio": 11.54,
+          "fin": 15.62
+        }
+      ]
+    },
+    {
+      "id": "problema",
+      "texto": "Filas largas, gente que no sabe cuándo le toca y citas que nadie confirma. Todo eso cuesta clientes.",
+      "archivo": "problema.wav",
+      "inicio": 15.87,
+      "duracion": 9.89,
+      "subtitulos": [
+        {
+          "texto": "Filas largas, gente que no sabe cuándo le toca y citas que nadie confirma.",
+          "inicio": 15.87,
+          "fin": 22.71
+        },
+        {
+          "texto": "Todo eso cuesta clientes.",
+          "inicio": 22.71,
+          "fin": 25.51
+        }
+      ]
+    },
+    {
+      "id": "turnero",
+      "texto": "Con Turnero, tu cliente toma su turno, lo ve en la pantalla del local y tu equipo llama al siguiente con un clic, en tiempo real.",
+      "archivo": "turnero.wav",
+      "inicio": 25.76,
+      "duracion": 10.97,
+      "subtitulos": [
+        {
+          "texto": "Con Turnero, tu cliente toma su turno,",
+          "inicio": 25.76,
+          "fin": 29.2
+        },
+        {
+          "texto": "lo ve en la pantalla del local y tu equipo llama al siguiente con un clic,",
+          "inicio": 29.2,
+          "fin": 34.84
+        },
+        {
+          "texto": "en tiempo real.",
+          "inicio": 34.84,
+          "fin": 36.48
+        }
+      ]
+    },
+    {
+      "id": "reservas",
+      "texto": "Y si atiendes con cita previa, el sistema de reservas deja agendar desde tu web, confirma solo y puede pedir un anticipo para que no te dejen plantado.",
+      "archivo": "reservas.wav",
+      "inicio": 36.73,
+      "duracion": 12.37,
+      "subtitulos": [
+        {
+          "texto": "Y si atiendes con cita previa, el sistema de reservas deja agendar desde tu web,",
+          "inicio": 36.73,
+          "fin": 43.41
+        },
+        {
+          "texto": "confirma solo y puede pedir un anticipo para que no te dejen plantado.",
+          "inicio": 43.41,
+          "fin": 48.85
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "texto": "Pruébalo gratis en la demo o escríbeme y lo adaptamos a tu negocio.",
+      "archivo": "cierre.wav",
+      "inicio": 49.1,
+      "duracion": 5.45,
+      "subtitulos": [
+        {
+          "texto": "Pruébalo gratis en la demo o escríbeme y lo adaptamos a tu negocio.",
+          "inicio": 49.1,
+          "fin": 54.3
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "¿Cuántas personas se fueron hoy de tu sala de espera sin ser atendidas?",
+      "startMs": 0,
+      "endMs": 4760,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Esta clínica dejó de tener filas en la puerta con una pantalla y un código QR.",
+      "startMs": 5010,
+      "endMs": 11290,
+      "timestampMs": 5010,
+      "confidence": 1
+    },
+    {
+      "text": "Si todavía agendas en un cuaderno, este video es para ti.",
+      "startMs": 11540,
+      "endMs": 15620,
+      "timestampMs": 11540,
+      "confidence": 1
+    },
+    {
+      "text": "Filas largas, gente que no sabe cuándo le toca y citas que nadie confirma.",
+      "startMs": 15870,
+      "endMs": 22710,
+      "timestampMs": 15870,
+      "confidence": 1
+    },
+    {
+      "text": "Todo eso cuesta clientes.",
+      "startMs": 22710,
+      "endMs": 25510,
+      "timestampMs": 22710,
+      "confidence": 1
+    },
+    {
+      "text": "Con Turnero, tu cliente toma su turno,",
+      "startMs": 25760,
+      "endMs": 29200,
+      "timestampMs": 25760,
+      "confidence": 1
+    },
+    {
+      "text": "lo ve en la pantalla del local y tu equipo llama al siguiente con un clic,",
+      "startMs": 29200,
+      "endMs": 34840,
+      "timestampMs": 29200,
+      "confidence": 1
+    },
+    {
+      "text": "en tiempo real.",
+      "startMs": 34840,
+      "endMs": 36480,
+      "timestampMs": 34840,
+      "confidence": 1
+    },
+    {
+      "text": "Y si atiendes con cita previa, el sistema de reservas deja agendar desde tu web,",
+      "startMs": 36730,
+      "endMs": 43410,
+      "timestampMs": 36730,
+      "confidence": 1
+    },
+    {
+      "text": "confirma solo y puede pedir un anticipo para que no te dejen plantado.",
+      "startMs": 43410,
+      "endMs": 48850,
+      "timestampMs": 43410,
+      "confidence": 1
+    },
+    {
+      "text": "Pruébalo gratis en la demo o escríbeme y lo adaptamos a tu negocio.",
+      "startMs": 49100,
+      "endMs": 54300,
+      "timestampMs": 49100,
+      "confidence": 1
+    }
+  ]
+}
