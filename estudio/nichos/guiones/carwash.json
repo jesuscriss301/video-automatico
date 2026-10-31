@@ -1,0 +1,34 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "pausa_ms": 450,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "The most profitable car washes in Texas don't sell washes. They sell memberships."
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Car wash website design, Texas edition: what actually makes money."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Rainy week? Members still pay."
+    },
+    {
+      "id": "s1",
+      "texto": "Car wash website design in Texas should do one thing first: sell the monthly membership."
+    },
+    {
+      "id": "s2",
+      "texto": "Menu with prices, before-and-after gallery, and a sign-up button that charges every month."
+    },
+    {
+      "id": "s3",
+      "texto": "Behind it, a membership app: automatic billing, a QR code or plate check at the entrance, and perks that keep members around."
+    },
+    {
+      "id": "s4",
+      "texto": "Want this for your car wash? Comment DEMO."
+    }
+  ]
+}

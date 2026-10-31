@@ -1,0 +1,34 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "pausa_ms": 450,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "One implant case can pay for your whole website."
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Responsive prosthodontic websites: what patients check on their phone before calling."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Every missed dental appointment is money that never comes back. Unless your system recovers it."
+    },
+    {
+      "id": "s1",
+      "texto": "Responsive prosthodontic websites have to work on a phone first, because that's where patients compare specialists."
+    },
+    {
+      "id": "s2",
+      "texto": "A page for each high-value treatment: implants, dentures, crowns. What it is, how long, financing, and a booking button."
+    },
+    {
+      "id": "s3",
+      "texto": "Behind it, a dental CRM: automatic reminders that cut no-shows, six-month recall messages, and a simple patient portal."
+    },
+    {
+      "id": "s4",
+      "texto": "Want to see your practice on this? Comment DEMO."
+    }
+  ]
+}

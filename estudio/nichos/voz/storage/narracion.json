@@ -1,0 +1,192 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 37.731,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Empty units cost you money every single day.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 3.223,
+      "subtitulos": [
+        {
+          "texto": "Empty units cost you money every single day.",
+          "inicio": 0.0,
+          "fin": 2.773
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Cheap web design for self storage, but built to rent units online.",
+      "archivo": "gancho_b.wav",
+      "inicio": 3.223,
+      "duracion": 4.738,
+      "subtitulos": [
+        {
+          "texto": "Cheap web design for self storage, but built to rent units online.",
+          "inicio": 3.223,
+          "fin": 7.511
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Your customers don't know what unit size they need. Your website should tell them.",
+      "archivo": "gancho_c.wav",
+      "inicio": 7.961,
+      "duracion": 5.122,
+      "subtitulos": [
+        {
+          "texto": "Your customers don't know what unit size they need. Your website should tell them.",
+          "inicio": 7.961,
+          "fin": 12.633
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Cheap web design for self storage works if it does one thing: rent the unit without a phone call.",
+      "archivo": "s1.wav",
+      "inicio": 13.083,
+      "duracion": 6.231,
+      "subtitulos": [
+        {
+          "texto": "Cheap web design for self storage works if it does one thing:",
+          "inicio": 13.083,
+          "fin": 16.774
+        },
+        {
+          "texto": "rent the unit without a phone call.",
+          "inicio": 16.774,
+          "fin": 18.865
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "A size calculator: what are you storing? It recommends the unit, shows the price and lets them reserve.",
+      "archivo": "s2.wav",
+      "inicio": 19.315,
+      "duracion": 6.53,
+      "subtitulos": [
+        {
+          "texto": "A size calculator: what are you storing?",
+          "inicio": 19.315,
+          "fin": 21.79
+        },
+        {
+          "texto": "It recommends the unit, shows the price and lets them reserve.",
+          "inicio": 21.79,
+          "fin": 25.395
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Behind it, a management system: live availability, automatic monthly billing and late-fee alerts. You see occupancy at a glance.",
+      "archivo": "s3.wav",
+      "inicio": 25.845,
+      "duracion": 8.642,
+      "subtitulos": [
+        {
+          "texto": "Behind it, a management system: live availability,",
+          "inicio": 25.845,
+          "fin": 29.301
+        },
+        {
+          "texto": "automatic monthly billing and late-fee alerts. You see occupancy at a glance.",
+          "inicio": 29.301,
+          "fin": 34.037
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Low setup, monthly plan. Comment DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 34.487,
+      "duracion": 3.245,
+      "subtitulos": [
+        {
+          "texto": "Low setup, monthly plan. Comment DEMO.",
+          "inicio": 34.487,
+          "fin": 37.282
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Empty units cost you money every single day.",
+      "startMs": 0,
+      "endMs": 2773,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Cheap web design for self storage, but built to rent units online.",
+      "startMs": 3223,
+      "endMs": 7511,
+      "timestampMs": 3223,
+      "confidence": 1
+    },
+    {
+      "text": "Your customers don't know what unit size they need. Your website should tell them.",
+      "startMs": 7961,
+      "endMs": 12633,
+      "timestampMs": 7961,
+      "confidence": 1
+    },
+    {
+      "text": "Cheap web design for self storage works if it does one thing:",
+      "startMs": 13083,
+      "endMs": 16774,
+      "timestampMs": 13083,
+      "confidence": 1
+    },
+    {
+      "text": "rent the unit without a phone call.",
+      "startMs": 16774,
+      "endMs": 18865,
+      "timestampMs": 16774,
+      "confidence": 1
+    },
+    {
+      "text": "A size calculator: what are you storing?",
+      "startMs": 19315,
+      "endMs": 21790,
+      "timestampMs": 19315,
+      "confidence": 1
+    },
+    {
+      "text": "It recommends the unit, shows the price and lets them reserve.",
+      "startMs": 21790,
+      "endMs": 25395,
+      "timestampMs": 21790,
+      "confidence": 1
+    },
+    {
+      "text": "Behind it, a management system: live availability,",
+      "startMs": 25845,
+      "endMs": 29301,
+      "timestampMs": 25845,
+      "confidence": 1
+    },
+    {
+      "text": "automatic monthly billing and late-fee alerts. You see occupancy at a glance.",
+      "startMs": 29301,
+      "endMs": 34037,
+      "timestampMs": 29301,
+      "confidence": 1
+    },
+    {
+      "text": "Low setup, monthly plan. Comment DEMO.",
+      "startMs": 34487,
+      "endMs": 37282,
+      "timestampMs": 34487,
+      "confidence": 1
+    }
+  ]
+}

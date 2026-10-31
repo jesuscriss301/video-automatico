@@ -1,0 +1,204 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 42.211,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Your shop is full and your phone still rings all day.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 3.522,
+      "subtitulos": [
+        {
+          "texto": "Your shop is full and your phone still rings all day.",
+          "inicio": 0.0,
+          "fin": 3.072
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Affordable auto shop website design: what four hundred fifty dollars actually gets you.",
+      "archivo": "gancho_b.wav",
+      "inicio": 3.522,
+      "duracion": 5.698,
+      "subtitulos": [
+        {
+          "texto": "Affordable auto shop website design:",
+          "inicio": 3.522,
+          "fin": 5.911
+        },
+        {
+          "texto": "what four hundred fifty dollars actually gets you.",
+          "inicio": 5.911,
+          "fin": 8.77
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Customers don't trust mechanics they can't see online.",
+      "archivo": "gancho_c.wav",
+      "inicio": 9.22,
+      "duracion": 3.479,
+      "subtitulos": [
+        {
+          "texto": "Customers don't trust mechanics they can't see online.",
+          "inicio": 9.22,
+          "fin": 12.249
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Affordable auto shop website design doesn't mean cheap-looking. It means one page that answers prices and books the slot.",
+      "archivo": "s1.wav",
+      "inicio": 12.699,
+      "duracion": 7.81,
+      "subtitulos": [
+        {
+          "texto": "Affordable auto shop website design doesn't mean cheap-looking.",
+          "inicio": 12.699,
+          "fin": 16.603
+        },
+        {
+          "texto": "It means one page that answers prices and books the slot.",
+          "inicio": 16.603,
+          "fin": 20.059
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Upfront prices, online booking, reviews. Fewer calls asking how much for brakes?",
+      "archivo": "s2.wav",
+      "inicio": 20.509,
+      "duracion": 5.826,
+      "subtitulos": [
+        {
+          "texto": "Upfront prices, online booking, reviews. Fewer calls asking how much for brakes?",
+          "inicio": 20.509,
+          "fin": 25.885
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "And when you're ready, the same system runs the shop: digital work orders, inspection photos sent to the customer, oil-change reminders and parts inventory.",
+      "archivo": "s3.wav",
+      "inicio": 26.335,
+      "duracion": 10.242,
+      "subtitulos": [
+        {
+          "texto": "And when you're ready, the same system runs the shop: digital work orders,",
+          "inicio": 26.335,
+          "fin": 30.666
+        },
+        {
+          "texto": "inspection photos sent to the customer, oil-change reminders and parts inventory.",
+          "inicio": 30.666,
+          "fin": 36.127
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Websites start at four hundred fifty dollars. Comment DEMO to see it with your shop's name.",
+      "archivo": "s4.wav",
+      "inicio": 36.577,
+      "duracion": 5.634,
+      "subtitulos": [
+        {
+          "texto": "Websites start at four hundred fifty dollars.",
+          "inicio": 36.577,
+          "fin": 39.222
+        },
+        {
+          "texto": "Comment DEMO to see it with your shop's name.",
+          "inicio": 39.222,
+          "fin": 41.761
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Your shop is full and your phone still rings all day.",
+      "startMs": 0,
+      "endMs": 3072,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Affordable auto shop website design:",
+      "startMs": 3522,
+      "endMs": 5911,
+      "timestampMs": 3522,
+      "confidence": 1
+    },
+    {
+      "text": "what four hundred fifty dollars actually gets you.",
+      "startMs": 5911,
+      "endMs": 8770,
+      "timestampMs": 5911,
+      "confidence": 1
+    },
+    {
+      "text": "Customers don't trust mechanics they can't see online.",
+      "startMs": 9220,
+      "endMs": 12249,
+      "timestampMs": 9220,
+      "confidence": 1
+    },
+    {
+      "text": "Affordable auto shop website design doesn't mean cheap-looking.",
+      "startMs": 12699,
+      "endMs": 16603,
+      "timestampMs": 12699,
+      "confidence": 1
+    },
+    {
+      "text": "It means one page that answers prices and books the slot.",
+      "startMs": 16603,
+      "endMs": 20059,
+      "timestampMs": 16603,
+      "confidence": 1
+    },
+    {
+      "text": "Upfront prices, online booking, reviews. Fewer calls asking how much for brakes?",
+      "startMs": 20509,
+      "endMs": 25885,
+      "timestampMs": 20509,
+      "confidence": 1
+    },
+    {
+      "text": "And when you're ready, the same system runs the shop: digital work orders,",
+      "startMs": 26335,
+      "endMs": 30666,
+      "timestampMs": 26335,
+      "confidence": 1
+    },
+    {
+      "text": "inspection photos sent to the customer, oil-change reminders and parts inventory.",
+      "startMs": 30666,
+      "endMs": 36127,
+      "timestampMs": 30666,
+      "confidence": 1
+    },
+    {
+      "text": "Websites start at four hundred fifty dollars.",
+      "startMs": 36577,
+      "endMs": 39222,
+      "timestampMs": 36577,
+      "confidence": 1
+    },
+    {
+      "text": "Comment DEMO to see it with your shop's name.",
+      "startMs": 39222,
+      "endMs": 41761,
+      "timestampMs": 39222,
+      "confidence": 1
+    }
+  ]
+}
