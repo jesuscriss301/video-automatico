@@ -1,0 +1,138 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 33.3,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día cuatro tratando de que una clínica estética no pierda citas: hoy se lo muestro a diez clínicas de Medellín.",
+      "archivo": "gancho.wav",
+      "inicio": 0.0,
+      "duracion": 9.1,
+      "subtitulos": [
+        {
+          "texto": "Día cuatro tratando de que una clínica estética no pierda citas:",
+          "inicio": 0.0,
+          "fin": 5.8
+        },
+        {
+          "texto": "hoy se lo muestro a diez clínicas de Medellín.",
+          "inicio": 5.8,
+          "fin": 8.8
+        }
+      ]
+    },
+    {
+      "id": "ayer",
+      "texto": "Ya tengo la demo lista.",
+      "archivo": "ayer.wav",
+      "inicio": 9.1,
+      "duracion": 4.62,
+      "subtitulos": [
+        {
+          "texto": "Ya tengo la demo lista.",
+          "inicio": 9.1,
+          "fin": 13.42
+        }
+      ]
+    },
+    {
+      "id": "hoy",
+      "texto": "A cada una le mando un mensaje corto, con la demo puesta con el nombre de su clínica. Este es el mensaje.",
+      "archivo": "hoy.wav",
+      "inicio": 13.72,
+      "duracion": 9.06,
+      "subtitulos": [
+        {
+          "texto": "A cada una le mando un mensaje corto,",
+          "inicio": 13.72,
+          "fin": 17.2
+        },
+        {
+          "texto": "con la demo puesta con el nombre de su clínica. Este es el mensaje.",
+          "inicio": 17.2,
+          "fin": 22.48
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "texto": "La meta de hoy: que al menos una quiera verlo en una llamada.",
+      "archivo": "meta.wav",
+      "inicio": 22.78,
+      "duracion": 5.22,
+      "subtitulos": [
+        {
+          "texto": "La meta de hoy: que al menos una quiera verlo en una llamada.",
+          "inicio": 22.78,
+          "fin": 27.7
+        }
+      ]
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana les cuento qué respondieron, y también quién me dejó en visto.",
+      "archivo": "manana.wav",
+      "inicio": 28.0,
+      "duracion": 5.3,
+      "subtitulos": [
+        {
+          "texto": "Mañana les cuento qué respondieron, y también quién me dejó en visto.",
+          "inicio": 28.0,
+          "fin": 33.0
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Día cuatro tratando de que una clínica estética no pierda citas:",
+      "startMs": 0,
+      "endMs": 5800,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "hoy se lo muestro a diez clínicas de Medellín.",
+      "startMs": 5800,
+      "endMs": 8800,
+      "timestampMs": 5800,
+      "confidence": 1
+    },
+    {
+      "text": "Ya tengo la demo lista.",
+      "startMs": 9100,
+      "endMs": 13420,
+      "timestampMs": 9100,
+      "confidence": 1
+    },
+    {
+      "text": "A cada una le mando un mensaje corto,",
+      "startMs": 13720,
+      "endMs": 17200,
+      "timestampMs": 13720,
+      "confidence": 1
+    },
+    {
+      "text": "con la demo puesta con el nombre de su clínica. Este es el mensaje.",
+      "startMs": 17200,
+      "endMs": 22480,
+      "timestampMs": 17200,
+      "confidence": 1
+    },
+    {
+      "text": "La meta de hoy: que al menos una quiera verlo en una llamada.",
+      "startMs": 22780,
+      "endMs": 27700,
+      "timestampMs": 22780,
+      "confidence": 1
+    },
+    {
+      "text": "Mañana les cuento qué respondieron, y también quién me dejó en visto.",
+      "startMs": 28000,
+      "endMs": 33000,
+      "timestampMs": 28000,
+      "confidence": 1
+    }
+  ]
+}

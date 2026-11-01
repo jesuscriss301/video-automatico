@@ -1,0 +1,150 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 36.26,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día dos tratando de que una clínica estética no pierda citas: hoy toca que agenden sin escribir.",
+      "archivo": "gancho.wav",
+      "inicio": 0.0,
+      "duracion": 8.66,
+      "subtitulos": [
+        {
+          "texto": "Día dos tratando de que una clínica estética no pierda citas:",
+          "inicio": 0.0,
+          "fin": 5.72
+        },
+        {
+          "texto": "hoy toca que agenden sin escribir.",
+          "inicio": 5.72,
+          "fin": 8.36
+        }
+      ]
+    },
+    {
+      "id": "ayer",
+      "texto": "Ayer conté el problema: citas perdidas.",
+      "archivo": "ayer.wav",
+      "inicio": 8.66,
+      "duracion": 4.02,
+      "subtitulos": [
+        {
+          "texto": "Ayer conté el problema: citas perdidas.",
+          "inicio": 8.66,
+          "fin": 12.38
+        }
+      ]
+    },
+    {
+      "id": "hoy",
+      "texto": "Cada tratamiento tiene su página: qué es, cuánto dura, cuánto cuesta y el botón de reservar. La clienta elige la hora y listo, sin esperar respuesta por WhatsApp.",
+      "archivo": "hoy.wav",
+      "inicio": 12.68,
+      "duracion": 14.18,
+      "subtitulos": [
+        {
+          "texto": "Cada tratamiento tiene su página: qué es, cuánto dura,",
+          "inicio": 12.68,
+          "fin": 17.76
+        },
+        {
+          "texto": "cuánto cuesta y el botón de reservar.",
+          "inicio": 17.76,
+          "fin": 21.08
+        },
+        {
+          "texto": "La clienta elige la hora y listo, sin esperar respuesta por WhatsApp.",
+          "inicio": 21.08,
+          "fin": 26.56
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "texto": "La meta: que ninguna clienta tenga que esperar una respuesta para agendar.",
+      "archivo": "meta.wav",
+      "inicio": 26.86,
+      "duracion": 5.14,
+      "subtitulos": [
+        {
+          "texto": "La meta: que ninguna clienta tenga que esperar una respuesta para agendar.",
+          "inicio": 26.86,
+          "fin": 31.7
+        }
+      ]
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana: los recordatorios automáticos.",
+      "archivo": "manana.wav",
+      "inicio": 32.0,
+      "duracion": 4.26,
+      "subtitulos": [
+        {
+          "texto": "Mañana: los recordatorios automáticos.",
+          "inicio": 32.0,
+          "fin": 35.96
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Día dos tratando de que una clínica estética no pierda citas:",
+      "startMs": 0,
+      "endMs": 5720,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "hoy toca que agenden sin escribir.",
+      "startMs": 5720,
+      "endMs": 8360,
+      "timestampMs": 5720,
+      "confidence": 1
+    },
+    {
+      "text": "Ayer conté el problema: citas perdidas.",
+      "startMs": 8660,
+      "endMs": 12380,
+      "timestampMs": 8660,
+      "confidence": 1
+    },
+    {
+      "text": "Cada tratamiento tiene su página: qué es, cuánto dura,",
+      "startMs": 12680,
+      "endMs": 17760,
+      "timestampMs": 12680,
+      "confidence": 1
+    },
+    {
+      "text": "cuánto cuesta y el botón de reservar.",
+      "startMs": 17760,
+      "endMs": 21080,
+      "timestampMs": 17760,
+      "confidence": 1
+    },
+    {
+      "text": "La clienta elige la hora y listo, sin esperar respuesta por WhatsApp.",
+      "startMs": 21080,
+      "endMs": 26560,
+      "timestampMs": 21080,
+      "confidence": 1
+    },
+    {
+      "text": "La meta: que ninguna clienta tenga que esperar una respuesta para agendar.",
+      "startMs": 26860,
+      "endMs": 31700,
+      "timestampMs": 26860,
+      "confidence": 1
+    },
+    {
+      "text": "Mañana: los recordatorios automáticos.",
+      "startMs": 32000,
+      "endMs": 35960,
+      "timestampMs": 32000,
+      "confidence": 1
+    }
+  ]
+}

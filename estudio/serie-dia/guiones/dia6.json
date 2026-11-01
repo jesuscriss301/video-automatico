@@ -1,0 +1,26 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 300,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día seis tratando de que una clínica estética no pierda citas: hoy, la primera demo en llamada."
+    },
+    {
+      "id": "ayer",
+      "texto": "Ayer: cómo responder los no."
+    },
+    {
+      "id": "hoy",
+      "texto": "En la llamada muestro tres cosas con el nombre de su clínica: cómo agenda una clienta, el recordatorio que le llega y la ficha con su historial."
+    },
+    {
+      "id": "meta",
+      "texto": "Y escucho más de lo que hablo: qué usan hoy y cuánto les cuesta una cita perdida."
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana, el resumen de la semana."
+    }
+  ]
+}

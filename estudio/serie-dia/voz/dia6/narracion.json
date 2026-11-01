@@ -1,0 +1,138 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 33.3,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día seis tratando de que una clínica estética no pierda citas: hoy, la primera demo en llamada.",
+      "archivo": "gancho.wav",
+      "inicio": 0.0,
+      "duracion": 9.86,
+      "subtitulos": [
+        {
+          "texto": "Día seis tratando de que una clínica estética no pierda citas: hoy,",
+          "inicio": 0.0,
+          "fin": 6.2
+        },
+        {
+          "texto": "la primera demo en llamada.",
+          "inicio": 6.2,
+          "fin": 9.56
+        }
+      ]
+    },
+    {
+      "id": "ayer",
+      "texto": "Ayer: cómo responder los no.",
+      "archivo": "ayer.wav",
+      "inicio": 9.86,
+      "duracion": 2.74,
+      "subtitulos": [
+        {
+          "texto": "Ayer: cómo responder los no.",
+          "inicio": 9.86,
+          "fin": 12.3
+        }
+      ]
+    },
+    {
+      "id": "hoy",
+      "texto": "En la llamada muestro tres cosas con el nombre de su clínica: cómo agenda una clienta, el recordatorio que le llega y la ficha con su historial.",
+      "archivo": "hoy.wav",
+      "inicio": 12.6,
+      "duracion": 11.14,
+      "subtitulos": [
+        {
+          "texto": "En la llamada muestro tres cosas con el nombre de su clínica:",
+          "inicio": 12.6,
+          "fin": 17.64
+        },
+        {
+          "texto": "cómo agenda una clienta, el recordatorio que le llega y la ficha con su historial.",
+          "inicio": 17.64,
+          "fin": 23.44
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "texto": "Y escucho más de lo que hablo: qué usan hoy y cuánto les cuesta una cita perdida.",
+      "archivo": "meta.wav",
+      "inicio": 23.74,
+      "duracion": 6.18,
+      "subtitulos": [
+        {
+          "texto": "Y escucho más de lo que hablo: qué usan hoy y cuánto les cuesta una cita perdida.",
+          "inicio": 23.74,
+          "fin": 29.62
+        }
+      ]
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana, el resumen de la semana.",
+      "archivo": "manana.wav",
+      "inicio": 29.92,
+      "duracion": 3.38,
+      "subtitulos": [
+        {
+          "texto": "Mañana, el resumen de la semana.",
+          "inicio": 29.92,
+          "fin": 33.0
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Día seis tratando de que una clínica estética no pierda citas: hoy,",
+      "startMs": 0,
+      "endMs": 6200,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "la primera demo en llamada.",
+      "startMs": 6200,
+      "endMs": 9560,
+      "timestampMs": 6200,
+      "confidence": 1
+    },
+    {
+      "text": "Ayer: cómo responder los no.",
+      "startMs": 9860,
+      "endMs": 12300,
+      "timestampMs": 9860,
+      "confidence": 1
+    },
+    {
+      "text": "En la llamada muestro tres cosas con el nombre de su clínica:",
+      "startMs": 12600,
+      "endMs": 17640,
+      "timestampMs": 12600,
+      "confidence": 1
+    },
+    {
+      "text": "cómo agenda una clienta, el recordatorio que le llega y la ficha con su historial.",
+      "startMs": 17640,
+      "endMs": 23440,
+      "timestampMs": 17640,
+      "confidence": 1
+    },
+    {
+      "text": "Y escucho más de lo que hablo: qué usan hoy y cuánto les cuesta una cita perdida.",
+      "startMs": 23740,
+      "endMs": 29620,
+      "timestampMs": 23740,
+      "confidence": 1
+    },
+    {
+      "text": "Mañana, el resumen de la semana.",
+      "startMs": 29920,
+      "endMs": 33000,
+      "timestampMs": 29920,
+      "confidence": 1
+    }
+  ]
+}

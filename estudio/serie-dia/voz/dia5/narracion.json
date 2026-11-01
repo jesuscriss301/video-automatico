@@ -1,0 +1,150 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 33.82,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día cinco tratando de que una clínica estética no pierda citas: hoy toca responder los no.",
+      "archivo": "gancho.wav",
+      "inicio": 0.0,
+      "duracion": 8.98,
+      "subtitulos": [
+        {
+          "texto": "Día cinco tratando de que una clínica estética no pierda citas:",
+          "inicio": 0.0,
+          "fin": 6.04
+        },
+        {
+          "texto": "hoy toca responder los no.",
+          "inicio": 6.04,
+          "fin": 8.68
+        }
+      ]
+    },
+    {
+      "id": "ayer",
+      "texto": "Ayer: el mensaje a las clínicas.",
+      "archivo": "ayer.wav",
+      "inicio": 8.98,
+      "duracion": 3.62,
+      "subtitulos": [
+        {
+          "texto": "Ayer: el mensaje a las clínicas.",
+          "inicio": 8.98,
+          "fin": 12.3
+        }
+      ]
+    },
+    {
+      "id": "hoy",
+      "texto": "Una objeción típica es: ya tenemos a alguien que contesta. Y es justo lo que el sistema resuelve: esa persona no puede contestar a las diez de la noche.",
+      "archivo": "hoy.wav",
+      "inicio": 12.6,
+      "duracion": 12.94,
+      "subtitulos": [
+        {
+          "texto": "Una objeción típica es: ya tenemos a alguien que contesta.",
+          "inicio": 12.6,
+          "fin": 17.88
+        },
+        {
+          "texto": "Y es justo lo que el sistema resuelve:",
+          "inicio": 17.88,
+          "fin": 21.36
+        },
+        {
+          "texto": "esa persona no puede contestar a las diez de la noche.",
+          "inicio": 21.36,
+          "fin": 25.24
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "texto": "La meta: agendar las primeras demos en llamada.",
+      "archivo": "meta.wav",
+      "inicio": 25.54,
+      "duracion": 3.54,
+      "subtitulos": [
+        {
+          "texto": "La meta: agendar las primeras demos en llamada.",
+          "inicio": 25.54,
+          "fin": 28.78
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "texto": "Si tienes una clínica y quieres verlo con la tuya, comenta DEMO.",
+      "archivo": "cta.wav",
+      "inicio": 29.08,
+      "duracion": 4.74,
+      "subtitulos": [
+        {
+          "texto": "Si tienes una clínica y quieres verlo con la tuya, comenta DEMO.",
+          "inicio": 29.08,
+          "fin": 33.52
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Día cinco tratando de que una clínica estética no pierda citas:",
+      "startMs": 0,
+      "endMs": 6040,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "hoy toca responder los no.",
+      "startMs": 6040,
+      "endMs": 8680,
+      "timestampMs": 6040,
+      "confidence": 1
+    },
+    {
+      "text": "Ayer: el mensaje a las clínicas.",
+      "startMs": 8980,
+      "endMs": 12300,
+      "timestampMs": 8980,
+      "confidence": 1
+    },
+    {
+      "text": "Una objeción típica es: ya tenemos a alguien que contesta.",
+      "startMs": 12600,
+      "endMs": 17880,
+      "timestampMs": 12600,
+      "confidence": 1
+    },
+    {
+      "text": "Y es justo lo que el sistema resuelve:",
+      "startMs": 17880,
+      "endMs": 21360,
+      "timestampMs": 17880,
+      "confidence": 1
+    },
+    {
+      "text": "esa persona no puede contestar a las diez de la noche.",
+      "startMs": 21360,
+      "endMs": 25240,
+      "timestampMs": 21360,
+      "confidence": 1
+    },
+    {
+      "text": "La meta: agendar las primeras demos en llamada.",
+      "startMs": 25540,
+      "endMs": 28780,
+      "timestampMs": 25540,
+      "confidence": 1
+    },
+    {
+      "text": "Si tienes una clínica y quieres verlo con la tuya, comenta DEMO.",
+      "startMs": 29080,
+      "endMs": 33520,
+      "timestampMs": 29080,
+      "confidence": 1
+    }
+  ]
+}
