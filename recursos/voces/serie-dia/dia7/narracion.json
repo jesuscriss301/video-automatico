@@ -1,0 +1,117 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 31.04,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día siete tratando de que una clínica estética no pierda citas: el resumen de la semana.",
+      "archivo": "gancho.wav",
+      "inicio": 0.0,
+      "duracion": 7.7,
+      "subtitulos": [
+        {
+          "texto": "Día siete tratando de que una clínica estética no pierda citas:",
+          "inicio": 0.0,
+          "fin": 5.28
+        },
+        {
+          "texto": "el resumen de la semana.",
+          "inicio": 5.28,
+          "fin": 7.4
+        }
+      ]
+    },
+    {
+      "id": "hoy",
+      "texto": "En siete días: una web que agenda sola, recordatorios por WhatsApp, un registro de cada clienta, y el sistema presentado a clínicas reales.",
+      "archivo": "hoy.wav",
+      "inicio": 7.7,
+      "duracion": 12.1,
+      "subtitulos": [
+        {
+          "texto": "En siete días: una web que agenda sola, recordatorios por WhatsApp,",
+          "inicio": 7.7,
+          "fin": 13.42
+        },
+        {
+          "texto": "un registro de cada clienta, y el sistema presentado a clínicas reales.",
+          "inicio": 13.42,
+          "fin": 19.5
+        }
+      ]
+    },
+    {
+      "id": "vota",
+      "texto": "La próxima semana: ¿taller mecánico, odontología o bodegas? Vota en los comentarios.",
+      "archivo": "vota.wav",
+      "inicio": 19.8,
+      "duracion": 7.38,
+      "subtitulos": [
+        {
+          "texto": "La próxima semana: ¿taller mecánico, odontología o bodegas? Vota en los comentarios.",
+          "inicio": 19.8,
+          "fin": 26.88
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "texto": "Y si tienes una clínica, comenta DEMO.",
+      "archivo": "cta.wav",
+      "inicio": 27.18,
+      "duracion": 3.86,
+      "subtitulos": [
+        {
+          "texto": "Y si tienes una clínica, comenta DEMO.",
+          "inicio": 27.18,
+          "fin": 30.74
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Día siete tratando de que una clínica estética no pierda citas:",
+      "startMs": 0,
+      "endMs": 5280,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "el resumen de la semana.",
+      "startMs": 5280,
+      "endMs": 7400,
+      "timestampMs": 5280,
+      "confidence": 1
+    },
+    {
+      "text": "En siete días: una web que agenda sola, recordatorios por WhatsApp,",
+      "startMs": 7700,
+      "endMs": 13420,
+      "timestampMs": 7700,
+      "confidence": 1
+    },
+    {
+      "text": "un registro de cada clienta, y el sistema presentado a clínicas reales.",
+      "startMs": 13420,
+      "endMs": 19500,
+      "timestampMs": 13420,
+      "confidence": 1
+    },
+    {
+      "text": "La próxima semana: ¿taller mecánico, odontología o bodegas? Vota en los comentarios.",
+      "startMs": 19800,
+      "endMs": 26880,
+      "timestampMs": 19800,
+      "confidence": 1
+    },
+    {
+      "text": "Y si tienes una clínica, comenta DEMO.",
+      "startMs": 27180,
+      "endMs": 30740,
+      "timestampMs": 27180,
+      "confidence": 1
+    }
+  ]
+}

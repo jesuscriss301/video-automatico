@@ -1,0 +1,26 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 300,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día tres tratando de que una clínica estética no pierda citas: hoy, que el sistema les escriba solo."
+    },
+    {
+      "id": "ayer",
+      "texto": "Ayer: la web que agenda sola."
+    },
+    {
+      "id": "hoy",
+      "texto": "Un día antes le llega este mensaje: confirma, cambia de hora o cancela con un botón. Si cancela, el espacio se libera para otra clienta."
+    },
+    {
+      "id": "meta",
+      "texto": "Y lo que más plata deja: cuando toca el retoque, el sistema le escribe solo."
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana se lo muestro a clínicas reales. Vamos a ver qué dicen."
+    }
+  ]
+}

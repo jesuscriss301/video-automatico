@@ -1,0 +1,216 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 41.081,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "One implant case can pay for your whole website.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 3.202,
+      "subtitulos": [
+        {
+          "texto": "One implant case can pay for your whole website.",
+          "inicio": 0.0,
+          "fin": 2.752
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Responsive prosthodontic websites: what patients check on their phone before calling.",
+      "archivo": "gancho_b.wav",
+      "inicio": 3.202,
+      "duracion": 5.143,
+      "subtitulos": [
+        {
+          "texto": "Responsive prosthodontic websites:",
+          "inicio": 3.202,
+          "fin": 5.463
+        },
+        {
+          "texto": "what patients check on their phone before calling.",
+          "inicio": 5.463,
+          "fin": 7.895
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Every missed dental appointment is money that never comes back. Unless your system recovers it.",
+      "archivo": "gancho_c.wav",
+      "inicio": 8.345,
+      "duracion": 5.911,
+      "subtitulos": [
+        {
+          "texto": "Every missed dental appointment is money that never comes back.",
+          "inicio": 8.345,
+          "fin": 11.908
+        },
+        {
+          "texto": "Unless your system recovers it.",
+          "inicio": 11.908,
+          "fin": 13.807
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Responsive prosthodontic websites have to work on a phone first, because that's where patients compare specialists.",
+      "archivo": "s1.wav",
+      "inicio": 14.257,
+      "duracion": 6.978,
+      "subtitulos": [
+        {
+          "texto": "Responsive prosthodontic websites have to work on a phone first,",
+          "inicio": 14.257,
+          "fin": 18.204
+        },
+        {
+          "texto": "because that's where patients compare specialists.",
+          "inicio": 18.204,
+          "fin": 20.785
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "A page for each high-value treatment: implants, dentures, crowns. What it is, how long, financing, and a booking button.",
+      "archivo": "s2.wav",
+      "inicio": 21.235,
+      "duracion": 8.002,
+      "subtitulos": [
+        {
+          "texto": "A page for each high-value treatment: implants, dentures, crowns.",
+          "inicio": 21.235,
+          "fin": 25.651
+        },
+        {
+          "texto": "What it is, how long, financing, and a booking button.",
+          "inicio": 25.651,
+          "fin": 28.787
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Behind it, a dental CRM: automatic reminders that cut no-shows, six-month recall messages, and a simple patient portal.",
+      "archivo": "s3.wav",
+      "inicio": 29.237,
+      "duracion": 8.727,
+      "subtitulos": [
+        {
+          "texto": "Behind it, a dental CRM: automatic reminders that cut no-shows,",
+          "inicio": 29.237,
+          "fin": 33.909
+        },
+        {
+          "texto": "six-month recall messages, and a simple patient portal.",
+          "inicio": 33.909,
+          "fin": 37.514
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Want to see your practice on this? Comment DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 37.964,
+      "duracion": 3.117,
+      "subtitulos": [
+        {
+          "texto": "Want to see your practice on this? Comment DEMO.",
+          "inicio": 37.964,
+          "fin": 40.631
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "One implant case can pay for your whole website.",
+      "startMs": 0,
+      "endMs": 2752,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Responsive prosthodontic websites:",
+      "startMs": 3202,
+      "endMs": 5463,
+      "timestampMs": 3202,
+      "confidence": 1
+    },
+    {
+      "text": "what patients check on their phone before calling.",
+      "startMs": 5463,
+      "endMs": 7895,
+      "timestampMs": 5463,
+      "confidence": 1
+    },
+    {
+      "text": "Every missed dental appointment is money that never comes back.",
+      "startMs": 8345,
+      "endMs": 11908,
+      "timestampMs": 8345,
+      "confidence": 1
+    },
+    {
+      "text": "Unless your system recovers it.",
+      "startMs": 11908,
+      "endMs": 13807,
+      "timestampMs": 11908,
+      "confidence": 1
+    },
+    {
+      "text": "Responsive prosthodontic websites have to work on a phone first,",
+      "startMs": 14257,
+      "endMs": 18204,
+      "timestampMs": 14257,
+      "confidence": 1
+    },
+    {
+      "text": "because that's where patients compare specialists.",
+      "startMs": 18204,
+      "endMs": 20785,
+      "timestampMs": 18204,
+      "confidence": 1
+    },
+    {
+      "text": "A page for each high-value treatment: implants, dentures, crowns.",
+      "startMs": 21235,
+      "endMs": 25651,
+      "timestampMs": 21235,
+      "confidence": 1
+    },
+    {
+      "text": "What it is, how long, financing, and a booking button.",
+      "startMs": 25651,
+      "endMs": 28787,
+      "timestampMs": 25651,
+      "confidence": 1
+    },
+    {
+      "text": "Behind it, a dental CRM: automatic reminders that cut no-shows,",
+      "startMs": 29237,
+      "endMs": 33909,
+      "timestampMs": 29237,
+      "confidence": 1
+    },
+    {
+      "text": "six-month recall messages, and a simple patient portal.",
+      "startMs": 33909,
+      "endMs": 37514,
+      "timestampMs": 33909,
+      "confidence": 1
+    },
+    {
+      "text": "Want to see your practice on this? Comment DEMO.",
+      "startMs": 37964,
+      "endMs": 40631,
+      "timestampMs": 37964,
+      "confidence": 1
+    }
+  ]
+}

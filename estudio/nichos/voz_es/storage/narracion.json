@@ -1,0 +1,204 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 53.9,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Cada bodega vacía te cuesta plata todos los días.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 4.34,
+      "subtitulos": [
+        {
+          "texto": "Cada bodega vacía te cuesta plata todos los días.",
+          "inicio": 0.0,
+          "fin": 4.04
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Diseño web económico para minibodegas, pero hecho para alquilar en línea.",
+      "archivo": "gancho_b.wav",
+      "inicio": 4.34,
+      "duracion": 7.18,
+      "subtitulos": [
+        {
+          "texto": "Diseño web económico para minibodegas, pero hecho para alquilar en línea.",
+          "inicio": 4.34,
+          "fin": 11.22
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Tus clientes no saben qué tamaño de bodega necesitan. Tu página web debería decírselo.",
+      "archivo": "gancho_c.wav",
+      "inicio": 11.52,
+      "duracion": 8.46,
+      "subtitulos": [
+        {
+          "texto": "Tus clientes no saben qué tamaño de bodega necesitan.",
+          "inicio": 11.52,
+          "fin": 16.04
+        },
+        {
+          "texto": "Tu página web debería decírselo.",
+          "inicio": 16.04,
+          "fin": 19.68
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Un diseño web económico para minibodegas funciona si hace una sola cosa: alquilar la bodega sin una llamada.",
+      "archivo": "s1.wav",
+      "inicio": 19.98,
+      "duracion": 9.14,
+      "subtitulos": [
+        {
+          "texto": "Un diseño web económico para minibodegas funciona si hace una sola cosa:",
+          "inicio": 19.98,
+          "fin": 25.5
+        },
+        {
+          "texto": "alquilar la bodega sin una llamada.",
+          "inicio": 25.5,
+          "fin": 28.82
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Una calculadora de tamaño: ¿qué vas a guardar? Te recomienda la bodega, te muestra el precio y la puedes reservar.",
+      "archivo": "s2.wav",
+      "inicio": 29.12,
+      "duracion": 8.18,
+      "subtitulos": [
+        {
+          "texto": "Una calculadora de tamaño: ¿qué vas a guardar?",
+          "inicio": 29.12,
+          "fin": 32.32
+        },
+        {
+          "texto": "Te recomienda la bodega, te muestra el precio y la puedes reservar.",
+          "inicio": 32.32,
+          "fin": 37.0
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Detrás, un sistema de gestión: disponibilidad en tiempo real, cobro mensual automático y alertas de pago atrasado. Ves la ocupación de un vistazo.",
+      "archivo": "s3.wav",
+      "inicio": 37.3,
+      "duracion": 12.14,
+      "subtitulos": [
+        {
+          "texto": "Detrás, un sistema de gestión: disponibilidad en tiempo real,",
+          "inicio": 37.3,
+          "fin": 42.5
+        },
+        {
+          "texto": "cobro mensual automático y alertas de pago atrasado. Ves la ocupación de un vistazo.",
+          "inicio": 42.5,
+          "fin": 49.14
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Instalación baja y plan mensual. Comenta DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 49.44,
+      "duracion": 4.46,
+      "subtitulos": [
+        {
+          "texto": "Instalación baja y plan mensual. Comenta DEMO.",
+          "inicio": 49.44,
+          "fin": 53.6
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Cada bodega vacía te cuesta plata todos los días.",
+      "startMs": 0,
+      "endMs": 4040,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Diseño web económico para minibodegas, pero hecho para alquilar en línea.",
+      "startMs": 4340,
+      "endMs": 11220,
+      "timestampMs": 4340,
+      "confidence": 1
+    },
+    {
+      "text": "Tus clientes no saben qué tamaño de bodega necesitan.",
+      "startMs": 11520,
+      "endMs": 16040,
+      "timestampMs": 11520,
+      "confidence": 1
+    },
+    {
+      "text": "Tu página web debería decírselo.",
+      "startMs": 16040,
+      "endMs": 19680,
+      "timestampMs": 16040,
+      "confidence": 1
+    },
+    {
+      "text": "Un diseño web económico para minibodegas funciona si hace una sola cosa:",
+      "startMs": 19980,
+      "endMs": 25500,
+      "timestampMs": 19980,
+      "confidence": 1
+    },
+    {
+      "text": "alquilar la bodega sin una llamada.",
+      "startMs": 25500,
+      "endMs": 28820,
+      "timestampMs": 25500,
+      "confidence": 1
+    },
+    {
+      "text": "Una calculadora de tamaño: ¿qué vas a guardar?",
+      "startMs": 29120,
+      "endMs": 32320,
+      "timestampMs": 29120,
+      "confidence": 1
+    },
+    {
+      "text": "Te recomienda la bodega, te muestra el precio y la puedes reservar.",
+      "startMs": 32320,
+      "endMs": 37000,
+      "timestampMs": 32320,
+      "confidence": 1
+    },
+    {
+      "text": "Detrás, un sistema de gestión: disponibilidad en tiempo real,",
+      "startMs": 37300,
+      "endMs": 42500,
+      "timestampMs": 37300,
+      "confidence": 1
+    },
+    {
+      "text": "cobro mensual automático y alertas de pago atrasado. Ves la ocupación de un vistazo.",
+      "startMs": 42500,
+      "endMs": 49140,
+      "timestampMs": 42500,
+      "confidence": 1
+    },
+    {
+      "text": "Instalación baja y plan mensual. Comenta DEMO.",
+      "startMs": 49440,
+      "endMs": 53600,
+      "timestampMs": 49440,
+      "confidence": 1
+    }
+  ]
+}

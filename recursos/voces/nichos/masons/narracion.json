@@ -1,0 +1,180 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 39.481,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Masonry contractors: your website is down and you don't even know it.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 4.567,
+      "subtitulos": [
+        {
+          "texto": "Masonry contractors: your website is down and you don't even know it.",
+          "inicio": 0.0,
+          "fin": 4.117
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "What a masonry contractor website and hosting should include, in 40 seconds.",
+      "archivo": "gancho_b.wav",
+      "inicio": 4.567,
+      "duracion": 5.101,
+      "subtitulos": [
+        {
+          "texto": "What a masonry contractor website and hosting should include, in 40 seconds.",
+          "inicio": 4.567,
+          "fin": 9.218
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Stop sending estimates by text. Let the website do the first one.",
+      "archivo": "gancho_c.wav",
+      "inicio": 9.668,
+      "duracion": 4.525,
+      "subtitulos": [
+        {
+          "texto": "Stop sending estimates by text. Let the website do the first one.",
+          "inicio": 9.668,
+          "fin": 13.743
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "A masonry contractor website needs three things: fast hosting, photos of your work, and a way to get real estimates.",
+      "archivo": "s1.wav",
+      "inicio": 14.193,
+      "duracion": 7.661,
+      "subtitulos": [
+        {
+          "texto": "A masonry contractor website needs three things: fast hosting, photos of your work,",
+          "inicio": 14.193,
+          "fin": 19.548
+        },
+        {
+          "texto": "and a way to get real estimates.",
+          "inicio": 19.548,
+          "fin": 21.404
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Hosting, backups and updates included, so it never goes down and you never touch it.",
+      "archivo": "s2.wav",
+      "inicio": 21.853,
+      "duracion": 5.549,
+      "subtitulos": [
+        {
+          "texto": "Hosting, backups and updates included, so it never goes down and you never touch it.",
+          "inicio": 21.853,
+          "fin": 26.952
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Then the part that saves you hours: customers upload photos and measurements, get a price per square foot, and the job lands in your pipeline.",
+      "archivo": "s3.wav",
+      "inicio": 27.402,
+      "duracion": 8.621,
+      "subtitulos": [
+        {
+          "texto": "Then the part that saves you hours: customers upload photos and measurements,",
+          "inicio": 27.402,
+          "fin": 31.946
+        },
+        {
+          "texto": "get a price per square foot, and the job lands in your pipeline.",
+          "inicio": 31.946,
+          "fin": 35.573
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Want this for your masonry business? Comment DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 36.023,
+      "duracion": 3.458,
+      "subtitulos": [
+        {
+          "texto": "Want this for your masonry business? Comment DEMO.",
+          "inicio": 36.023,
+          "fin": 39.031
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Masonry contractors: your website is down and you don't even know it.",
+      "startMs": 0,
+      "endMs": 4117,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "What a masonry contractor website and hosting should include, in 40 seconds.",
+      "startMs": 4567,
+      "endMs": 9218,
+      "timestampMs": 4567,
+      "confidence": 1
+    },
+    {
+      "text": "Stop sending estimates by text. Let the website do the first one.",
+      "startMs": 9668,
+      "endMs": 13743,
+      "timestampMs": 9668,
+      "confidence": 1
+    },
+    {
+      "text": "A masonry contractor website needs three things: fast hosting, photos of your work,",
+      "startMs": 14193,
+      "endMs": 19548,
+      "timestampMs": 14193,
+      "confidence": 1
+    },
+    {
+      "text": "and a way to get real estimates.",
+      "startMs": 19548,
+      "endMs": 21404,
+      "timestampMs": 19548,
+      "confidence": 1
+    },
+    {
+      "text": "Hosting, backups and updates included, so it never goes down and you never touch it.",
+      "startMs": 21853,
+      "endMs": 26952,
+      "timestampMs": 21853,
+      "confidence": 1
+    },
+    {
+      "text": "Then the part that saves you hours: customers upload photos and measurements,",
+      "startMs": 27402,
+      "endMs": 31946,
+      "timestampMs": 27402,
+      "confidence": 1
+    },
+    {
+      "text": "get a price per square foot, and the job lands in your pipeline.",
+      "startMs": 31946,
+      "endMs": 35573,
+      "timestampMs": 31946,
+      "confidence": 1
+    },
+    {
+      "text": "Want this for your masonry business? Comment DEMO.",
+      "startMs": 36023,
+      "endMs": 39031,
+      "timestampMs": 36023,
+      "confidence": 1
+    }
+  ]
+}

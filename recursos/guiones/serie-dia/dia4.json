@@ -1,0 +1,26 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 300,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día cuatro tratando de que una clínica estética no pierda citas: hoy se lo muestro a diez clínicas de Medellín."
+    },
+    {
+      "id": "ayer",
+      "texto": "Ya tengo la demo lista."
+    },
+    {
+      "id": "hoy",
+      "texto": "A cada una le mando un mensaje corto, con la demo puesta con el nombre de su clínica. Este es el mensaje."
+    },
+    {
+      "id": "meta",
+      "texto": "La meta de hoy: que al menos una quiera verlo en una llamada."
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana les cuento qué respondieron, y también quién me dejó en visto."
+    }
+  ]
+}

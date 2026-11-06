@@ -1,0 +1,216 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 58.34,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Día uno tratando de que una clínica estética no pierda ni una cita más, solo con software.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 8.94,
+      "subtitulos": [
+        {
+          "texto": "Día uno tratando de que una clínica estética no pierda ni una cita más,",
+          "inicio": 0.0,
+          "fin": 7.0
+        },
+        {
+          "texto": "solo con software.",
+          "inicio": 7.0,
+          "fin": 8.64
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Día uno tratando de llenarle la agenda a una clínica estética sin pagar anuncios.",
+      "archivo": "gancho_b.wav",
+      "inicio": 8.94,
+      "duracion": 7.42,
+      "subtitulos": [
+        {
+          "texto": "Día uno tratando de llenarle la agenda a una clínica estética sin pagar anuncios.",
+          "inicio": 8.94,
+          "fin": 16.06
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Día uno: le voy a demostrar a una clínica de Medellín cuánta plata pierde por citas perdidas.",
+      "archivo": "gancho_c.wav",
+      "inicio": 16.36,
+      "duracion": 7.58,
+      "subtitulos": [
+        {
+          "texto": "Día uno:",
+          "inicio": 16.36,
+          "fin": 17.72
+        },
+        {
+          "texto": "le voy a demostrar a una clínica de Medellín cuánta plata pierde por citas perdidas.",
+          "inicio": 17.72,
+          "fin": 23.64
+        }
+      ]
+    },
+    {
+      "id": "problema",
+      "texto": "Las clínicas estéticas pierden clientas por tres cosas: no contestan a tiempo, nadie recuerda la cita y nadie las llama cuando toca el retoque.",
+      "archivo": "problema.wav",
+      "inicio": 23.94,
+      "duracion": 11.14,
+      "subtitulos": [
+        {
+          "texto": "Las clínicas estéticas pierden clientas por tres cosas: no contestan a tiempo,",
+          "inicio": 23.94,
+          "fin": 29.42
+        },
+        {
+          "texto": "nadie recuerda la cita y nadie las llama cuando toca el retoque.",
+          "inicio": 29.42,
+          "fin": 34.78
+        }
+      ]
+    },
+    {
+      "id": "hoy",
+      "texto": "Esta semana voy a armar el sistema completo: web que agenda sola, recordatorios por WhatsApp y un registro de cada clienta. Y se lo voy a mostrar a clínicas reales.",
+      "archivo": "hoy.wav",
+      "inicio": 35.08,
+      "duracion": 13.78,
+      "subtitulos": [
+        {
+          "texto": "Esta semana voy a armar el sistema completo: web que agenda sola,",
+          "inicio": 35.08,
+          "fin": 40.44
+        },
+        {
+          "texto": "recordatorios por WhatsApp y un registro de cada clienta.",
+          "inicio": 40.44,
+          "fin": 45.28
+        },
+        {
+          "texto": "Y se lo voy a mostrar a clínicas reales.",
+          "inicio": 45.28,
+          "fin": 48.56
+        }
+      ]
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana empiezo por lo más difícil: que agenden sin escribirte.",
+      "archivo": "manana.wav",
+      "inicio": 48.86,
+      "duracion": 5.54,
+      "subtitulos": [
+        {
+          "texto": "Mañana empiezo por lo más difícil: que agenden sin escribirte.",
+          "inicio": 48.86,
+          "fin": 54.1
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "texto": "Sígueme para ver si lo logro.",
+      "archivo": "cta.wav",
+      "inicio": 54.4,
+      "duracion": 3.94,
+      "subtitulos": [
+        {
+          "texto": "Sígueme para ver si lo logro.",
+          "inicio": 54.4,
+          "fin": 58.04
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Día uno tratando de que una clínica estética no pierda ni una cita más,",
+      "startMs": 0,
+      "endMs": 7000,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "solo con software.",
+      "startMs": 7000,
+      "endMs": 8640,
+      "timestampMs": 7000,
+      "confidence": 1
+    },
+    {
+      "text": "Día uno tratando de llenarle la agenda a una clínica estética sin pagar anuncios.",
+      "startMs": 8940,
+      "endMs": 16059,
+      "timestampMs": 8940,
+      "confidence": 1
+    },
+    {
+      "text": "Día uno:",
+      "startMs": 16360,
+      "endMs": 17720,
+      "timestampMs": 16360,
+      "confidence": 1
+    },
+    {
+      "text": "le voy a demostrar a una clínica de Medellín cuánta plata pierde por citas perdidas.",
+      "startMs": 17720,
+      "endMs": 23640,
+      "timestampMs": 17720,
+      "confidence": 1
+    },
+    {
+      "text": "Las clínicas estéticas pierden clientas por tres cosas: no contestan a tiempo,",
+      "startMs": 23940,
+      "endMs": 29420,
+      "timestampMs": 23940,
+      "confidence": 1
+    },
+    {
+      "text": "nadie recuerda la cita y nadie las llama cuando toca el retoque.",
+      "startMs": 29420,
+      "endMs": 34780,
+      "timestampMs": 29420,
+      "confidence": 1
+    },
+    {
+      "text": "Esta semana voy a armar el sistema completo: web que agenda sola,",
+      "startMs": 35080,
+      "endMs": 40440,
+      "timestampMs": 35080,
+      "confidence": 1
+    },
+    {
+      "text": "recordatorios por WhatsApp y un registro de cada clienta.",
+      "startMs": 40440,
+      "endMs": 45280,
+      "timestampMs": 40440,
+      "confidence": 1
+    },
+    {
+      "text": "Y se lo voy a mostrar a clínicas reales.",
+      "startMs": 45280,
+      "endMs": 48560,
+      "timestampMs": 45280,
+      "confidence": 1
+    },
+    {
+      "text": "Mañana empiezo por lo más difícil: que agenden sin escribirte.",
+      "startMs": 48860,
+      "endMs": 54100,
+      "timestampMs": 48860,
+      "confidence": 1
+    },
+    {
+      "text": "Sígueme para ver si lo logro.",
+      "startMs": 54400,
+      "endMs": 58040,
+      "timestampMs": 54400,
+      "confidence": 1
+    }
+  ]
+}

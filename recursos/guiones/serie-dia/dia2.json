@@ -1,0 +1,26 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 300,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día dos tratando de que una clínica estética no pierda citas: hoy toca que agenden sin escribir."
+    },
+    {
+      "id": "ayer",
+      "texto": "Ayer conté el problema: citas perdidas."
+    },
+    {
+      "id": "hoy",
+      "texto": "Cada tratamiento tiene su página: qué es, cuánto dura, cuánto cuesta y el botón de reservar. La clienta elige la hora y listo, sin esperar respuesta por WhatsApp."
+    },
+    {
+      "id": "meta",
+      "texto": "La meta: que ninguna clienta tenga que esperar una respuesta para agendar."
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana: los recordatorios automáticos."
+    }
+  ]
+}

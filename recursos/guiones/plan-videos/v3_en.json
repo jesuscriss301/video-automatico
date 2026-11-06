@@ -1,0 +1,34 @@
+{
+  "voz": "Heart (Kokoro, inglés)",
+  "pausa_ms": 250,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "How many people left your waiting room today without being served?"
+    },
+    {
+      "id": "gancho_b",
+      "texto": "This clinic got rid of the line at its door with one screen and a QR code."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Still booking appointments in a notebook? This is for you."
+    },
+    {
+      "id": "problema",
+      "texto": "Long lines, people who don't know when it's their turn, and appointments nobody confirms. All of that costs you customers."
+    },
+    {
+      "id": "turnero",
+      "texto": "With Turnero, your customer takes a number, sees it on the screen in your place, and your team calls the next one with a single click, in real time."
+    },
+    {
+      "id": "reservas",
+      "texto": "And if you work by appointment, the booking system lets people book from your website, confirms on its own, and can ask for a deposit so nobody stands you up."
+    },
+    {
+      "id": "cierre",
+      "texto": "Try the free demo, or message us and we'll adapt it to your business."
+    }
+  ]
+}

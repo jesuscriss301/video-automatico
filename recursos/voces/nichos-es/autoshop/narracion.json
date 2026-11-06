@@ -1,0 +1,228 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 61.86,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Tu taller está lleno y el teléfono sigue sonando todo el día.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 5.22,
+      "subtitulos": [
+        {
+          "texto": "Tu taller está lleno y el teléfono sigue sonando todo el día.",
+          "inicio": 0.0,
+          "fin": 4.92
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Diseño web económico para talleres mecánicos: lo que de verdad incluye por cuatrocientos cincuenta dólares.",
+      "archivo": "gancho_b.wav",
+      "inicio": 5.22,
+      "duracion": 10.18,
+      "subtitulos": [
+        {
+          "texto": "Diseño web económico para talleres mecánicos:",
+          "inicio": 5.22,
+          "fin": 10.1
+        },
+        {
+          "texto": "lo que de verdad incluye por cuatrocientos cincuenta dólares.",
+          "inicio": 10.1,
+          "fin": 15.1
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "La gente no confía en un mecánico que no puede ver en internet.",
+      "archivo": "gancho_c.wav",
+      "inicio": 15.4,
+      "duracion": 4.54,
+      "subtitulos": [
+        {
+          "texto": "La gente no confía en un mecánico que no puede ver en internet.",
+          "inicio": 15.4,
+          "fin": 19.64
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Un diseño web económico para talleres no significa que se vea barato. Significa una página que responde los precios y aparta el turno.",
+      "archivo": "s1.wav",
+      "inicio": 19.94,
+      "duracion": 10.58,
+      "subtitulos": [
+        {
+          "texto": "Un diseño web económico para talleres no significa que se vea barato.",
+          "inicio": 19.94,
+          "fin": 24.86
+        },
+        {
+          "texto": "Significa una página que responde los precios y aparta el turno.",
+          "inicio": 24.86,
+          "fin": 30.22
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Precios claros, reservas en línea y reseñas. Menos llamadas preguntando cuánto cuestan los frenos.",
+      "archivo": "s2.wav",
+      "inicio": 30.52,
+      "duracion": 8.42,
+      "subtitulos": [
+        {
+          "texto": "Precios claros, reservas en línea y reseñas.",
+          "inicio": 30.52,
+          "fin": 34.84
+        },
+        {
+          "texto": "Menos llamadas preguntando cuánto cuestan los frenos.",
+          "inicio": 34.84,
+          "fin": 38.64
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Y cuando estés listo, el mismo sistema maneja el taller: órdenes de trabajo digitales, fotos de la revisión que le llegan al cliente, recordatorios de cambio de aceite e inventario de repuestos.",
+      "archivo": "s3.wav",
+      "inicio": 38.94,
+      "duracion": 14.82,
+      "subtitulos": [
+        {
+          "texto": "Y cuando estés listo, el mismo sistema maneja el taller:",
+          "inicio": 38.94,
+          "fin": 43.22
+        },
+        {
+          "texto": "órdenes de trabajo digitales, fotos de la revisión que le llegan al cliente,",
+          "inicio": 43.22,
+          "fin": 48.7
+        },
+        {
+          "texto": "recordatorios de cambio de aceite e inventario de repuestos.",
+          "inicio": 48.7,
+          "fin": 53.46
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Las páginas empiezan en cuatrocientos cincuenta dólares. Comenta DEMO para verla con el nombre de tu taller.",
+      "archivo": "s4.wav",
+      "inicio": 53.76,
+      "duracion": 8.1,
+      "subtitulos": [
+        {
+          "texto": "Las páginas empiezan en cuatrocientos cincuenta dólares.",
+          "inicio": 53.76,
+          "fin": 57.76
+        },
+        {
+          "texto": "Comenta DEMO para verla con el nombre de tu taller.",
+          "inicio": 57.76,
+          "fin": 61.56
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Tu taller está lleno y el teléfono sigue sonando todo el día.",
+      "startMs": 0,
+      "endMs": 4920,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Diseño web económico para talleres mecánicos:",
+      "startMs": 5220,
+      "endMs": 10100,
+      "timestampMs": 5220,
+      "confidence": 1
+    },
+    {
+      "text": "lo que de verdad incluye por cuatrocientos cincuenta dólares.",
+      "startMs": 10100,
+      "endMs": 15100,
+      "timestampMs": 10100,
+      "confidence": 1
+    },
+    {
+      "text": "La gente no confía en un mecánico que no puede ver en internet.",
+      "startMs": 15400,
+      "endMs": 19640,
+      "timestampMs": 15400,
+      "confidence": 1
+    },
+    {
+      "text": "Un diseño web económico para talleres no significa que se vea barato.",
+      "startMs": 19940,
+      "endMs": 24860,
+      "timestampMs": 19940,
+      "confidence": 1
+    },
+    {
+      "text": "Significa una página que responde los precios y aparta el turno.",
+      "startMs": 24860,
+      "endMs": 30220,
+      "timestampMs": 24860,
+      "confidence": 1
+    },
+    {
+      "text": "Precios claros, reservas en línea y reseñas.",
+      "startMs": 30520,
+      "endMs": 34840,
+      "timestampMs": 30520,
+      "confidence": 1
+    },
+    {
+      "text": "Menos llamadas preguntando cuánto cuestan los frenos.",
+      "startMs": 34840,
+      "endMs": 38640,
+      "timestampMs": 34840,
+      "confidence": 1
+    },
+    {
+      "text": "Y cuando estés listo, el mismo sistema maneja el taller:",
+      "startMs": 38940,
+      "endMs": 43220,
+      "timestampMs": 38940,
+      "confidence": 1
+    },
+    {
+      "text": "órdenes de trabajo digitales, fotos de la revisión que le llegan al cliente,",
+      "startMs": 43220,
+      "endMs": 48700,
+      "timestampMs": 43220,
+      "confidence": 1
+    },
+    {
+      "text": "recordatorios de cambio de aceite e inventario de repuestos.",
+      "startMs": 48700,
+      "endMs": 53460,
+      "timestampMs": 48700,
+      "confidence": 1
+    },
+    {
+      "text": "Las páginas empiezan en cuatrocientos cincuenta dólares.",
+      "startMs": 53760,
+      "endMs": 57760,
+      "timestampMs": 53760,
+      "confidence": 1
+    },
+    {
+      "text": "Comenta DEMO para verla con el nombre de tu taller.",
+      "startMs": 57760,
+      "endMs": 61560,
+      "timestampMs": 57760,
+      "confidence": 1
+    }
+  ]
+}

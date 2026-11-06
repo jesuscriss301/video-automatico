@@ -1,0 +1,34 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 300,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Los lavaderos que más ganan no venden lavadas. Venden membresías."
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Página web para lavaderos de carros: lo que de verdad deja plata."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "¿Semana de lluvia? Los miembros igual pagan."
+    },
+    {
+      "id": "s1",
+      "texto": "La página web de un lavadero tiene que hacer una cosa primero: vender la membresía mensual."
+    },
+    {
+      "id": "s2",
+      "texto": "Menú con precios, galería de antes y después, y un botón de inscripción que cobra cada mes."
+    },
+    {
+      "id": "s3",
+      "texto": "Detrás, una app de membresías: cobro automático, lectura de placa o código QR en la entrada y beneficios que hacen que los miembros se queden."
+    },
+    {
+      "id": "s4",
+      "texto": "¿Quieres esto para tu lavadero? Comenta DEMO."
+    }
+  ]
+}

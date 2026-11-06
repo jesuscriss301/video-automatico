@@ -1,0 +1,138 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 35.38,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día tres tratando de que una clínica estética no pierda citas: hoy, que el sistema les escriba solo.",
+      "archivo": "gancho.wav",
+      "inicio": 0.0,
+      "duracion": 9.1,
+      "subtitulos": [
+        {
+          "texto": "Día tres tratando de que una clínica estética no pierda citas: hoy,",
+          "inicio": 0.0,
+          "fin": 6.12
+        },
+        {
+          "texto": "que el sistema les escriba solo.",
+          "inicio": 6.12,
+          "fin": 8.8
+        }
+      ]
+    },
+    {
+      "id": "ayer",
+      "texto": "Ayer: la web que agenda sola.",
+      "archivo": "ayer.wav",
+      "inicio": 9.1,
+      "duracion": 3.18,
+      "subtitulos": [
+        {
+          "texto": "Ayer: la web que agenda sola.",
+          "inicio": 9.1,
+          "fin": 11.98
+        }
+      ]
+    },
+    {
+      "id": "hoy",
+      "texto": "Un día antes le llega este mensaje: confirma, cambia de hora o cancela con un botón. Si cancela, el espacio se libera para otra clienta.",
+      "archivo": "hoy.wav",
+      "inicio": 12.28,
+      "duracion": 11.78,
+      "subtitulos": [
+        {
+          "texto": "Un día antes le llega este mensaje: confirma, cambia de hora o cancela con un botón.",
+          "inicio": 12.28,
+          "fin": 17.92
+        },
+        {
+          "texto": "Si cancela, el espacio se libera para otra clienta.",
+          "inicio": 17.92,
+          "fin": 23.76
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "texto": "Y lo que más plata deja: cuando toca el retoque, el sistema le escribe solo.",
+      "archivo": "meta.wav",
+      "inicio": 24.06,
+      "duracion": 6.02,
+      "subtitulos": [
+        {
+          "texto": "Y lo que más plata deja: cuando toca el retoque, el sistema le escribe solo.",
+          "inicio": 24.06,
+          "fin": 29.78
+        }
+      ]
+    },
+    {
+      "id": "manana",
+      "texto": "Mañana se lo muestro a clínicas reales. Vamos a ver qué dicen.",
+      "archivo": "manana.wav",
+      "inicio": 30.08,
+      "duracion": 5.3,
+      "subtitulos": [
+        {
+          "texto": "Mañana se lo muestro a clínicas reales. Vamos a ver qué dicen.",
+          "inicio": 30.08,
+          "fin": 35.08
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Día tres tratando de que una clínica estética no pierda citas: hoy,",
+      "startMs": 0,
+      "endMs": 6120,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "que el sistema les escriba solo.",
+      "startMs": 6120,
+      "endMs": 8800,
+      "timestampMs": 6120,
+      "confidence": 1
+    },
+    {
+      "text": "Ayer: la web que agenda sola.",
+      "startMs": 9100,
+      "endMs": 11980,
+      "timestampMs": 9100,
+      "confidence": 1
+    },
+    {
+      "text": "Un día antes le llega este mensaje: confirma, cambia de hora o cancela con un botón.",
+      "startMs": 12280,
+      "endMs": 17920,
+      "timestampMs": 12280,
+      "confidence": 1
+    },
+    {
+      "text": "Si cancela, el espacio se libera para otra clienta.",
+      "startMs": 17920,
+      "endMs": 23760,
+      "timestampMs": 17920,
+      "confidence": 1
+    },
+    {
+      "text": "Y lo que más plata deja: cuando toca el retoque, el sistema le escribe solo.",
+      "startMs": 24060,
+      "endMs": 29780,
+      "timestampMs": 24060,
+      "confidence": 1
+    },
+    {
+      "text": "Mañana se lo muestro a clínicas reales. Vamos a ver qué dicen.",
+      "startMs": 30080,
+      "endMs": 35080,
+      "timestampMs": 30080,
+      "confidence": 1
+    }
+  ]
+}

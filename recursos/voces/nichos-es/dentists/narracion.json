@@ -1,0 +1,216 @@
+{
+  "voz": "Alex (Kokoro, español)",
+  "backend": "kokoro",
+  "duracion_total": 44.98,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Un solo caso de implantes puede pagar toda tu página web.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 3.756,
+      "subtitulos": [
+        {
+          "texto": "Un solo caso de implantes puede pagar toda tu página web.",
+          "inicio": 0.0,
+          "fin": 3.456
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Páginas web para clínicas dentales: lo que el paciente revisa en el celular antes de llamar.",
+      "archivo": "gancho_b.wav",
+      "inicio": 3.756,
+      "duracion": 5.804,
+      "subtitulos": [
+        {
+          "texto": "Páginas web para clínicas dentales:",
+          "inicio": 3.756,
+          "fin": 6.039
+        },
+        {
+          "texto": "lo que el paciente revisa en el celular antes de llamar.",
+          "inicio": 6.039,
+          "fin": 9.26
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Cada cita dental perdida es plata que no vuelve. A menos que tu sistema la recupere.",
+      "archivo": "gancho_c.wav",
+      "inicio": 9.56,
+      "duracion": 5.335,
+      "subtitulos": [
+        {
+          "texto": "Cada cita dental perdida es plata que no vuelve. A menos que tu sistema la recupere.",
+          "inicio": 9.56,
+          "fin": 14.595
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Una página web dental tiene que funcionar primero en el celular, porque ahí es donde los pacientes comparan especialistas.",
+      "archivo": "s1.wav",
+      "inicio": 14.895,
+      "duracion": 7.169,
+      "subtitulos": [
+        {
+          "texto": "Una página web dental tiene que funcionar primero en el celular,",
+          "inicio": 14.895,
+          "fin": 18.479
+        },
+        {
+          "texto": "porque ahí es donde los pacientes comparan especialistas.",
+          "inicio": 18.479,
+          "fin": 21.764
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Una página para cada tratamiento de alto valor: implantes, prótesis y coronas. Qué es, cuánto tarda, cómo financiarlo y un botón para agendar.",
+      "archivo": "s2.wav",
+      "inicio": 22.064,
+      "duracion": 8.62,
+      "subtitulos": [
+        {
+          "texto": "Una página para cada tratamiento de alto valor: implantes, prótesis y coronas.",
+          "inicio": 22.064,
+          "fin": 26.8
+        },
+        {
+          "texto": "Qué es, cuánto tarda, cómo financiarlo y un botón para agendar.",
+          "inicio": 26.8,
+          "fin": 30.384
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Detrás, un sistema para el consultorio: recordatorios automáticos que reducen las inasistencias, mensajes de control cada seis meses y un portal sencillo para el paciente.",
+      "archivo": "s3.wav",
+      "inicio": 30.684,
+      "duracion": 10.497,
+      "subtitulos": [
+        {
+          "texto": "Detrás, un sistema para el consultorio:",
+          "inicio": 30.684,
+          "fin": 32.945
+        },
+        {
+          "texto": "recordatorios automáticos que reducen las inasistencias,",
+          "inicio": 32.945,
+          "fin": 36.465
+        },
+        {
+          "texto": "mensajes de control cada seis meses y un portal sencillo para el paciente.",
+          "inicio": 36.465,
+          "fin": 40.881
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "¿Quieres ver tu consultorio con este diseño? Comenta DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 41.181,
+      "duracion": 3.799,
+      "subtitulos": [
+        {
+          "texto": "¿Quieres ver tu consultorio con este diseño? Comenta DEMO.",
+          "inicio": 41.181,
+          "fin": 44.68
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Un solo caso de implantes puede pagar toda tu página web.",
+      "startMs": 0,
+      "endMs": 3456,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Páginas web para clínicas dentales:",
+      "startMs": 3756,
+      "endMs": 6039,
+      "timestampMs": 3756,
+      "confidence": 1
+    },
+    {
+      "text": "lo que el paciente revisa en el celular antes de llamar.",
+      "startMs": 6039,
+      "endMs": 9260,
+      "timestampMs": 6039,
+      "confidence": 1
+    },
+    {
+      "text": "Cada cita dental perdida es plata que no vuelve. A menos que tu sistema la recupere.",
+      "startMs": 9560,
+      "endMs": 14595,
+      "timestampMs": 9560,
+      "confidence": 1
+    },
+    {
+      "text": "Una página web dental tiene que funcionar primero en el celular,",
+      "startMs": 14895,
+      "endMs": 18479,
+      "timestampMs": 14895,
+      "confidence": 1
+    },
+    {
+      "text": "porque ahí es donde los pacientes comparan especialistas.",
+      "startMs": 18479,
+      "endMs": 21764,
+      "timestampMs": 18479,
+      "confidence": 1
+    },
+    {
+      "text": "Una página para cada tratamiento de alto valor: implantes, prótesis y coronas.",
+      "startMs": 22064,
+      "endMs": 26800,
+      "timestampMs": 22064,
+      "confidence": 1
+    },
+    {
+      "text": "Qué es, cuánto tarda, cómo financiarlo y un botón para agendar.",
+      "startMs": 26800,
+      "endMs": 30384,
+      "timestampMs": 26800,
+      "confidence": 1
+    },
+    {
+      "text": "Detrás, un sistema para el consultorio:",
+      "startMs": 30684,
+      "endMs": 32945,
+      "timestampMs": 30684,
+      "confidence": 1
+    },
+    {
+      "text": "recordatorios automáticos que reducen las inasistencias,",
+      "startMs": 32945,
+      "endMs": 36465,
+      "timestampMs": 32945,
+      "confidence": 1
+    },
+    {
+      "text": "mensajes de control cada seis meses y un portal sencillo para el paciente.",
+      "startMs": 36465,
+      "endMs": 40881,
+      "timestampMs": 36465,
+      "confidence": 1
+    },
+    {
+      "text": "¿Quieres ver tu consultorio con este diseño? Comenta DEMO.",
+      "startMs": 41181,
+      "endMs": 44680,
+      "timestampMs": 41181,
+      "confidence": 1
+    }
+  ]
+}

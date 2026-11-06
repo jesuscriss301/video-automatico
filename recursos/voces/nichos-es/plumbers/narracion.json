@@ -1,0 +1,240 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 63.5,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Dos de la mañana, se revienta un tubo. Tu cliente llama a quien le aparezca primero en el celular.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 7.34,
+      "subtitulos": [
+        {
+          "texto": "Dos de la mañana, se revienta un tubo.",
+          "inicio": 0.0,
+          "fin": 3.0
+        },
+        {
+          "texto": "Tu cliente llama a quien le aparezca primero en el celular.",
+          "inicio": 3.0,
+          "fin": 7.04
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Diseño web para plomeros: lo que hace que te llamen a ti.",
+      "archivo": "gancho_b.wav",
+      "inicio": 7.34,
+      "duracion": 4.9,
+      "subtitulos": [
+        {
+          "texto": "Diseño web para plomeros: lo que hace que te llamen a ti.",
+          "inicio": 7.34,
+          "fin": 11.94
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "El plomero que responde en cinco minutos se queda con el trabajo. Así se hace en automático.",
+      "archivo": "gancho_c.wav",
+      "inicio": 12.24,
+      "duracion": 9.98,
+      "subtitulos": [
+        {
+          "texto": "El plomero que responde en cinco minutos se queda con el trabajo.",
+          "inicio": 12.24,
+          "fin": 17.48
+        },
+        {
+          "texto": "Así se hace en automático.",
+          "inicio": 17.48,
+          "fin": 21.92
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "El diseño web para plomeros se resume en esto: un botón para llamar con un toque y una página para cada zona donde trabajas.",
+      "archivo": "s1.wav",
+      "inicio": 22.22,
+      "duracion": 9.58,
+      "subtitulos": [
+        {
+          "texto": "El diseño web para plomeros se resume en esto:",
+          "inicio": 22.22,
+          "fin": 26.34
+        },
+        {
+          "texto": "un botón para llamar con un toque y una página para cada zona donde trabajas.",
+          "inicio": 26.34,
+          "fin": 31.5
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Destapes, calentadores y fugas: una página por servicio, para aparecer en cada búsqueda.",
+      "archivo": "s2.wav",
+      "inicio": 31.8,
+      "duracion": 8.7,
+      "subtitulos": [
+        {
+          "texto": "Destapes, calentadores y fugas: una página por servicio,",
+          "inicio": 31.8,
+          "fin": 37.48
+        },
+        {
+          "texto": "para aparecer en cada búsqueda.",
+          "inicio": 37.48,
+          "fin": 40.2
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Después, automatización: cada llamada perdida o formulario recibe una cotización por mensaje en menos de cinco minutos, y el trabajo llega directo al celular de tu técnico con la dirección y la ruta.",
+      "archivo": "s3.wav",
+      "inicio": 40.5,
+      "duracion": 17.38,
+      "subtitulos": [
+        {
+          "texto": "Después, automatización:",
+          "inicio": 40.5,
+          "fin": 43.42
+        },
+        {
+          "texto": "cada llamada perdida o formulario recibe una cotización por mensaje en menos de",
+          "inicio": 43.42,
+          "fin": 49.7
+        },
+        {
+          "texto": "cinco minutos,",
+          "inicio": 49.7,
+          "fin": 51.58
+        },
+        {
+          "texto": "y el trabajo llega directo al celular de tu técnico con la dirección y la ruta.",
+          "inicio": 51.58,
+          "fin": 57.58
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "¿Quieres esto para tu negocio de plomería? Comenta DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 57.88,
+      "duracion": 5.62,
+      "subtitulos": [
+        {
+          "texto": "¿Quieres esto para tu negocio de plomería? Comenta DEMO.",
+          "inicio": 57.88,
+          "fin": 63.2
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Dos de la mañana, se revienta un tubo.",
+      "startMs": 0,
+      "endMs": 3000,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Tu cliente llama a quien le aparezca primero en el celular.",
+      "startMs": 3000,
+      "endMs": 7040,
+      "timestampMs": 3000,
+      "confidence": 1
+    },
+    {
+      "text": "Diseño web para plomeros: lo que hace que te llamen a ti.",
+      "startMs": 7340,
+      "endMs": 11940,
+      "timestampMs": 7340,
+      "confidence": 1
+    },
+    {
+      "text": "El plomero que responde en cinco minutos se queda con el trabajo.",
+      "startMs": 12240,
+      "endMs": 17480,
+      "timestampMs": 12240,
+      "confidence": 1
+    },
+    {
+      "text": "Así se hace en automático.",
+      "startMs": 17480,
+      "endMs": 21920,
+      "timestampMs": 17480,
+      "confidence": 1
+    },
+    {
+      "text": "El diseño web para plomeros se resume en esto:",
+      "startMs": 22220,
+      "endMs": 26340,
+      "timestampMs": 22220,
+      "confidence": 1
+    },
+    {
+      "text": "un botón para llamar con un toque y una página para cada zona donde trabajas.",
+      "startMs": 26340,
+      "endMs": 31500,
+      "timestampMs": 26340,
+      "confidence": 1
+    },
+    {
+      "text": "Destapes, calentadores y fugas: una página por servicio,",
+      "startMs": 31800,
+      "endMs": 37480,
+      "timestampMs": 31800,
+      "confidence": 1
+    },
+    {
+      "text": "para aparecer en cada búsqueda.",
+      "startMs": 37480,
+      "endMs": 40200,
+      "timestampMs": 37480,
+      "confidence": 1
+    },
+    {
+      "text": "Después, automatización:",
+      "startMs": 40500,
+      "endMs": 43420,
+      "timestampMs": 40500,
+      "confidence": 1
+    },
+    {
+      "text": "cada llamada perdida o formulario recibe una cotización por mensaje en menos de",
+      "startMs": 43420,
+      "endMs": 49700,
+      "timestampMs": 43420,
+      "confidence": 1
+    },
+    {
+      "text": "cinco minutos,",
+      "startMs": 49700,
+      "endMs": 51580,
+      "timestampMs": 49700,
+      "confidence": 1
+    },
+    {
+      "text": "y el trabajo llega directo al celular de tu técnico con la dirección y la ruta.",
+      "startMs": 51580,
+      "endMs": 57580,
+      "timestampMs": 51580,
+      "confidence": 1
+    },
+    {
+      "text": "¿Quieres esto para tu negocio de plomería? Comenta DEMO.",
+      "startMs": 57880,
+      "endMs": 63200,
+      "timestampMs": 57880,
+      "confidence": 1
+    }
+  ]
+}

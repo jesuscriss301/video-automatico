@@ -1,0 +1,204 @@
+{
+  "voz": "Alex (Kokoro, español)",
+  "backend": "kokoro",
+  "duracion_total": 34.335,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Los lavaderos que más ganan no venden lavadas. Venden membresías.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 4.247,
+      "subtitulos": [
+        {
+          "texto": "Los lavaderos que más ganan no venden lavadas. Venden membresías.",
+          "inicio": 0.0,
+          "fin": 3.947
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Página web para lavaderos de carros: lo que de verdad deja plata.",
+      "archivo": "gancho_b.wav",
+      "inicio": 4.247,
+      "duracion": 4.14,
+      "subtitulos": [
+        {
+          "texto": "Página web para lavaderos de carros: lo que de verdad deja plata.",
+          "inicio": 4.247,
+          "fin": 8.087
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "¿Semana de lluvia? Los miembros igual pagan.",
+      "archivo": "gancho_c.wav",
+      "inicio": 8.387,
+      "duracion": 2.924,
+      "subtitulos": [
+        {
+          "texto": "¿Semana de lluvia? Los miembros igual pagan.",
+          "inicio": 8.387,
+          "fin": 11.011
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "La página web de un lavadero tiene que hacer una cosa primero: vender la membresía mensual.",
+      "archivo": "s1.wav",
+      "inicio": 11.311,
+      "duracion": 5.783,
+      "subtitulos": [
+        {
+          "texto": "La página web de un lavadero tiene que hacer una cosa primero:",
+          "inicio": 11.311,
+          "fin": 14.852
+        },
+        {
+          "texto": "vender la membresía mensual.",
+          "inicio": 14.852,
+          "fin": 16.793
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Menú con precios, galería de antes y después, y un botón de inscripción que cobra cada mes.",
+      "archivo": "s2.wav",
+      "inicio": 17.093,
+      "duracion": 5.697,
+      "subtitulos": [
+        {
+          "texto": "Menú con precios, galería de antes y después,",
+          "inicio": 17.093,
+          "fin": 19.909
+        },
+        {
+          "texto": "y un botón de inscripción que cobra cada mes.",
+          "inicio": 19.909,
+          "fin": 22.49
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Detrás, una app de membresías: cobro automático, lectura de placa o código QR en la entrada y beneficios que hacen que los miembros se queden.",
+      "archivo": "s3.wav",
+      "inicio": 22.791,
+      "duracion": 8.577,
+      "subtitulos": [
+        {
+          "texto": "Detrás, una app de membresías: cobro automático,",
+          "inicio": 22.791,
+          "fin": 25.671
+        },
+        {
+          "texto": "lectura de placa o código QR en la entrada y beneficios que hacen que los miembros",
+          "inicio": 25.671,
+          "fin": 30.343
+        },
+        {
+          "texto": "se queden.",
+          "inicio": 30.343,
+          "fin": 31.068
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "¿Quieres esto para tu lavadero? Comenta DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 31.368,
+      "duracion": 2.967,
+      "subtitulos": [
+        {
+          "texto": "¿Quieres esto para tu lavadero? Comenta DEMO.",
+          "inicio": 31.368,
+          "fin": 34.035
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Los lavaderos que más ganan no venden lavadas. Venden membresías.",
+      "startMs": 0,
+      "endMs": 3947,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Página web para lavaderos de carros: lo que de verdad deja plata.",
+      "startMs": 4247,
+      "endMs": 8087,
+      "timestampMs": 4247,
+      "confidence": 1
+    },
+    {
+      "text": "¿Semana de lluvia? Los miembros igual pagan.",
+      "startMs": 8387,
+      "endMs": 11011,
+      "timestampMs": 8387,
+      "confidence": 1
+    },
+    {
+      "text": "La página web de un lavadero tiene que hacer una cosa primero:",
+      "startMs": 11311,
+      "endMs": 14852,
+      "timestampMs": 11311,
+      "confidence": 1
+    },
+    {
+      "text": "vender la membresía mensual.",
+      "startMs": 14852,
+      "endMs": 16793,
+      "timestampMs": 14852,
+      "confidence": 1
+    },
+    {
+      "text": "Menú con precios, galería de antes y después,",
+      "startMs": 17093,
+      "endMs": 19909,
+      "timestampMs": 17093,
+      "confidence": 1
+    },
+    {
+      "text": "y un botón de inscripción que cobra cada mes.",
+      "startMs": 19909,
+      "endMs": 22490,
+      "timestampMs": 19909,
+      "confidence": 1
+    },
+    {
+      "text": "Detrás, una app de membresías: cobro automático,",
+      "startMs": 22791,
+      "endMs": 25671,
+      "timestampMs": 22791,
+      "confidence": 1
+    },
+    {
+      "text": "lectura de placa o código QR en la entrada y beneficios que hacen que los miembros",
+      "startMs": 25671,
+      "endMs": 30343,
+      "timestampMs": 25671,
+      "confidence": 1
+    },
+    {
+      "text": "se queden.",
+      "startMs": 30343,
+      "endMs": 31068,
+      "timestampMs": 30343,
+      "confidence": 1
+    },
+    {
+      "text": "¿Quieres esto para tu lavadero? Comenta DEMO.",
+      "startMs": 31368,
+      "endMs": 34035,
+      "timestampMs": 31368,
+      "confidence": 1
+    }
+  ]
+}

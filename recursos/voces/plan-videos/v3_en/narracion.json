@@ -1,0 +1,204 @@
+{
+  "voz": "Heart (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 39.041,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "How many people left your waiting room today without being served?",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 3.749,
+      "subtitulos": [
+        {
+          "texto": "How many people left your waiting room today without being served?",
+          "inicio": 0.0,
+          "fin": 3.499
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "This clinic got rid of the line at its door with one screen and a QR code.",
+      "archivo": "gancho_b.wav",
+      "inicio": 3.749,
+      "duracion": 4.346,
+      "subtitulos": [
+        {
+          "texto": "This clinic got rid of the line at its door with one screen and a QR code.",
+          "inicio": 3.749,
+          "fin": 7.845
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Still booking appointments in a notebook? This is for you.",
+      "archivo": "gancho_c.wav",
+      "inicio": 8.095,
+      "duracion": 3.173,
+      "subtitulos": [
+        {
+          "texto": "Still booking appointments in a notebook? This is for you.",
+          "inicio": 8.095,
+          "fin": 11.018
+        }
+      ]
+    },
+    {
+      "id": "problema",
+      "texto": "Long lines, people who don't know when it's their turn, and appointments nobody confirms. All of that costs you customers.",
+      "archivo": "problema.wav",
+      "inicio": 11.267,
+      "duracion": 6.863,
+      "subtitulos": [
+        {
+          "texto": "Long lines, people who don't know when it's their turn,",
+          "inicio": 11.267,
+          "fin": 13.976
+        },
+        {
+          "texto": "and appointments nobody confirms. All of that costs you customers.",
+          "inicio": 13.976,
+          "fin": 17.88
+        }
+      ]
+    },
+    {
+      "id": "turnero",
+      "texto": "With Turnero, your customer takes a number, sees it on the screen in your place, and your team calls the next one with a single click, in real time.",
+      "archivo": "turnero.wav",
+      "inicio": 18.131,
+      "duracion": 8.186,
+      "subtitulos": [
+        {
+          "texto": "With Turnero, your customer takes a number, sees it on the screen in your place,",
+          "inicio": 18.131,
+          "fin": 22.398
+        },
+        {
+          "texto": "and your team calls the next one with a single click, in real time.",
+          "inicio": 22.398,
+          "fin": 26.067
+        }
+      ]
+    },
+    {
+      "id": "reservas",
+      "texto": "And if you work by appointment, the booking system lets people book from your website, confirms on its own, and can ask for a deposit so nobody stands you up.",
+      "archivo": "reservas.wav",
+      "inicio": 26.317,
+      "duracion": 8.741,
+      "subtitulos": [
+        {
+          "texto": "And if you work by appointment,",
+          "inicio": 26.317,
+          "fin": 27.874
+        },
+        {
+          "texto": "the booking system lets people book from your website, confirms on its own,",
+          "inicio": 27.874,
+          "fin": 31.906
+        },
+        {
+          "texto": "and can ask for a deposit so nobody stands you up.",
+          "inicio": 31.906,
+          "fin": 34.807
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "texto": "Try the free demo, or message us and we'll adapt it to your business.",
+      "archivo": "cierre.wav",
+      "inicio": 35.057,
+      "duracion": 3.983,
+      "subtitulos": [
+        {
+          "texto": "Try the free demo, or message us and we'll adapt it to your business.",
+          "inicio": 35.057,
+          "fin": 38.79
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "How many people left your waiting room today without being served?",
+      "startMs": 0,
+      "endMs": 3499,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "This clinic got rid of the line at its door with one screen and a QR code.",
+      "startMs": 3749,
+      "endMs": 7845,
+      "timestampMs": 3749,
+      "confidence": 1
+    },
+    {
+      "text": "Still booking appointments in a notebook? This is for you.",
+      "startMs": 8095,
+      "endMs": 11018,
+      "timestampMs": 8095,
+      "confidence": 1
+    },
+    {
+      "text": "Long lines, people who don't know when it's their turn,",
+      "startMs": 11267,
+      "endMs": 13976,
+      "timestampMs": 11267,
+      "confidence": 1
+    },
+    {
+      "text": "and appointments nobody confirms. All of that costs you customers.",
+      "startMs": 13976,
+      "endMs": 17880,
+      "timestampMs": 13976,
+      "confidence": 1
+    },
+    {
+      "text": "With Turnero, your customer takes a number, sees it on the screen in your place,",
+      "startMs": 18131,
+      "endMs": 22398,
+      "timestampMs": 18131,
+      "confidence": 1
+    },
+    {
+      "text": "and your team calls the next one with a single click, in real time.",
+      "startMs": 22398,
+      "endMs": 26067,
+      "timestampMs": 22398,
+      "confidence": 1
+    },
+    {
+      "text": "And if you work by appointment,",
+      "startMs": 26317,
+      "endMs": 27874,
+      "timestampMs": 26317,
+      "confidence": 1
+    },
+    {
+      "text": "the booking system lets people book from your website, confirms on its own,",
+      "startMs": 27874,
+      "endMs": 31906,
+      "timestampMs": 27874,
+      "confidence": 1
+    },
+    {
+      "text": "and can ask for a deposit so nobody stands you up.",
+      "startMs": 31906,
+      "endMs": 34807,
+      "timestampMs": 31906,
+      "confidence": 1
+    },
+    {
+      "text": "Try the free demo, or message us and we'll adapt it to your business.",
+      "startMs": 35057,
+      "endMs": 38790,
+      "timestampMs": 35057,
+      "confidence": 1
+    }
+  ]
+}

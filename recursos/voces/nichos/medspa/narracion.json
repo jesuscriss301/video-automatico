@@ -1,0 +1,216 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 44.75,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Your injectables clients research for weeks. Then they book whoever answers their questions first.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 5.698,
+      "subtitulos": [
+        {
+          "texto": "Your injectables clients research for weeks.",
+          "inicio": 0.0,
+          "fin": 2.539
+        },
+        {
+          "texto": "Then they book whoever answers their questions first.",
+          "inicio": 2.539,
+          "fin": 5.248
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "This is what injectables website design should look like in 2026.",
+      "archivo": "gancho_b.wav",
+      "inicio": 5.698,
+      "duracion": 5.719,
+      "subtitulos": [
+        {
+          "texto": "This is what injectables website design should look like in 2026.",
+          "inicio": 5.698,
+          "fin": 10.967
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Botox clients come back every few months. Does your website remind them?",
+      "archivo": "gancho_c.wav",
+      "inicio": 11.417,
+      "duracion": 4.759,
+      "subtitulos": [
+        {
+          "texto": "Botox clients come back every few months. Does your website remind them?",
+          "inicio": 11.417,
+          "fin": 15.726
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Injectables website design isn't about pretty photos. It's about answering fears before the consultation.",
+      "archivo": "s1.wav",
+      "inicio": 16.177,
+      "duracion": 7.127,
+      "subtitulos": [
+        {
+          "texto": "Injectables website design isn't about pretty photos.",
+          "inicio": 16.177,
+          "fin": 19.868
+        },
+        {
+          "texto": "It's about answering fears before the consultation.",
+          "inicio": 19.868,
+          "fin": 22.855
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Each treatment gets its own page: what it is, how long it lasts, what it costs, and a book a free consult button.",
+      "archivo": "s2.wav",
+      "inicio": 23.304,
+      "duracion": 7.063,
+      "subtitulos": [
+        {
+          "texto": "Each treatment gets its own page: what it is, how long it lasts, what it costs,",
+          "inicio": 23.304,
+          "fin": 27.976
+        },
+        {
+          "texto": "and a book a free consult button.",
+          "inicio": 27.976,
+          "fin": 29.917
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Behind it, a simple client system: it keeps each patient's treatment history and texts them when it's time for their next appointment. That's repeat revenue on autopilot.",
+      "archivo": "s3.wav",
+      "inicio": 30.367,
+      "duracion": 10.818,
+      "subtitulos": [
+        {
+          "texto": "Behind it, a simple client system:",
+          "inicio": 30.367,
+          "fin": 32.735
+        },
+        {
+          "texto": "it keeps each patient's treatment history and texts them when it's time for their",
+          "inicio": 32.735,
+          "fin": 37.066
+        },
+        {
+          "texto": "next appointment. That's repeat revenue on autopilot.",
+          "inicio": 37.066,
+          "fin": 40.735
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Want to see your med spa on this layout? Comment DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 41.185,
+      "duracion": 3.565,
+      "subtitulos": [
+        {
+          "texto": "Want to see your med spa on this layout? Comment DEMO.",
+          "inicio": 41.185,
+          "fin": 44.3
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Your injectables clients research for weeks.",
+      "startMs": 0,
+      "endMs": 2539,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Then they book whoever answers their questions first.",
+      "startMs": 2539,
+      "endMs": 5248,
+      "timestampMs": 2539,
+      "confidence": 1
+    },
+    {
+      "text": "This is what injectables website design should look like in 2026.",
+      "startMs": 5698,
+      "endMs": 10967,
+      "timestampMs": 5698,
+      "confidence": 1
+    },
+    {
+      "text": "Botox clients come back every few months. Does your website remind them?",
+      "startMs": 11417,
+      "endMs": 15726,
+      "timestampMs": 11417,
+      "confidence": 1
+    },
+    {
+      "text": "Injectables website design isn't about pretty photos.",
+      "startMs": 16177,
+      "endMs": 19868,
+      "timestampMs": 16177,
+      "confidence": 1
+    },
+    {
+      "text": "It's about answering fears before the consultation.",
+      "startMs": 19868,
+      "endMs": 22855,
+      "timestampMs": 19868,
+      "confidence": 1
+    },
+    {
+      "text": "Each treatment gets its own page: what it is, how long it lasts, what it costs,",
+      "startMs": 23304,
+      "endMs": 27976,
+      "timestampMs": 23304,
+      "confidence": 1
+    },
+    {
+      "text": "and a book a free consult button.",
+      "startMs": 27976,
+      "endMs": 29917,
+      "timestampMs": 27976,
+      "confidence": 1
+    },
+    {
+      "text": "Behind it, a simple client system:",
+      "startMs": 30367,
+      "endMs": 32735,
+      "timestampMs": 30367,
+      "confidence": 1
+    },
+    {
+      "text": "it keeps each patient's treatment history and texts them when it's time for their",
+      "startMs": 32735,
+      "endMs": 37066,
+      "timestampMs": 32735,
+      "confidence": 1
+    },
+    {
+      "text": "next appointment. That's repeat revenue on autopilot.",
+      "startMs": 37066,
+      "endMs": 40735,
+      "timestampMs": 37066,
+      "confidence": 1
+    },
+    {
+      "text": "Want to see your med spa on this layout? Comment DEMO.",
+      "startMs": 41185,
+      "endMs": 44300,
+      "timestampMs": 41185,
+      "confidence": 1
+    }
+  ]
+}

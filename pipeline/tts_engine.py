@@ -126,7 +126,7 @@ class KokoroBackend:
 
     def synthesize(self, text: str, out_path: Path) -> SynthesizedAudio:
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        cmd = [self.npx, "-y", "hyperframes@latest", "tts", text, "--voice", self.voice,
+        cmd = [self.npx, "-y", "hyperframes@0.8.226", "tts", text, "--voice", self.voice,
                "-o", str(out_path)]
         if self.lang:
             cmd += ["--lang", self.lang]

@@ -1,0 +1,228 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "backend": "chatterbox",
+  "duracion_total": 66.59,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "La mayoría de proyectos de software se caen entre el que vende y el que programa. Aquí no existe ese intermediario.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 9.09,
+      "subtitulos": [
+        {
+          "texto": "La mayoría de proyectos de software se caen entre el que vende y el que programa.",
+          "inicio": 0.0,
+          "fin": 5.92
+        },
+        {
+          "texto": "Aquí no existe ese intermediario.",
+          "inicio": 5.92,
+          "fin": 8.84
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "¿Tienes una idea de app y no sabes por dónde empezar? Mira esto.",
+      "archivo": "gancho_b.wav",
+      "inicio": 9.09,
+      "duracion": 5.69,
+      "subtitulos": [
+        {
+          "texto": "¿Tienes una idea de app y no sabes por dónde empezar? Mira esto.",
+          "inicio": 9.09,
+          "fin": 14.53
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Tres mil transacciones diarias en un sistema de salud. Lo construyó una sola persona.",
+      "archivo": "gancho_c.wav",
+      "inicio": 14.78,
+      "duracion": 8.89,
+      "subtitulos": [
+        {
+          "texto": "Tres mil transacciones diarias en un sistema de salud.",
+          "inicio": 14.78,
+          "fin": 19.1
+        },
+        {
+          "texto": "Lo construyó una sola persona.",
+          "inicio": 19.1,
+          "fin": 23.42
+        }
+      ]
+    },
+    {
+      "id": "intro",
+      "texto": "Soy Jesús, desarrollador full stack en Medellín. Convierto ideas de negocio en software que funciona.",
+      "archivo": "intro.wav",
+      "inicio": 23.67,
+      "duracion": 9.73,
+      "subtitulos": [
+        {
+          "texto": "Soy Jesús, desarrollador full stack en Medellín.",
+          "inicio": 23.67,
+          "fin": 28.51
+        },
+        {
+          "texto": "Convierto ideas de negocio en software que funciona.",
+          "inicio": 28.51,
+          "fin": 33.15
+        }
+      ]
+    },
+    {
+      "id": "servicios",
+      "texto": "Páginas web y tiendas en línea, apps, plataformas SaaS, inteligencia artificial y SEO. Todo con un solo responsable.",
+      "archivo": "servicios.wav",
+      "inicio": 33.4,
+      "duracion": 14.85,
+      "subtitulos": [
+        {
+          "texto": "Páginas web y tiendas en línea, apps, plataformas SaaS,",
+          "inicio": 33.4,
+          "fin": 39.08
+        },
+        {
+          "texto": "inteligencia artificial y SEO. Todo con un solo responsable.",
+          "inicio": 39.08,
+          "fin": 48.0
+        }
+      ]
+    },
+    {
+      "id": "caso",
+      "texto": "Ejemplo: una integración con el Ministerio de Salud que procesa tres mil transacciones al día y respondió un cuarenta por ciento más rápido.",
+      "archivo": "caso.wav",
+      "inicio": 48.25,
+      "duracion": 12.17,
+      "subtitulos": [
+        {
+          "texto": "Ejemplo:",
+          "inicio": 48.25,
+          "fin": 49.37
+        },
+        {
+          "texto": "una integración con el Ministerio de Salud que procesa tres mil transacciones al día",
+          "inicio": 49.37,
+          "fin": 55.09
+        },
+        {
+          "texto": "y respondió un cuarenta por ciento más rápido.",
+          "inicio": 55.09,
+          "fin": 60.17
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "texto": "Cuéntame tu idea por WhatsApp y en veinticuatro horas te digo cómo la haría.",
+      "archivo": "cierre.wav",
+      "inicio": 60.42,
+      "duracion": 6.17,
+      "subtitulos": [
+        {
+          "texto": "Cuéntame tu idea por WhatsApp y en veinticuatro horas te digo cómo la haría.",
+          "inicio": 60.42,
+          "fin": 66.34
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "La mayoría de proyectos de software se caen entre el que vende y el que programa.",
+      "startMs": 0,
+      "endMs": 5920,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Aquí no existe ese intermediario.",
+      "startMs": 5920,
+      "endMs": 8840,
+      "timestampMs": 5920,
+      "confidence": 1
+    },
+    {
+      "text": "¿Tienes una idea de app y no sabes por dónde empezar? Mira esto.",
+      "startMs": 9090,
+      "endMs": 14530,
+      "timestampMs": 9090,
+      "confidence": 1
+    },
+    {
+      "text": "Tres mil transacciones diarias en un sistema de salud.",
+      "startMs": 14780,
+      "endMs": 19100,
+      "timestampMs": 14780,
+      "confidence": 1
+    },
+    {
+      "text": "Lo construyó una sola persona.",
+      "startMs": 19100,
+      "endMs": 23420,
+      "timestampMs": 19100,
+      "confidence": 1
+    },
+    {
+      "text": "Soy Jesús, desarrollador full stack en Medellín.",
+      "startMs": 23670,
+      "endMs": 28510,
+      "timestampMs": 23670,
+      "confidence": 1
+    },
+    {
+      "text": "Convierto ideas de negocio en software que funciona.",
+      "startMs": 28510,
+      "endMs": 33150,
+      "timestampMs": 28510,
+      "confidence": 1
+    },
+    {
+      "text": "Páginas web y tiendas en línea, apps, plataformas SaaS,",
+      "startMs": 33400,
+      "endMs": 39080,
+      "timestampMs": 33400,
+      "confidence": 1
+    },
+    {
+      "text": "inteligencia artificial y SEO. Todo con un solo responsable.",
+      "startMs": 39080,
+      "endMs": 48000,
+      "timestampMs": 39080,
+      "confidence": 1
+    },
+    {
+      "text": "Ejemplo:",
+      "startMs": 48250,
+      "endMs": 49370,
+      "timestampMs": 48250,
+      "confidence": 1
+    },
+    {
+      "text": "una integración con el Ministerio de Salud que procesa tres mil transacciones al día",
+      "startMs": 49370,
+      "endMs": 55090,
+      "timestampMs": 49370,
+      "confidence": 1
+    },
+    {
+      "text": "y respondió un cuarenta por ciento más rápido.",
+      "startMs": 55090,
+      "endMs": 60170,
+      "timestampMs": 55090,
+      "confidence": 1
+    },
+    {
+      "text": "Cuéntame tu idea por WhatsApp y en veinticuatro horas te digo cómo la haría.",
+      "startMs": 60420,
+      "endMs": 66340,
+      "timestampMs": 60420,
+      "confidence": 1
+    }
+  ]
+}

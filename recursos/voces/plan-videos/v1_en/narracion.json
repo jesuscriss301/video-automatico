@@ -1,0 +1,228 @@
+{
+  "voz": "Heart (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 42.049,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Most software projects fall apart between the salesperson and the developer. Here, there's no middleman.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 6.266,
+      "subtitulos": [
+        {
+          "texto": "Most software projects fall apart between the salesperson and the developer.",
+          "inicio": 0.0,
+          "fin": 4.459
+        },
+        {
+          "texto": "Here, there's no middleman.",
+          "inicio": 4.459,
+          "fin": 6.016
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Got an app idea and don't know where to start? Watch this.",
+      "archivo": "gancho_b.wav",
+      "inicio": 6.266,
+      "duracion": 3.343,
+      "subtitulos": [
+        {
+          "texto": "Got an app idea and don't know where to start? Watch this.",
+          "inicio": 6.266,
+          "fin": 9.359
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Three thousand daily transactions in a healthcare system. Built by one developer.",
+      "archivo": "gancho_c.wav",
+      "inicio": 9.609,
+      "duracion": 5.114,
+      "subtitulos": [
+        {
+          "texto": "Three thousand daily transactions in a healthcare system. Built by one developer.",
+          "inicio": 9.609,
+          "fin": 14.473
+        }
+      ]
+    },
+    {
+      "id": "intro",
+      "texto": "Meet Jesús, a full stack developer in Medellín. He turns business ideas into software that works.",
+      "archivo": "intro.wav",
+      "inicio": 14.723,
+      "duracion": 5.882,
+      "subtitulos": [
+        {
+          "texto": "Meet Jesús, a full stack developer in Medellín.",
+          "inicio": 14.723,
+          "fin": 17.603
+        },
+        {
+          "texto": "He turns business ideas into software that works.",
+          "inicio": 17.603,
+          "fin": 20.355
+        }
+      ]
+    },
+    {
+      "id": "servicios",
+      "texto": "Websites and online stores, apps, SaaS platforms, artificial intelligence and SEO. All with one person in charge.",
+      "archivo": "servicios.wav",
+      "inicio": 20.605,
+      "duracion": 7.909,
+      "subtitulos": [
+        {
+          "texto": "Websites and online stores, apps, SaaS platforms, artificial intelligence and SEO.",
+          "inicio": 20.605,
+          "fin": 26.472
+        },
+        {
+          "texto": "All with one person in charge.",
+          "inicio": 26.472,
+          "fin": 28.264
+        }
+      ]
+    },
+    {
+      "id": "caso",
+      "texto": "For example: an integration with the Ministry of Health that processes three thousand transactions a day and responds forty percent faster.",
+      "archivo": "caso.wav",
+      "inicio": 28.514,
+      "duracion": 8.378,
+      "subtitulos": [
+        {
+          "texto": "For example:",
+          "inicio": 28.514,
+          "fin": 29.474
+        },
+        {
+          "texto": "an integration with the Ministry of Health that processes three thousand",
+          "inicio": 29.474,
+          "fin": 33.399
+        },
+        {
+          "texto": "transactions a day and responds forty percent faster.",
+          "inicio": 33.399,
+          "fin": 36.642
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "texto": "Tell Jesús your idea on WhatsApp, and within twenty-four hours he'll tell you how he'd build it.",
+      "archivo": "cierre.wav",
+      "inicio": 36.892,
+      "duracion": 5.157,
+      "subtitulos": [
+        {
+          "texto": "Tell Jesús your idea on WhatsApp,",
+          "inicio": 36.892,
+          "fin": 38.812
+        },
+        {
+          "texto": "and within twenty-four hours he'll tell you how he'd build it.",
+          "inicio": 38.812,
+          "fin": 41.799
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Most software projects fall apart between the salesperson and the developer.",
+      "startMs": 0,
+      "endMs": 4459,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Here, there's no middleman.",
+      "startMs": 4459,
+      "endMs": 6016,
+      "timestampMs": 4459,
+      "confidence": 1
+    },
+    {
+      "text": "Got an app idea and don't know where to start? Watch this.",
+      "startMs": 6266,
+      "endMs": 9359,
+      "timestampMs": 6266,
+      "confidence": 1
+    },
+    {
+      "text": "Three thousand daily transactions in a healthcare system. Built by one developer.",
+      "startMs": 9609,
+      "endMs": 14473,
+      "timestampMs": 9609,
+      "confidence": 1
+    },
+    {
+      "text": "Meet Jesús, a full stack developer in Medellín.",
+      "startMs": 14723,
+      "endMs": 17603,
+      "timestampMs": 14723,
+      "confidence": 1
+    },
+    {
+      "text": "He turns business ideas into software that works.",
+      "startMs": 17603,
+      "endMs": 20355,
+      "timestampMs": 17603,
+      "confidence": 1
+    },
+    {
+      "text": "Websites and online stores, apps, SaaS platforms, artificial intelligence and SEO.",
+      "startMs": 20605,
+      "endMs": 26472,
+      "timestampMs": 20605,
+      "confidence": 1
+    },
+    {
+      "text": "All with one person in charge.",
+      "startMs": 26472,
+      "endMs": 28264,
+      "timestampMs": 26472,
+      "confidence": 1
+    },
+    {
+      "text": "For example:",
+      "startMs": 28514,
+      "endMs": 29474,
+      "timestampMs": 28514,
+      "confidence": 1
+    },
+    {
+      "text": "an integration with the Ministry of Health that processes three thousand",
+      "startMs": 29474,
+      "endMs": 33399,
+      "timestampMs": 29474,
+      "confidence": 1
+    },
+    {
+      "text": "transactions a day and responds forty percent faster.",
+      "startMs": 33399,
+      "endMs": 36642,
+      "timestampMs": 33399,
+      "confidence": 1
+    },
+    {
+      "text": "Tell Jesús your idea on WhatsApp,",
+      "startMs": 36892,
+      "endMs": 38812,
+      "timestampMs": 36892,
+      "confidence": 1
+    },
+    {
+      "text": "and within twenty-four hours he'll tell you how he'd build it.",
+      "startMs": 38812,
+      "endMs": 41799,
+      "timestampMs": 38812,
+      "confidence": 1
+    }
+  ]
+}

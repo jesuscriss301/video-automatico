@@ -1,0 +1,192 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 36.195,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "The most profitable car washes in Texas don't sell washes. They sell memberships.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 5.783,
+      "subtitulos": [
+        {
+          "texto": "The most profitable car washes in Texas don't sell washes. They sell memberships.",
+          "inicio": 0.0,
+          "fin": 5.333
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Car wash website design, Texas edition: what actually makes money.",
+      "archivo": "gancho_b.wav",
+      "inicio": 5.783,
+      "duracion": 5.037,
+      "subtitulos": [
+        {
+          "texto": "Car wash website design, Texas edition: what actually makes money.",
+          "inicio": 5.783,
+          "fin": 10.37
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Rainy week? Members still pay.",
+      "archivo": "gancho_c.wav",
+      "inicio": 10.82,
+      "duracion": 2.519,
+      "subtitulos": [
+        {
+          "texto": "Rainy week? Members still pay.",
+          "inicio": 10.82,
+          "fin": 12.889
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Car wash website design in Texas should do one thing first: sell the monthly membership.",
+      "archivo": "s1.wav",
+      "inicio": 13.339,
+      "duracion": 5.911,
+      "subtitulos": [
+        {
+          "texto": "Car wash website design in Texas should do one thing first:",
+          "inicio": 13.339,
+          "fin": 17.243
+        },
+        {
+          "texto": "sell the monthly membership.",
+          "inicio": 17.243,
+          "fin": 18.8
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Menu with prices, before-and-after gallery, and a sign-up button that charges every month.",
+      "archivo": "s2.wav",
+      "inicio": 19.251,
+      "duracion": 5.805,
+      "subtitulos": [
+        {
+          "texto": "Menu with prices, before-and-after gallery,",
+          "inicio": 19.251,
+          "fin": 22.024
+        },
+        {
+          "texto": "and a sign-up button that charges every month.",
+          "inicio": 22.024,
+          "fin": 24.605
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Behind it, a membership app: automatic billing, a QR code or plate check at the entrance, and perks that keep members around.",
+      "archivo": "s3.wav",
+      "inicio": 25.055,
+      "duracion": 8.002,
+      "subtitulos": [
+        {
+          "texto": "Behind it, a membership app: automatic billing,",
+          "inicio": 25.055,
+          "fin": 28.042
+        },
+        {
+          "texto": "a QR code or plate check at the entrance, and perks that keep members around.",
+          "inicio": 28.042,
+          "fin": 32.607
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Want this for your car wash? Comment DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 33.057,
+      "duracion": 3.138,
+      "subtitulos": [
+        {
+          "texto": "Want this for your car wash? Comment DEMO.",
+          "inicio": 33.057,
+          "fin": 35.745
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "The most profitable car washes in Texas don't sell washes. They sell memberships.",
+      "startMs": 0,
+      "endMs": 5333,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Car wash website design, Texas edition: what actually makes money.",
+      "startMs": 5783,
+      "endMs": 10370,
+      "timestampMs": 5783,
+      "confidence": 1
+    },
+    {
+      "text": "Rainy week? Members still pay.",
+      "startMs": 10820,
+      "endMs": 12889,
+      "timestampMs": 10820,
+      "confidence": 1
+    },
+    {
+      "text": "Car wash website design in Texas should do one thing first:",
+      "startMs": 13339,
+      "endMs": 17243,
+      "timestampMs": 13339,
+      "confidence": 1
+    },
+    {
+      "text": "sell the monthly membership.",
+      "startMs": 17243,
+      "endMs": 18800,
+      "timestampMs": 17243,
+      "confidence": 1
+    },
+    {
+      "text": "Menu with prices, before-and-after gallery,",
+      "startMs": 19251,
+      "endMs": 22024,
+      "timestampMs": 19251,
+      "confidence": 1
+    },
+    {
+      "text": "and a sign-up button that charges every month.",
+      "startMs": 22024,
+      "endMs": 24605,
+      "timestampMs": 22024,
+      "confidence": 1
+    },
+    {
+      "text": "Behind it, a membership app: automatic billing,",
+      "startMs": 25055,
+      "endMs": 28042,
+      "timestampMs": 25055,
+      "confidence": 1
+    },
+    {
+      "text": "a QR code or plate check at the entrance, and perks that keep members around.",
+      "startMs": 28042,
+      "endMs": 32607,
+      "timestampMs": 28042,
+      "confidence": 1
+    },
+    {
+      "text": "Want this for your car wash? Comment DEMO.",
+      "startMs": 33057,
+      "endMs": 35745,
+      "timestampMs": 33057,
+      "confidence": 1
+    }
+  ]
+}

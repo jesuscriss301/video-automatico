@@ -1,0 +1,22 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 300,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día siete tratando de que una clínica estética no pierda citas: el resumen de la semana."
+    },
+    {
+      "id": "hoy",
+      "texto": "En siete días: una web que agenda sola, recordatorios por WhatsApp, un registro de cada clienta, y el sistema presentado a clínicas reales."
+    },
+    {
+      "id": "vota",
+      "texto": "La próxima semana: ¿taller mecánico, odontología o bodegas? Vota en los comentarios."
+    },
+    {
+      "id": "cta",
+      "texto": "Y si tienes una clínica, comenta DEMO."
+    }
+  ]
+}

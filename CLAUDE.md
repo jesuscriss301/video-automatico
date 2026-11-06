@@ -26,6 +26,17 @@ ejecutarlas, mira si estás en la PC o en la nube y sigue la sección
 (en la nube con la PC enlazada: escribir `local/tarea.cmd` y lanzar
 `local\correr_tarea.bat`). Lanzadores listos en `local/`.
 
+## Guardar los recursos de cada video (siempre)
+
+Todo lo que se use para un video se guarda en `recursos/` para reutilizarlo:
+capturas de demos y webs, voces (una frase por archivo + `narracion.json`), guiones,
+fuentes, efectos de sonido y la plantilla (`build.py`) con la que se armó.
+
+1. **Antes de empezar**, mira `recursos/INDICE.md`: si ya hay capturas o voces que
+   sirven, úsalas en vez de volver a generarlas.
+2. **Al terminar**, corre `python scripts/guardar_recursos.py` (actualiza `recursos/`
+   y el índice) en la nube y en la PC, y súbelo a GitHub junto con el video.
+
 ## Otras notas
 - Todo en español.
 - La voz clonada principal es "El documentalista de español latino" (versiones 20s y 60s).

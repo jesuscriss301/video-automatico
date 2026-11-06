@@ -1,0 +1,204 @@
+{
+  "voz": "Heart pausada (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 41.827,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Two A M, burst pipe. Your customer calls whoever shows up first on their phone.",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 5.527,
+      "subtitulos": [
+        {
+          "texto": "Two A M, burst pipe. Your customer calls whoever shows up first on their phone.",
+          "inicio": 0.0,
+          "fin": 5.077
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Website design for plumbers in Independence: what wins the call.",
+      "archivo": "gancho_b.wav",
+      "inicio": 5.527,
+      "duracion": 4.333,
+      "subtitulos": [
+        {
+          "texto": "Website design for plumbers in Independence: what wins the call.",
+          "inicio": 5.527,
+          "fin": 9.41
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Plumbers who reply in five minutes win the job. Here's how to do it automatically.",
+      "archivo": "gancho_c.wav",
+      "inicio": 9.86,
+      "duracion": 5.399,
+      "subtitulos": [
+        {
+          "texto": "Plumbers who reply in five minutes win the job. Here's how to do it automatically.",
+          "inicio": 9.86,
+          "fin": 14.809
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "texto": "Website design for plumbers in Independence comes down to this: a tap-to-call button and a page for every area you serve.",
+      "archivo": "s1.wav",
+      "inicio": 15.259,
+      "duracion": 7.703,
+      "subtitulos": [
+        {
+          "texto": "Website design for plumbers in Independence comes down to this:",
+          "inicio": 15.259,
+          "fin": 18.992
+        },
+        {
+          "texto": "a tap-to-call button and a page for every area you serve.",
+          "inicio": 18.992,
+          "fin": 22.512
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "texto": "Drain cleaning, water heaters, leaks: one page per service, so you show up for each search.",
+      "archivo": "s2.wav",
+      "inicio": 22.963,
+      "duracion": 5.975,
+      "subtitulos": [
+        {
+          "texto": "Drain cleaning, water heaters, leaks: one page per service,",
+          "inicio": 22.963,
+          "fin": 26.76
+        },
+        {
+          "texto": "so you show up for each search.",
+          "inicio": 26.76,
+          "fin": 28.488
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "texto": "Then automation: every missed call or form gets a quote by text in under five minutes, and the job goes straight to your tech's phone with the address and route.",
+      "archivo": "s3.wav",
+      "inicio": 28.938,
+      "duracion": 9.645,
+      "subtitulos": [
+        {
+          "texto": "Then automation:",
+          "inicio": 28.938,
+          "fin": 30.154
+        },
+        {
+          "texto": "every missed call or form gets a quote by text in under five minutes,",
+          "inicio": 30.154,
+          "fin": 34.378
+        },
+        {
+          "texto": "and the job goes straight to your tech's phone with the address and route.",
+          "inicio": 34.378,
+          "fin": 38.133
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "texto": "Want your plumbing business on this? Comment DEMO.",
+      "archivo": "s4.wav",
+      "inicio": 38.583,
+      "duracion": 3.245,
+      "subtitulos": [
+        {
+          "texto": "Want your plumbing business on this? Comment DEMO.",
+          "inicio": 38.583,
+          "fin": 41.378
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "Two A M, burst pipe. Your customer calls whoever shows up first on their phone.",
+      "startMs": 0,
+      "endMs": 5077,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Website design for plumbers in Independence: what wins the call.",
+      "startMs": 5527,
+      "endMs": 9410,
+      "timestampMs": 5527,
+      "confidence": 1
+    },
+    {
+      "text": "Plumbers who reply in five minutes win the job. Here's how to do it automatically.",
+      "startMs": 9860,
+      "endMs": 14809,
+      "timestampMs": 9860,
+      "confidence": 1
+    },
+    {
+      "text": "Website design for plumbers in Independence comes down to this:",
+      "startMs": 15259,
+      "endMs": 18992,
+      "timestampMs": 15259,
+      "confidence": 1
+    },
+    {
+      "text": "a tap-to-call button and a page for every area you serve.",
+      "startMs": 18992,
+      "endMs": 22512,
+      "timestampMs": 18992,
+      "confidence": 1
+    },
+    {
+      "text": "Drain cleaning, water heaters, leaks: one page per service,",
+      "startMs": 22963,
+      "endMs": 26760,
+      "timestampMs": 22963,
+      "confidence": 1
+    },
+    {
+      "text": "so you show up for each search.",
+      "startMs": 26760,
+      "endMs": 28488,
+      "timestampMs": 26760,
+      "confidence": 1
+    },
+    {
+      "text": "Then automation:",
+      "startMs": 28938,
+      "endMs": 30154,
+      "timestampMs": 28938,
+      "confidence": 1
+    },
+    {
+      "text": "every missed call or form gets a quote by text in under five minutes,",
+      "startMs": 30154,
+      "endMs": 34378,
+      "timestampMs": 30154,
+      "confidence": 1
+    },
+    {
+      "text": "and the job goes straight to your tech's phone with the address and route.",
+      "startMs": 34378,
+      "endMs": 38133,
+      "timestampMs": 34378,
+      "confidence": 1
+    },
+    {
+      "text": "Want your plumbing business on this? Comment DEMO.",
+      "startMs": 38583,
+      "endMs": 41378,
+      "timestampMs": 38583,
+      "confidence": 1
+    }
+  ]
+}

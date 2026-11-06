@@ -1,0 +1,34 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 250,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "¿Cuántas personas se fueron hoy de tu sala de espera sin ser atendidas?"
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Esta clínica dejó de tener filas en la puerta con una pantalla y un código QR."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Si todavía agendas en un cuaderno, este video es para ti."
+    },
+    {
+      "id": "problema",
+      "texto": "Filas largas, gente que no sabe cuándo le toca y citas que nadie confirma. Todo eso cuesta clientes."
+    },
+    {
+      "id": "turnero",
+      "texto": "Con Turnero, tu cliente toma su turno, lo ve en la pantalla del local y tu equipo llama al siguiente con un clic, en tiempo real."
+    },
+    {
+      "id": "reservas",
+      "texto": "Y si atiendes con cita previa, el sistema de reservas deja agendar desde tu web, confirma solo y puede pedir un anticipo para que no te dejen plantado."
+    },
+    {
+      "id": "cierre",
+      "texto": "Pruébalo gratis en la demo o escríbeme y lo adaptamos a tu negocio."
+    }
+  ]
+}

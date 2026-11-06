@@ -1,0 +1,26 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 300,
+  "lineas": [
+    {
+      "id": "gancho",
+      "texto": "Día cinco tratando de que una clínica estética no pierda citas: hoy toca responder los no."
+    },
+    {
+      "id": "ayer",
+      "texto": "Ayer: el mensaje a las clínicas."
+    },
+    {
+      "id": "hoy",
+      "texto": "Una objeción típica es: ya tenemos a alguien que contesta. Y es justo lo que el sistema resuelve: esa persona no puede contestar a las diez de la noche."
+    },
+    {
+      "id": "meta",
+      "texto": "La meta: agendar las primeras demos en llamada."
+    },
+    {
+      "id": "cta",
+      "texto": "Si tienes una clínica y quieres verlo con la tuya, comenta DEMO."
+    }
+  ]
+}

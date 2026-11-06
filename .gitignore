@@ -26,3 +26,7 @@ estudio/*/cortes/
 estudio/*/.perfil-captura/
 estudio/nichos/voz/*/narracion.wav
 estudio/serie-dia/voz/*/narracion.wav
+estudio/*/renders_es/
+estudio/*/cortes_es/
+estudio/nichos/voz_es/*/narracion.wav
+estudio/*/capturas*/.perfil*/

@@ -188,6 +188,9 @@ Usar la skill `remotion-to-hyperframes` para pasar la composición a HTML y segu
 - Videos del pipeline: el `*.qa.json` que genera solo.
 
 ## 5. Reglas de la casa
+- **Recursos guardados:** antes de capturar o generar voz, revisa `recursos/INDICE.md` y reutiliza lo que sirva.
+  Al terminar cada video, corre `python scripts/guardar_recursos.py` y súbelo a GitHub: así quedan las capturas,
+  las voces por frase, los guiones, las fuentes, los efectos y la plantilla para la próxima vez.
 - Todo en español; textos del cliente literales.
 - No sobrescribir cambios que el usuario haya hecho a mano en un proyecto.
 - Renderizar el entregable cuando el usuario aprueba la vista previa o lo pide.

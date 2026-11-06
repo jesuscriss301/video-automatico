@@ -1,0 +1,34 @@
+{
+  "voz": "El documentalista de español latino (20s)",
+  "pausa_ms": 300,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "Constructores: tu página web está caída y ni siquiera lo sabes."
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Lo que debe incluir la página web y el hosting de un constructor, en cuarenta segundos."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Deja de mandar cotizaciones por mensaje. Que la página web haga la primera."
+    },
+    {
+      "id": "s1",
+      "texto": "La página web de un constructor necesita tres cosas: hosting rápido, fotos de tus obras y una forma de pedir cotizaciones reales."
+    },
+    {
+      "id": "s2",
+      "texto": "Hosting, copias de seguridad y actualizaciones incluidos, para que nunca se caiga y tú no tengas que tocarla."
+    },
+    {
+      "id": "s3",
+      "texto": "Después viene lo que te ahorra horas: el cliente sube fotos y medidas, recibe un precio por metro cuadrado y la obra entra a tu lista de trabajos."
+    },
+    {
+      "id": "s4",
+      "texto": "¿Quieres esto para tu empresa de construcción? Comenta DEMO."
+    }
+  ]
+}
