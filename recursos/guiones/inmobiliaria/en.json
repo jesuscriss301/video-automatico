@@ -1,0 +1,38 @@
+{
+  "voz": "Heart (Kokoro, inglés)",
+  "pausa_ms": 250,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "How many hours do you lose posting the same property on five different portals?"
+    },
+    {
+      "id": "gancho_b",
+      "texto": "If you run a real estate agency, I need seven minutes of your time."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "I'm building a system for real estate agencies, and I want you to design it."
+    },
+    {
+      "id": "contexto",
+      "texto": "I'm Jesús, a software developer in Medellín, Colombia. Before I build it, I want to know what agencies really need, day to day."
+    },
+    {
+      "id": "funciones",
+      "texto": "What would save you the most time? Managing listings and clients, publishing to portals, collecting rent, or replying on WhatsApp automatically."
+    },
+    {
+      "id": "encuesta",
+      "texto": "So I made a short survey. It takes about seven minutes."
+    },
+    {
+      "id": "fundadores",
+      "texto": "Everyone who answers gets to try it for free. And the first founding clients get a lifetime discount and every feature."
+    },
+    {
+      "id": "cta",
+      "texto": "The link is in the description. Thanks for helping me build it."
+    }
+  ]
+}

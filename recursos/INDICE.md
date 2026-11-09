@@ -1,4 +1,4 @@
-# Recursos para videos (actualizado 2026-11-05)
+# Recursos para videos (actualizado 2026-11-09)
 
 Todo lo que se usó para hacer los videos, listo para reutilizar. Se actualiza con
 `python scripts/guardar_recursos.py` después de cada video.
@@ -16,6 +16,24 @@ Todo lo que se usó para hacer los videos, listo para reutilizar. Se actualiza c
 
 Cada grupo trae `narracion.json` con los tiempos y el texto de cada frase.
 
+- **`voces/inmobiliaria/en`** · Heart (Kokoro, inglés)
+  - `gancho_a.wav`: How many hours do you lose posting the same property on five different portals?
+  - `gancho_b.wav`: If you run a real estate agency, I need seven minutes of your time.
+  - `gancho_c.wav`: I'm building a system for real estate agencies, and I want you to design it.
+  - `contexto.wav`: I'm Jesús, a software developer in Medellín, Colombia. Before I build it, I want to know what agencies really need, day to day.
+  - `funciones.wav`: What would save you the most time? Managing listings and clients, publishing to portals, collecting rent, or replying on WhatsApp automatically.
+  - `encuesta.wav`: So I made a short survey. It takes about seven minutes.
+  - `fundadores.wav`: Everyone who answers gets to try it for free. And the first founding clients get a lifetime discount and every feature.
+  - `cta.wav`: The link is in the description. Thanks for helping me build it.
+- **`voces/inmobiliaria/es`** · Dora (Kokoro, español)
+  - `gancho_a.wav`: ¿Cuántas horas pierdes publicando el mismo inmueble en cinco portales?
+  - `gancho_b.wav`: Si tienes una inmobiliaria, necesito siete minutos de tu tiempo.
+  - `gancho_c.wav`: Voy a crear un sistema para inmobiliarias, y quiero que lo diseñes tú.
+  - `contexto.wav`: Soy Jesús, desarrollador en Medellín. Antes de construirlo, quiero saber qué necesitan de verdad quienes viven el día a día de una inmobiliaria.
+  - `funciones.wav`: ¿Qué te ahorraría más tiempo? Manejar inmuebles y clientes, publicar en portales, cobrar los arriendos, o responder por WhatsApp de forma automática.
+  - `encuesta.wav`: Por eso hice una encuesta corta. Son unos siete minutos.
+  - `fundadores.wav`: Quienes respondan podrán probarlo gratis. Y los primeros clientes fundadores tendrán descuento de por vida y todas las funciones.
+  - `cta.wav`: El enlace está en la descripción. Gracias por ayudarme a construirlo.
 - **`voces/nichos/autoshop`** · Heart pausada (Kokoro, inglés)
   - `gancho_a.wav`: Your shop is full and your phone still rings all day.
   - `gancho_b.wav`: Affordable auto shop website design: what four hundred fifty dollars actually gets you.
@@ -218,6 +236,7 @@ Cada grupo trae `narracion.json` con los tiempos y el texto de cada frase.
 
 ## Plantillas (cómo se armó cada serie de videos)
 
+- `plantillas/inmobiliaria`: `PUBLICAR.md`, `SPEC.md`, `build.py`
 - `plantillas/nichos`: `PUBLICAR.md`, `build.py`, `build_es.py`
 - `plantillas/plan-videos`: `SPEC.md`, `build.py`, `capturar.py`, `hacer_espanol.bat`
 - `plantillas/serie-dia`: `PUBLICAR.md`, `build.py`

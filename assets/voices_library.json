@@ -66,5 +66,15 @@
   },
   "note": "Voz masculina en español, gratis y local; corre en la nube en segundos. Usada en los videos por nicho de odontología y lavaderos (05/11/2026).",
   "created_at": "2026-11-05T20:30:00"
+ },
+ {
+  "name": "Dora (Kokoro, español)",
+  "backend": "kokoro",
+  "options": {
+   "voice": "ef_dora",
+   "lang": "es"
+  },
+  "note": "Voz femenina en español, gratis y local; corre en la nube en segundos. Elegida para el video de la encuesta del sistema inmobiliario (09/11/2026).",
+  "created_at": "2026-11-09T12:10:00"
  }
 ]

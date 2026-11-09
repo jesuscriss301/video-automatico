@@ -1,0 +1,38 @@
+{
+  "voz": "Dora (Kokoro, español)",
+  "pausa_ms": 250,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "¿Cuántas horas pierdes publicando el mismo inmueble en cinco portales?"
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Si tienes una inmobiliaria, necesito siete minutos de tu tiempo."
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Voy a crear un sistema para inmobiliarias, y quiero que lo diseñes tú."
+    },
+    {
+      "id": "contexto",
+      "texto": "Soy Jesús, desarrollador en Medellín. Antes de construirlo, quiero saber qué necesitan de verdad quienes viven el día a día de una inmobiliaria."
+    },
+    {
+      "id": "funciones",
+      "texto": "¿Qué te ahorraría más tiempo? Manejar inmuebles y clientes, publicar en portales, cobrar los arriendos, o responder por WhatsApp de forma automática."
+    },
+    {
+      "id": "encuesta",
+      "texto": "Por eso hice una encuesta corta. Son unos siete minutos."
+    },
+    {
+      "id": "fundadores",
+      "texto": "Quienes respondan podrán probarlo gratis. Y los primeros clientes fundadores tendrán descuento de por vida y todas las funciones."
+    },
+    {
+      "id": "cta",
+      "texto": "El enlace está en la descripción. Gracias por ayudarme a construirlo."
+    }
+  ]
+}
