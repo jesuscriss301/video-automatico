@@ -74,8 +74,13 @@ def main():
             elif n.startswith("cortes"):
                 for f in sub.rglob("assets/sfx/*"):
                     usados_sfx.add(f.name)
+        src = proy / "src"
+        if src.is_dir():  # proyectos de Remotion: el código de la plantilla
+            for f in src.rglob("*"):
+                if f.is_file() and f.suffix in (".tsx", ".ts", ".json", ".css"):
+                    nuevos += copiar(f, REC / "plantillas" / proy.name / "src" / f.relative_to(src))
         for f in proy.iterdir():
-            if f.is_file() and (f.name.startswith("build") and f.suffix == ".py" or f.name in ("SPEC.md", "PUBLICAR.md")
+            if f.is_file() and (f.name in ("package.json", "gen_datos.py")) or f.is_file() and (f.name.startswith("build") and f.suffix == ".py" or f.name in ("SPEC.md", "PUBLICAR.md")
                                 or f.name.startswith("captur") or f.suffix == ".bat"):
                 nuevos += copiar(f, REC / "plantillas" / proy.name / f.name)
     for nom in sorted(usados_sfx):

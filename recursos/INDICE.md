@@ -224,7 +224,7 @@ Cada grupo trae `narracion.json` con los tiempos y el texto de cada frase.
 
 ## Fuentes
 
-`barlow-condensed-latin-700-normal.woff2`, `cormorant-garamond-latin-600-normal.woff2`, `cormorant-garamond-latin-700-normal.woff2`, `lexend-latin-700-normal.woff2`, `rajdhani-latin-700-normal.woff2`, `sora-latin-700-normal.woff2`, `teko-latin-600-normal.woff2`
+`barlow-condensed-latin-700-normal.woff2`, `cormorant-garamond-latin-600-normal.woff2`, `cormorant-garamond-latin-700-normal.woff2`, `jetbrains-mono-latin-800-normal.woff2`, `lexend-latin-700-normal.woff2`, `lora-latin-400-italic.woff2`, `lora-latin-400-normal.woff2`, `lora-latin-600-normal.woff2`, `poppins-latin-500-normal.woff2`, `poppins-latin-700-normal.woff2`, `poppins-latin-800-normal.woff2`, `rajdhani-latin-700-normal.woff2`, `sora-latin-700-normal.woff2`, `teko-latin-600-normal.woff2`
 
 ## Efectos de sonido
 
@@ -237,6 +237,7 @@ Cada grupo trae `narracion.json` con los tiempos y el texto de cada frase.
 ## Plantillas (cómo se armó cada serie de videos)
 
 - `plantillas/inmobiliaria`: `PUBLICAR.md`, `SPEC.md`, `build.py`
+- `plantillas/inmobiliaria-remotion`: `SPEC.md`, `gen_datos.py`, `package.json`, `src`
 - `plantillas/nichos`: `PUBLICAR.md`, `build.py`, `build_es.py`
 - `plantillas/plan-videos`: `SPEC.md`, `build.py`, `capturar.py`, `hacer_espanol.bat`
 - `plantillas/serie-dia`: `PUBLICAR.md`, `build.py`

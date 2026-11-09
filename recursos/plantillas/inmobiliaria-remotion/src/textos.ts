@@ -1,0 +1,58 @@
+export type Lang = "es" | "en";
+
+export const TX = {
+  es: {
+    ganchos: {
+      a: "¿Cuántas horas pierdes publicando el *mismo inmueble* en *5 portales?*",
+      b: "Si tienes una inmobiliaria, necesito *7 minutos* de tu tiempo.",
+      c: "Voy a crear un sistema para inmobiliarias, y quiero que *lo diseñes tú.*",
+    },
+    tag: "SOFTWARE PARA INMOBILIARIAS",
+    portal: "Portal",
+    ficha: "3 hab · 2 baños · 85 m²",
+    quien: "Jesús Cristancho",
+    rol: "Desarrollador de software · Medellín",
+    estado: "Sistema para inmobiliarias",
+    estado2: "En diseño, con tu ayuda",
+    pregunta: "¿Qué te ahorraría más tiempo?",
+    funciones: ["Inmuebles y clientes", "Publicar en portales", "Cobro de arriendos", "WhatsApp automático"],
+    encTit: "Encuesta",
+    encMin: "7 min",
+    encQ: "¿Qué tarea te quita más tiempo hoy?",
+    encOps: ["Publicar inmuebles", "Responder clientes", "Cobrar arriendos"],
+    fund: [
+      ["Prueba gratis", "Para quienes respondan"],
+      ["Cliente fundador", "Descuento de por vida + todas las funciones"],
+    ],
+    cta1: "Responde la encuesta",
+    cta2: "Enlace en la descripción",
+    cta3: "Son solo 7 minutos",
+  },
+  en: {
+    ganchos: {
+      a: "How many hours do you lose posting the *same property* on *5 portals?*",
+      b: "If you run a real estate agency, I need *7 minutes* of your time.",
+      c: "I'm building a system for real estate agencies, and I want *you to design it.*",
+    },
+    tag: "REAL ESTATE AGENCY SOFTWARE",
+    portal: "Portal",
+    ficha: "3 bd · 2 ba · 915 sq ft",
+    quien: "Jesús Cristancho",
+    rol: "Software developer · Medellín, Colombia",
+    estado: "Real estate agency system",
+    estado2: "In design, with your help",
+    pregunta: "What would save you the most time?",
+    funciones: ["Listings & clients", "Publish to portals", "Rent collection", "Automated WhatsApp"],
+    encTit: "Survey",
+    encMin: "7 min",
+    encQ: "Which task takes most of your time today?",
+    encOps: ["Posting listings", "Replying to clients", "Collecting rent"],
+    fund: [
+      ["Free trial", "For everyone who answers"],
+      ["Founding client", "Lifetime discount + every feature"],
+    ],
+    cta1: "Take the survey",
+    cta2: "Link in the description",
+    cta3: "It only takes 7 minutes",
+  },
+} as const;

@@ -1,0 +1,225 @@
+{
+  "voz": "Dora (Kokoro, español)",
+  "backend": "kokoro",
+  "duracion_total": 44.24,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "¿Cuántas horas pierdes publicando el mismo inmueble en cinco portales?",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 4.111,
+      "subtitulos": [
+        {
+          "texto": "¿Cuántas horas pierdes publicando el mismo inmueble en cinco portales?",
+          "inicio": 0.0,
+          "fin": 3.861
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "Si tienes una inmobiliaria, necesito siete minutos de tu tiempo.",
+      "archivo": "gancho_b.wav",
+      "inicio": 4.111,
+      "duracion": 3.941,
+      "subtitulos": [
+        {
+          "texto": "Si tienes una inmobiliaria, necesito siete minutos de tu tiempo.",
+          "inicio": 4.111,
+          "fin": 7.802
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "Voy a crear un sistema para inmobiliarias, y quiero que lo diseñes tú.",
+      "archivo": "gancho_c.wav",
+      "inicio": 8.052,
+      "duracion": 4.005,
+      "subtitulos": [
+        {
+          "texto": "Voy a crear un sistema para inmobiliarias, y quiero que lo diseñes tú.",
+          "inicio": 8.052,
+          "fin": 11.807
+        }
+      ]
+    },
+    {
+      "id": "contexto",
+      "texto": "Soy Jesús, desarrollador en Medellín. Antes de construirlo, quiero saber qué necesitan de verdad quienes viven el día a día de una inmobiliaria.",
+      "archivo": "contexto.wav",
+      "inicio": 12.057,
+      "duracion": 7.93,
+      "subtitulos": [
+        {
+          "texto": "Soy Jesús, desarrollador en Medellín. Antes de construirlo,",
+          "inicio": 12.057,
+          "fin": 15.257
+        },
+        {
+          "texto": "quiero saber qué necesitan de verdad quienes viven el día a día de una inmobiliaria.",
+          "inicio": 15.257,
+          "fin": 19.737
+        }
+      ]
+    },
+    {
+      "id": "funciones",
+      "texto": "¿Qué te ahorraría más tiempo? Manejar inmuebles y clientes, publicar en portales, cobrar los arriendos, o responder por WhatsApp de forma automática.",
+      "archivo": "funciones.wav",
+      "inicio": 19.987,
+      "duracion": 8.613,
+      "subtitulos": [
+        {
+          "texto": "¿Qué te ahorraría más tiempo? Manejar inmuebles y clientes, publicar en portales,",
+          "inicio": 19.987,
+          "fin": 24.488
+        },
+        {
+          "texto": "cobrar los arriendos, o responder por WhatsApp de forma automática.",
+          "inicio": 24.488,
+          "fin": 28.349
+        }
+      ]
+    },
+    {
+      "id": "encuesta",
+      "texto": "Por eso hice una encuesta corta. Son unos siete minutos.",
+      "archivo": "encuesta.wav",
+      "inicio": 28.599,
+      "duracion": 3.557,
+      "subtitulos": [
+        {
+          "texto": "Por eso hice una encuesta corta. Son unos siete minutos.",
+          "inicio": 28.599,
+          "fin": 31.906
+        }
+      ]
+    },
+    {
+      "id": "fundadores",
+      "texto": "Quienes respondan podrán probarlo gratis. Y los primeros clientes fundadores tendrán descuento de por vida y todas las funciones.",
+      "archivo": "fundadores.wav",
+      "inicio": 32.156,
+      "duracion": 7.802,
+      "subtitulos": [
+        {
+          "texto": "Quienes respondan podrán probarlo gratis.",
+          "inicio": 32.156,
+          "fin": 34.567
+        },
+        {
+          "texto": "Y los primeros clientes fundadores tendrán descuento de por vida y todas las",
+          "inicio": 34.567,
+          "fin": 38.876
+        },
+        {
+          "texto": "funciones.",
+          "inicio": 38.876,
+          "fin": 39.708
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "texto": "El enlace está en la descripción. Gracias por ayudarme a construirlo.",
+      "archivo": "cta.wav",
+      "inicio": 39.958,
+      "duracion": 4.282,
+      "subtitulos": [
+        {
+          "texto": "El enlace está en la descripción. Gracias por ayudarme a construirlo.",
+          "inicio": 39.958,
+          "fin": 43.99
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "¿Cuántas horas pierdes publicando el mismo inmueble en cinco portales?",
+      "startMs": 0,
+      "endMs": 3861,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "Si tienes una inmobiliaria, necesito siete minutos de tu tiempo.",
+      "startMs": 4111,
+      "endMs": 7802,
+      "timestampMs": 4111,
+      "confidence": 1
+    },
+    {
+      "text": "Voy a crear un sistema para inmobiliarias, y quiero que lo diseñes tú.",
+      "startMs": 8052,
+      "endMs": 11807,
+      "timestampMs": 8052,
+      "confidence": 1
+    },
+    {
+      "text": "Soy Jesús, desarrollador en Medellín. Antes de construirlo,",
+      "startMs": 12057,
+      "endMs": 15257,
+      "timestampMs": 12057,
+      "confidence": 1
+    },
+    {
+      "text": "quiero saber qué necesitan de verdad quienes viven el día a día de una inmobiliaria.",
+      "startMs": 15257,
+      "endMs": 19737,
+      "timestampMs": 15257,
+      "confidence": 1
+    },
+    {
+      "text": "¿Qué te ahorraría más tiempo? Manejar inmuebles y clientes, publicar en portales,",
+      "startMs": 19987,
+      "endMs": 24488,
+      "timestampMs": 19987,
+      "confidence": 1
+    },
+    {
+      "text": "cobrar los arriendos, o responder por WhatsApp de forma automática.",
+      "startMs": 24488,
+      "endMs": 28349,
+      "timestampMs": 24488,
+      "confidence": 1
+    },
+    {
+      "text": "Por eso hice una encuesta corta. Son unos siete minutos.",
+      "startMs": 28599,
+      "endMs": 31906,
+      "timestampMs": 28599,
+      "confidence": 1
+    },
+    {
+      "text": "Quienes respondan podrán probarlo gratis.",
+      "startMs": 32156,
+      "endMs": 34567,
+      "timestampMs": 32156,
+      "confidence": 1
+    },
+    {
+      "text": "Y los primeros clientes fundadores tendrán descuento de por vida y todas las",
+      "startMs": 34567,
+      "endMs": 38876,
+      "timestampMs": 34567,
+      "confidence": 1
+    },
+    {
+      "text": "funciones.",
+      "startMs": 38876,
+      "endMs": 39708,
+      "timestampMs": 38876,
+      "confidence": 1
+    },
+    {
+      "text": "El enlace está en la descripción. Gracias por ayudarme a construirlo.",
+      "startMs": 39958,
+      "endMs": 43990,
+      "timestampMs": 39958,
+      "confidence": 1
+    }
+  ]
+}

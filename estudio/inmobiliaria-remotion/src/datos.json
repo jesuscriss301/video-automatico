@@ -1,0 +1,1307 @@
+{
+ "es-a": {
+  "lang": "es",
+  "gancho": "a",
+  "total": 1240,
+  "escenas": [
+   {
+    "id": "gancho",
+    "from": 0,
+    "dur": 141
+   },
+   {
+    "id": "contexto",
+    "from": 141,
+    "dur": 245
+   },
+   {
+    "id": "funciones",
+    "from": 387,
+    "dur": 266
+   },
+   {
+    "id": "encuesta",
+    "from": 653,
+    "dur": 114
+   },
+   {
+    "id": "fundadores",
+    "from": 767,
+    "dur": 242
+   },
+   {
+    "id": "cta",
+    "from": 1008,
+    "dur": 154
+   },
+   {
+    "id": "logo",
+    "from": 1162,
+    "dur": 78
+   }
+  ],
+  "subs": [
+   {
+    "text": "Soy Jesús,",
+    "from": 143,
+    "dur": 18
+   },
+   {
+    "text": "desarrollador en Medellín.",
+    "from": 161,
+    "dur": 42
+   },
+   {
+    "text": "Antes de construirlo,",
+    "from": 203,
+    "dur": 35
+   },
+   {
+    "text": "quiero saber qué",
+    "from": 239,
+    "dur": 27
+   },
+   {
+    "text": "necesitan de verdad",
+    "from": 265,
+    "dur": 31
+   },
+   {
+    "text": "quienes viven el",
+    "from": 296,
+    "dur": 27
+   },
+   {
+    "text": "día a día",
+    "from": 323,
+    "dur": 16
+   },
+   {
+    "text": "de una inmobiliaria.",
+    "from": 339,
+    "dur": 33
+   },
+   {
+    "text": "¿Qué te ahorraría",
+    "from": 388,
+    "dur": 29
+   },
+   {
+    "text": "más tiempo?",
+    "from": 417,
+    "dur": 20
+   },
+   {
+    "text": "Manejar inmuebles y",
+    "from": 437,
+    "dur": 32
+   },
+   {
+    "text": "clientes,",
+    "from": 469,
+    "dur": 17
+   },
+   {
+    "text": "publicar en portales,",
+    "from": 486,
+    "dur": 35
+   },
+   {
+    "text": "cobrar los arriendos,",
+    "from": 523,
+    "dur": 37
+   },
+   {
+    "text": "o responder por",
+    "from": 560,
+    "dur": 27
+   },
+   {
+    "text": "WhatsApp de forma",
+    "from": 587,
+    "dur": 30
+   },
+   {
+    "text": "automática.",
+    "from": 617,
+    "dur": 21
+   },
+   {
+    "text": "Por eso hice",
+    "from": 654,
+    "dur": 24
+   },
+   {
+    "text": "una encuesta corta.",
+    "from": 678,
+    "dur": 36
+   },
+   {
+    "text": "Son unos 7",
+    "from": 714,
+    "dur": 21
+   },
+   {
+    "text": "minutos.",
+    "from": 735,
+    "dur": 17
+   },
+   {
+    "text": "Quienes respondan podrán",
+    "from": 768,
+    "dur": 42
+   },
+   {
+    "text": "probarlo gratis.",
+    "from": 810,
+    "dur": 29
+   },
+   {
+    "text": "Y los primeros",
+    "from": 840,
+    "dur": 25
+   },
+   {
+    "text": "clientes fundadores tendrán",
+    "from": 865,
+    "dur": 45
+   },
+   {
+    "text": "descuento de por",
+    "from": 911,
+    "dur": 28
+   },
+   {
+    "text": "vida y todas",
+    "from": 939,
+    "dur": 22
+   },
+   {
+    "text": "las",
+    "from": 961,
+    "dur": 8
+   },
+   {
+    "text": "funciones.",
+    "from": 970,
+    "dur": 24
+   }
+  ],
+  "audios": [
+   {
+    "src": "voz/es/gancho_a.wav",
+    "from": 2
+   },
+   {
+    "src": "voz/es/contexto.wav",
+    "from": 144
+   },
+   {
+    "src": "voz/es/funciones.wav",
+    "from": 389
+   },
+   {
+    "src": "voz/es/encuesta.wav",
+    "from": 655
+   },
+   {
+    "src": "voz/es/fundadores.wav",
+    "from": 769
+   },
+   {
+    "src": "voz/es/cta.wav",
+    "from": 1011
+   }
+  ]
+ },
+ "es-b": {
+  "lang": "es",
+  "gancho": "b",
+  "total": 1235,
+  "escenas": [
+   {
+    "id": "gancho",
+    "from": 0,
+    "dur": 136
+   },
+   {
+    "id": "contexto",
+    "from": 136,
+    "dur": 245
+   },
+   {
+    "id": "funciones",
+    "from": 382,
+    "dur": 266
+   },
+   {
+    "id": "encuesta",
+    "from": 648,
+    "dur": 114
+   },
+   {
+    "id": "fundadores",
+    "from": 762,
+    "dur": 242
+   },
+   {
+    "id": "cta",
+    "from": 1003,
+    "dur": 154
+   },
+   {
+    "id": "logo",
+    "from": 1157,
+    "dur": 78
+   }
+  ],
+  "subs": [
+   {
+    "text": "Soy Jesús,",
+    "from": 137,
+    "dur": 18
+   },
+   {
+    "text": "desarrollador en Medellín.",
+    "from": 155,
+    "dur": 42
+   },
+   {
+    "text": "Antes de construirlo,",
+    "from": 198,
+    "dur": 35
+   },
+   {
+    "text": "quiero saber qué",
+    "from": 233,
+    "dur": 27
+   },
+   {
+    "text": "necesitan de verdad",
+    "from": 260,
+    "dur": 31
+   },
+   {
+    "text": "quienes viven el",
+    "from": 291,
+    "dur": 27
+   },
+   {
+    "text": "día a día",
+    "from": 318,
+    "dur": 16
+   },
+   {
+    "text": "de una inmobiliaria.",
+    "from": 334,
+    "dur": 33
+   },
+   {
+    "text": "¿Qué te ahorraría",
+    "from": 383,
+    "dur": 29
+   },
+   {
+    "text": "más tiempo?",
+    "from": 412,
+    "dur": 20
+   },
+   {
+    "text": "Manejar inmuebles y",
+    "from": 432,
+    "dur": 32
+   },
+   {
+    "text": "clientes,",
+    "from": 464,
+    "dur": 17
+   },
+   {
+    "text": "publicar en portales,",
+    "from": 481,
+    "dur": 35
+   },
+   {
+    "text": "cobrar los arriendos,",
+    "from": 518,
+    "dur": 37
+   },
+   {
+    "text": "o responder por",
+    "from": 554,
+    "dur": 27
+   },
+   {
+    "text": "WhatsApp de forma",
+    "from": 582,
+    "dur": 30
+   },
+   {
+    "text": "automática.",
+    "from": 612,
+    "dur": 21
+   },
+   {
+    "text": "Por eso hice",
+    "from": 649,
+    "dur": 24
+   },
+   {
+    "text": "una encuesta corta.",
+    "from": 673,
+    "dur": 36
+   },
+   {
+    "text": "Son unos 7",
+    "from": 709,
+    "dur": 21
+   },
+   {
+    "text": "minutos.",
+    "from": 730,
+    "dur": 17
+   },
+   {
+    "text": "Quienes respondan podrán",
+    "from": 763,
+    "dur": 42
+   },
+   {
+    "text": "probarlo gratis.",
+    "from": 805,
+    "dur": 29
+   },
+   {
+    "text": "Y los primeros",
+    "from": 835,
+    "dur": 25
+   },
+   {
+    "text": "clientes fundadores tendrán",
+    "from": 860,
+    "dur": 45
+   },
+   {
+    "text": "descuento de por",
+    "from": 906,
+    "dur": 28
+   },
+   {
+    "text": "vida y todas",
+    "from": 934,
+    "dur": 22
+   },
+   {
+    "text": "las",
+    "from": 956,
+    "dur": 8
+   },
+   {
+    "text": "funciones.",
+    "from": 965,
+    "dur": 24
+   }
+  ],
+  "audios": [
+   {
+    "src": "voz/es/gancho_b.wav",
+    "from": 2
+   },
+   {
+    "src": "voz/es/contexto.wav",
+    "from": 139
+   },
+   {
+    "src": "voz/es/funciones.wav",
+    "from": 384
+   },
+   {
+    "src": "voz/es/encuesta.wav",
+    "from": 650
+   },
+   {
+    "src": "voz/es/fundadores.wav",
+    "from": 764
+   },
+   {
+    "src": "voz/es/cta.wav",
+    "from": 1006
+   }
+  ]
+ },
+ "es-c": {
+  "lang": "es",
+  "gancho": "c",
+  "total": 1237,
+  "escenas": [
+   {
+    "id": "gancho",
+    "from": 0,
+    "dur": 138
+   },
+   {
+    "id": "contexto",
+    "from": 138,
+    "dur": 245
+   },
+   {
+    "id": "funciones",
+    "from": 384,
+    "dur": 266
+   },
+   {
+    "id": "encuesta",
+    "from": 649,
+    "dur": 114
+   },
+   {
+    "id": "fundadores",
+    "from": 764,
+    "dur": 242
+   },
+   {
+    "id": "cta",
+    "from": 1005,
+    "dur": 154
+   },
+   {
+    "id": "logo",
+    "from": 1159,
+    "dur": 78
+   }
+  ],
+  "subs": [
+   {
+    "text": "Soy Jesús,",
+    "from": 139,
+    "dur": 18
+   },
+   {
+    "text": "desarrollador en Medellín.",
+    "from": 157,
+    "dur": 42
+   },
+   {
+    "text": "Antes de construirlo,",
+    "from": 200,
+    "dur": 35
+   },
+   {
+    "text": "quiero saber qué",
+    "from": 235,
+    "dur": 27
+   },
+   {
+    "text": "necesitan de verdad",
+    "from": 262,
+    "dur": 31
+   },
+   {
+    "text": "quienes viven el",
+    "from": 293,
+    "dur": 27
+   },
+   {
+    "text": "día a día",
+    "from": 320,
+    "dur": 16
+   },
+   {
+    "text": "de una inmobiliaria.",
+    "from": 336,
+    "dur": 33
+   },
+   {
+    "text": "¿Qué te ahorraría",
+    "from": 385,
+    "dur": 29
+   },
+   {
+    "text": "más tiempo?",
+    "from": 414,
+    "dur": 20
+   },
+   {
+    "text": "Manejar inmuebles y",
+    "from": 434,
+    "dur": 32
+   },
+   {
+    "text": "clientes,",
+    "from": 466,
+    "dur": 17
+   },
+   {
+    "text": "publicar en portales,",
+    "from": 483,
+    "dur": 35
+   },
+   {
+    "text": "cobrar los arriendos,",
+    "from": 520,
+    "dur": 37
+   },
+   {
+    "text": "o responder por",
+    "from": 556,
+    "dur": 27
+   },
+   {
+    "text": "WhatsApp de forma",
+    "from": 583,
+    "dur": 30
+   },
+   {
+    "text": "automática.",
+    "from": 614,
+    "dur": 21
+   },
+   {
+    "text": "Por eso hice",
+    "from": 651,
+    "dur": 24
+   },
+   {
+    "text": "una encuesta corta.",
+    "from": 675,
+    "dur": 36
+   },
+   {
+    "text": "Son unos 7",
+    "from": 711,
+    "dur": 21
+   },
+   {
+    "text": "minutos.",
+    "from": 731,
+    "dur": 17
+   },
+   {
+    "text": "Quienes respondan podrán",
+    "from": 765,
+    "dur": 42
+   },
+   {
+    "text": "probarlo gratis.",
+    "from": 807,
+    "dur": 29
+   },
+   {
+    "text": "Y los primeros",
+    "from": 837,
+    "dur": 25
+   },
+   {
+    "text": "clientes fundadores tendrán",
+    "from": 862,
+    "dur": 45
+   },
+   {
+    "text": "descuento de por",
+    "from": 907,
+    "dur": 28
+   },
+   {
+    "text": "vida y todas",
+    "from": 936,
+    "dur": 22
+   },
+   {
+    "text": "las",
+    "from": 957,
+    "dur": 8
+   },
+   {
+    "text": "funciones.",
+    "from": 966,
+    "dur": 24
+   }
+  ],
+  "audios": [
+   {
+    "src": "voz/es/gancho_c.wav",
+    "from": 2
+   },
+   {
+    "src": "voz/es/contexto.wav",
+    "from": 141
+   },
+   {
+    "src": "voz/es/funciones.wav",
+    "from": 386
+   },
+   {
+    "src": "voz/es/encuesta.wav",
+    "from": 652
+   },
+   {
+    "src": "voz/es/fundadores.wav",
+    "from": 766
+   },
+   {
+    "src": "voz/es/cta.wav",
+    "from": 1008
+   }
+  ]
+ },
+ "en-a": {
+  "lang": "en",
+  "gancho": "a",
+  "total": 1192,
+  "escenas": [
+   {
+    "id": "gancho",
+    "from": 0,
+    "dur": 155
+   },
+   {
+    "id": "contexto",
+    "from": 155,
+    "dur": 238
+   },
+   {
+    "id": "funciones",
+    "from": 394,
+    "dur": 261
+   },
+   {
+    "id": "encuesta",
+    "from": 655,
+    "dur": 111
+   },
+   {
+    "id": "fundadores",
+    "from": 766,
+    "dur": 220
+   },
+   {
+    "id": "cta",
+    "from": 985,
+    "dur": 129
+   },
+   {
+    "id": "logo",
+    "from": 1114,
+    "dur": 78
+   }
+  ],
+  "subs": [
+   {
+    "text": "I'm Jesús,",
+    "from": 157,
+    "dur": 20
+   },
+   {
+    "text": "a software developer",
+    "from": 177,
+    "dur": 37
+   },
+   {
+    "text": "in Medellín,",
+    "from": 213,
+    "dur": 23
+   },
+   {
+    "text": "Colombia.",
+    "from": 236,
+    "dur": 18
+   },
+   {
+    "text": "Before I build",
+    "from": 256,
+    "dur": 25
+   },
+   {
+    "text": "it,",
+    "from": 281,
+    "dur": 8
+   },
+   {
+    "text": "I want to",
+    "from": 289,
+    "dur": 17
+   },
+   {
+    "text": "know what agencies",
+    "from": 306,
+    "dur": 31
+   },
+   {
+    "text": "really need,",
+    "from": 337,
+    "dur": 22
+   },
+   {
+    "text": "day to day.",
+    "from": 359,
+    "dur": 20
+   },
+   {
+    "text": "What would save",
+    "from": 395,
+    "dur": 25
+   },
+   {
+    "text": "you the most",
+    "from": 420,
+    "dur": 20
+   },
+   {
+    "text": "time?",
+    "from": 440,
+    "dur": 10
+   },
+   {
+    "text": "Managing listings and",
+    "from": 451,
+    "dur": 34
+   },
+   {
+    "text": "clients,",
+    "from": 484,
+    "dur": 15
+   },
+   {
+    "text": "publishing to portals,",
+    "from": 500,
+    "dur": 40
+   },
+   {
+    "text": "collecting rent,",
+    "from": 540,
+    "dur": 30
+   },
+   {
+    "text": "or replying on",
+    "from": 571,
+    "dur": 27
+   },
+   {
+    "text": "WhatsApp automatically.",
+    "from": 597,
+    "dur": 42
+   },
+   {
+    "text": "So I made",
+    "from": 656,
+    "dur": 19
+   },
+   {
+    "text": "a short survey.",
+    "from": 674,
+    "dur": 29
+   },
+   {
+    "text": "It takes about",
+    "from": 703,
+    "dur": 27
+   },
+   {
+    "text": "7 minutes.",
+    "from": 730,
+    "dur": 20
+   },
+   {
+    "text": "Everyone who answers",
+    "from": 767,
+    "dur": 36
+   },
+   {
+    "text": "gets to try",
+    "from": 803,
+    "dur": 21
+   },
+   {
+    "text": "it for free.",
+    "from": 824,
+    "dur": 23
+   },
+   {
+    "text": "And the first",
+    "from": 849,
+    "dur": 23
+   },
+   {
+    "text": "founding clients get",
+    "from": 872,
+    "dur": 34
+   },
+   {
+    "text": "a lifetime discount",
+    "from": 906,
+    "dur": 33
+   },
+   {
+    "text": "and every feature.",
+    "from": 939,
+    "dur": 31
+   }
+  ],
+  "audios": [
+   {
+    "src": "voz/en/gancho_a.wav",
+    "from": 2
+   },
+   {
+    "src": "voz/en/contexto.wav",
+    "from": 158
+   },
+   {
+    "src": "voz/en/funciones.wav",
+    "from": 396
+   },
+   {
+    "src": "voz/en/encuesta.wav",
+    "from": 657
+   },
+   {
+    "src": "voz/en/fundadores.wav",
+    "from": 768
+   },
+   {
+    "src": "voz/en/cta.wav",
+    "from": 988
+   }
+  ]
+ },
+ "en-b": {
+  "lang": "en",
+  "gancho": "b",
+  "total": 1188,
+  "escenas": [
+   {
+    "id": "gancho",
+    "from": 0,
+    "dur": 151
+   },
+   {
+    "id": "contexto",
+    "from": 151,
+    "dur": 238
+   },
+   {
+    "id": "funciones",
+    "from": 389,
+    "dur": 261
+   },
+   {
+    "id": "encuesta",
+    "from": 650,
+    "dur": 111
+   },
+   {
+    "id": "fundadores",
+    "from": 761,
+    "dur": 220
+   },
+   {
+    "id": "cta",
+    "from": 981,
+    "dur": 129
+   },
+   {
+    "id": "logo",
+    "from": 1110,
+    "dur": 78
+   }
+  ],
+  "subs": [
+   {
+    "text": "I'm Jesús,",
+    "from": 152,
+    "dur": 20
+   },
+   {
+    "text": "a software developer",
+    "from": 172,
+    "dur": 37
+   },
+   {
+    "text": "in Medellín,",
+    "from": 209,
+    "dur": 23
+   },
+   {
+    "text": "Colombia.",
+    "from": 232,
+    "dur": 18
+   },
+   {
+    "text": "Before I build",
+    "from": 251,
+    "dur": 25
+   },
+   {
+    "text": "it,",
+    "from": 276,
+    "dur": 8
+   },
+   {
+    "text": "I want to",
+    "from": 284,
+    "dur": 17
+   },
+   {
+    "text": "know what agencies",
+    "from": 301,
+    "dur": 31
+   },
+   {
+    "text": "really need,",
+    "from": 332,
+    "dur": 22
+   },
+   {
+    "text": "day to day.",
+    "from": 354,
+    "dur": 20
+   },
+   {
+    "text": "What would save",
+    "from": 390,
+    "dur": 25
+   },
+   {
+    "text": "you the most",
+    "from": 415,
+    "dur": 20
+   },
+   {
+    "text": "time?",
+    "from": 436,
+    "dur": 10
+   },
+   {
+    "text": "Managing listings and",
+    "from": 446,
+    "dur": 34
+   },
+   {
+    "text": "clients,",
+    "from": 480,
+    "dur": 15
+   },
+   {
+    "text": "publishing to portals,",
+    "from": 495,
+    "dur": 40
+   },
+   {
+    "text": "collecting rent,",
+    "from": 536,
+    "dur": 30
+   },
+   {
+    "text": "or replying on",
+    "from": 566,
+    "dur": 27
+   },
+   {
+    "text": "WhatsApp automatically.",
+    "from": 593,
+    "dur": 42
+   },
+   {
+    "text": "So I made",
+    "from": 651,
+    "dur": 19
+   },
+   {
+    "text": "a short survey.",
+    "from": 670,
+    "dur": 29
+   },
+   {
+    "text": "It takes about",
+    "from": 699,
+    "dur": 27
+   },
+   {
+    "text": "7 minutes.",
+    "from": 726,
+    "dur": 20
+   },
+   {
+    "text": "Everyone who answers",
+    "from": 762,
+    "dur": 36
+   },
+   {
+    "text": "gets to try",
+    "from": 798,
+    "dur": 21
+   },
+   {
+    "text": "it for free.",
+    "from": 820,
+    "dur": 23
+   },
+   {
+    "text": "And the first",
+    "from": 844,
+    "dur": 23
+   },
+   {
+    "text": "founding clients get",
+    "from": 868,
+    "dur": 34
+   },
+   {
+    "text": "a lifetime discount",
+    "from": 902,
+    "dur": 33
+   },
+   {
+    "text": "and every feature.",
+    "from": 935,
+    "dur": 31
+   }
+  ],
+  "audios": [
+   {
+    "src": "voz/en/gancho_b.wav",
+    "from": 2
+   },
+   {
+    "src": "voz/en/contexto.wav",
+    "from": 153
+   },
+   {
+    "src": "voz/en/funciones.wav",
+    "from": 392
+   },
+   {
+    "src": "voz/en/encuesta.wav",
+    "from": 652
+   },
+   {
+    "src": "voz/en/fundadores.wav",
+    "from": 763
+   },
+   {
+    "src": "voz/en/cta.wav",
+    "from": 983
+   }
+  ]
+ },
+ "en-c": {
+  "lang": "en",
+  "gancho": "c",
+  "total": 1196,
+  "escenas": [
+   {
+    "id": "gancho",
+    "from": 0,
+    "dur": 159
+   },
+   {
+    "id": "contexto",
+    "from": 159,
+    "dur": 238
+   },
+   {
+    "id": "funciones",
+    "from": 397,
+    "dur": 261
+   },
+   {
+    "id": "encuesta",
+    "from": 658,
+    "dur": 111
+   },
+   {
+    "id": "fundadores",
+    "from": 769,
+    "dur": 220
+   },
+   {
+    "id": "cta",
+    "from": 989,
+    "dur": 129
+   },
+   {
+    "id": "logo",
+    "from": 1118,
+    "dur": 78
+   }
+  ],
+  "subs": [
+   {
+    "text": "I'm Jesús,",
+    "from": 160,
+    "dur": 20
+   },
+   {
+    "text": "a software developer",
+    "from": 180,
+    "dur": 37
+   },
+   {
+    "text": "in Medellín,",
+    "from": 216,
+    "dur": 23
+   },
+   {
+    "text": "Colombia.",
+    "from": 240,
+    "dur": 18
+   },
+   {
+    "text": "Before I build",
+    "from": 259,
+    "dur": 25
+   },
+   {
+    "text": "it,",
+    "from": 284,
+    "dur": 8
+   },
+   {
+    "text": "I want to",
+    "from": 292,
+    "dur": 17
+   },
+   {
+    "text": "know what agencies",
+    "from": 309,
+    "dur": 31
+   },
+   {
+    "text": "really need,",
+    "from": 340,
+    "dur": 22
+   },
+   {
+    "text": "day to day.",
+    "from": 362,
+    "dur": 20
+   },
+   {
+    "text": "What would save",
+    "from": 398,
+    "dur": 25
+   },
+   {
+    "text": "you the most",
+    "from": 423,
+    "dur": 20
+   },
+   {
+    "text": "time?",
+    "from": 443,
+    "dur": 10
+   },
+   {
+    "text": "Managing listings and",
+    "from": 454,
+    "dur": 34
+   },
+   {
+    "text": "clients,",
+    "from": 487,
+    "dur": 15
+   },
+   {
+    "text": "publishing to portals,",
+    "from": 503,
+    "dur": 40
+   },
+   {
+    "text": "collecting rent,",
+    "from": 543,
+    "dur": 30
+   },
+   {
+    "text": "or replying on",
+    "from": 574,
+    "dur": 27
+   },
+   {
+    "text": "WhatsApp automatically.",
+    "from": 601,
+    "dur": 42
+   },
+   {
+    "text": "So I made",
+    "from": 659,
+    "dur": 19
+   },
+   {
+    "text": "a short survey.",
+    "from": 678,
+    "dur": 29
+   },
+   {
+    "text": "It takes about",
+    "from": 706,
+    "dur": 27
+   },
+   {
+    "text": "7 minutes.",
+    "from": 733,
+    "dur": 20
+   },
+   {
+    "text": "Everyone who answers",
+    "from": 770,
+    "dur": 36
+   },
+   {
+    "text": "gets to try",
+    "from": 806,
+    "dur": 21
+   },
+   {
+    "text": "it for free.",
+    "from": 828,
+    "dur": 23
+   },
+   {
+    "text": "And the first",
+    "from": 852,
+    "dur": 23
+   },
+   {
+    "text": "founding clients get",
+    "from": 875,
+    "dur": 34
+   },
+   {
+    "text": "a lifetime discount",
+    "from": 910,
+    "dur": 33
+   },
+   {
+    "text": "and every feature.",
+    "from": 942,
+    "dur": 31
+   }
+  ],
+  "audios": [
+   {
+    "src": "voz/en/gancho_c.wav",
+    "from": 2
+   },
+   {
+    "src": "voz/en/contexto.wav",
+    "from": 161
+   },
+   {
+    "src": "voz/en/funciones.wav",
+    "from": 399
+   },
+   {
+    "src": "voz/en/encuesta.wav",
+    "from": 660
+   },
+   {
+    "src": "voz/en/fundadores.wav",
+    "from": 771
+   },
+   {
+    "src": "voz/en/cta.wav",
+    "from": 991
+   }
+  ]
+ }
+}

@@ -1,0 +1,213 @@
+{
+  "voz": "Heart (Kokoro, inglés)",
+  "backend": "kokoro",
+  "duracion_total": 43.813,
+  "lineas": [
+    {
+      "id": "gancho_a",
+      "texto": "How many hours do you lose posting the same property on five different portals?",
+      "archivo": "gancho_a.wav",
+      "inicio": 0.0,
+      "duracion": 4.581,
+      "subtitulos": [
+        {
+          "texto": "How many hours do you lose posting the same property on five different portals?",
+          "inicio": 0.0,
+          "fin": 4.331
+        }
+      ]
+    },
+    {
+      "id": "gancho_b",
+      "texto": "If you run a real estate agency, I need seven minutes of your time.",
+      "archivo": "gancho_b.wav",
+      "inicio": 4.581,
+      "duracion": 4.431,
+      "subtitulos": [
+        {
+          "texto": "If you run a real estate agency, I need seven minutes of your time.",
+          "inicio": 4.581,
+          "fin": 8.762
+        }
+      ]
+    },
+    {
+      "id": "gancho_c",
+      "texto": "I'm building a system for real estate agencies, and I want you to design it.",
+      "archivo": "gancho_c.wav",
+      "inicio": 9.012,
+      "duracion": 4.687,
+      "subtitulos": [
+        {
+          "texto": "I'm building a system for real estate agencies, and I want you to design it.",
+          "inicio": 9.012,
+          "fin": 13.449
+        }
+      ]
+    },
+    {
+      "id": "contexto",
+      "texto": "I'm Jesús, a software developer in Medellín, Colombia. Before I build it, I want to know what agencies really need, day to day.",
+      "archivo": "contexto.wav",
+      "inicio": 13.699,
+      "duracion": 7.695,
+      "subtitulos": [
+        {
+          "texto": "I'm Jesús, a software developer in Medellín, Colombia.",
+          "inicio": 13.699,
+          "fin": 17.006
+        },
+        {
+          "texto": "Before I build it, I want to know what agencies really need, day to day.",
+          "inicio": 17.006,
+          "fin": 21.145
+        }
+      ]
+    },
+    {
+      "id": "funciones",
+      "texto": "What would save you the most time? Managing listings and clients, publishing to portals, collecting rent, or replying on WhatsApp automatically.",
+      "archivo": "funciones.wav",
+      "inicio": 21.395,
+      "duracion": 8.442,
+      "subtitulos": [
+        {
+          "texto": "What would save you the most time? Managing listings and clients,",
+          "inicio": 21.395,
+          "fin": 24.894
+        },
+        {
+          "texto": "publishing to portals, collecting rent, or replying on WhatsApp automatically.",
+          "inicio": 24.894,
+          "fin": 29.587
+        }
+      ]
+    },
+    {
+      "id": "encuesta",
+      "texto": "So I made a short survey. It takes about seven minutes.",
+      "archivo": "encuesta.wav",
+      "inicio": 29.837,
+      "duracion": 3.45,
+      "subtitulos": [
+        {
+          "texto": "So I made a short survey. It takes about seven minutes.",
+          "inicio": 29.837,
+          "fin": 33.037
+        }
+      ]
+    },
+    {
+      "id": "fundadores",
+      "texto": "Everyone who answers gets to try it for free. And the first founding clients get a lifetime discount and every feature.",
+      "archivo": "fundadores.wav",
+      "inicio": 33.287,
+      "duracion": 7.077,
+      "subtitulos": [
+        {
+          "texto": "Everyone who answers gets to try it for free.",
+          "inicio": 33.287,
+          "fin": 36.018
+        },
+        {
+          "texto": "And the first founding clients get a lifetime discount and every feature.",
+          "inicio": 36.018,
+          "fin": 40.114
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "texto": "The link is in the description. Thanks for helping me build it.",
+      "archivo": "cta.wav",
+      "inicio": 40.363,
+      "duracion": 3.45,
+      "subtitulos": [
+        {
+          "texto": "The link is in the description. Thanks for helping me build it.",
+          "inicio": 40.363,
+          "fin": 43.563
+        }
+      ]
+    }
+  ],
+  "remotion_captions": [
+    {
+      "text": "How many hours do you lose posting the same property on five different portals?",
+      "startMs": 0,
+      "endMs": 4331,
+      "timestampMs": 0,
+      "confidence": 1
+    },
+    {
+      "text": "If you run a real estate agency, I need seven minutes of your time.",
+      "startMs": 4581,
+      "endMs": 8762,
+      "timestampMs": 4581,
+      "confidence": 1
+    },
+    {
+      "text": "I'm building a system for real estate agencies, and I want you to design it.",
+      "startMs": 9012,
+      "endMs": 13449,
+      "timestampMs": 9012,
+      "confidence": 1
+    },
+    {
+      "text": "I'm Jesús, a software developer in Medellín, Colombia.",
+      "startMs": 13699,
+      "endMs": 17006,
+      "timestampMs": 13699,
+      "confidence": 1
+    },
+    {
+      "text": "Before I build it, I want to know what agencies really need, day to day.",
+      "startMs": 17006,
+      "endMs": 21145,
+      "timestampMs": 17006,
+      "confidence": 1
+    },
+    {
+      "text": "What would save you the most time? Managing listings and clients,",
+      "startMs": 21395,
+      "endMs": 24894,
+      "timestampMs": 21395,
+      "confidence": 1
+    },
+    {
+      "text": "publishing to portals, collecting rent, or replying on WhatsApp automatically.",
+      "startMs": 24894,
+      "endMs": 29587,
+      "timestampMs": 24894,
+      "confidence": 1
+    },
+    {
+      "text": "So I made a short survey. It takes about seven minutes.",
+      "startMs": 29837,
+      "endMs": 33037,
+      "timestampMs": 29837,
+      "confidence": 1
+    },
+    {
+      "text": "Everyone who answers gets to try it for free.",
+      "startMs": 33287,
+      "endMs": 36018,
+      "timestampMs": 33287,
+      "confidence": 1
+    },
+    {
+      "text": "And the first founding clients get a lifetime discount and every feature.",
+      "startMs": 36018,
+      "endMs": 40114,
+      "timestampMs": 36018,
+      "confidence": 1
+    },
+    {
+      "text": "The link is in the description. Thanks for helping me build it.",
+      "startMs": 40363,
+      "endMs": 43563,
+      "timestampMs": 40363,
+      "confidence": 1
+    }
+  ]
+}
